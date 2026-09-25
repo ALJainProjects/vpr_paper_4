@@ -1,0 +1,711 @@
+{
+  "alibey2023mixvpr": {
+    "fetched_title": "MixVPR: Feature Mixing for Visual Place Recognition",
+    "fingerprint": "64011f62f9d82a1d4b3ed0ff8a982486579e8fae173cc86824d71c0c1529eb18",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "alibey2024boq": {
+    "fetched_title": "BoQ: A Place is Worth a Bag of Learnable Queries",
+    "fingerprint": "3dc670ca14d95fb1ebd8aa2aae683c10a2d78d8d6fac4feb294cf9ea91216dcc",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "allan2021stereo": {
+    "fetched_title": "Stereo Correspondence and Reconstruction of Endoscopic Data Challenge",
+    "fingerprint": "a56159b2cf4fc23e12e3be2926f6698115226ca6e317ccd86b5a1c5cde30bbfc",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "arandjelovic2016netvlad": {
+    "fetched_title": "NetVLAD: CNN Architecture for Weakly Supervised Place Recognition",
+    "fingerprint": "3700ca904fb0dc88b09e5a478c5fae8d6d8b41725baa0a33711908b66dbfc5df",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "azagra2023endomapper": {
+    "fetched_title": "Endomapper dataset of complete calibrated endoscopy procedures",
+    "fingerprint": "dfb9d046e2d326165d4f71934fa019253b89bec93f1208d2634a1e99221034cd",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "azizi2021big": {
+    "fetched_title": "Big Self-Supervised Models Advance Medical Image Classification",
+    "fingerprint": "8cdfda1f448ce04fb81e629cd0d6014a130d4eacfaef83e657c5083846ed5ee5",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "baharoon2023evaluating": {
+    "fetched_title": "Evaluating General Purpose Vision Foundation Models for Medical Image Analysis: An Experimental Study of DINOv2 on Radiology Benchmarks",
+    "fingerprint": "189649b76f5c758899bfa884928da9d01735d7f5e58a23bde127b6fd9f689b01",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "barbed2022superpoint": {
+    "fetched_title": "SuperPoint Features in Endoscopy",
+    "fingerprint": "8d99df079fcadb4755056186920485ed9b00b0ca3575161dfc16fb5cac465a5f",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "barbed2025automated": {
+    "fetched_title": "Automated overview of complete endoscopies with unsupervised learned descriptors",
+    "fingerprint": "73baf807acaec2240c78bb9a8168f755d42e52f8b445ef0ea1fa6054ae15552f",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "batic2024endovit": {
+    "fetched_title": "EndoViT: pretraining vision transformers on a large collection of endoscopic images",
+    "fingerprint": "90b76c6171ffde476739846e9e4233d189a1e0f3345fdf8d9b8df52d0a57bb26",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "berton2022deep": {
+    "fetched_title": "Deep Visual Geo-localization Benchmark",
+    "fingerprint": "a0f6f07bc96991b7b9d4613d770b71a6028184a069363b400a26beb2a53106a9",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "berton2022rethinking": {
+    "fetched_title": "Rethinking Visual Geo-localization for Large-Scale Applications",
+    "fingerprint": "05c7e0f5c6c29fe848a0a62436e6261a030dc8d0fadadbff4822aa329eb94474",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "berton2023eigenplaces": {
+    "fetched_title": "EigenPlaces: Training Viewpoint Robust Models for Visual Place Recognition",
+    "fingerprint": "fd13063b27320b47a2071f938ac52464e4b20c8a765c2ebe28e7129b94716c85",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "berton2025megaloc": {
+    "fetched_title": "MegaLoc: One Retrieval to Place Them All",
+    "fingerprint": "a7240ff326371dd41cdd58057efdc66d249b23e0fcd13bc9aafe9f047c765607",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "biffi2024realcolon": {
+    "fetched_title": "REAL-Colon: A dataset for developing real-world AI applications in colonoscopy",
+    "fingerprint": "685257380bf4160016d724f386049d3c63d62b0adeac485bab345f8b29d1a034",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "biffi2025temporal": {
+    "fetched_title": "A temporal convolutional network-based approach and a benchmark dataset for colonoscopy video temporal segmentation",
+    "fingerprint": "98444120aa73b980d7824e2bacdddecc945432298becec75ef0283e8a9eeb573",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "bobrow2023colonoscopy": {
+    "fetched_title": "Colonoscopy 3D video dataset with paired depth from 2D-3D registration",
+    "fingerprint": "5d65bffd6c4602b3b45eeac9183c82dfdbcafa06ccbd3e66bb70868fc5e59cc9",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "boers2024foundation": {
+    "fetched_title": "Foundation models in gastrointestinal endoscopic AI: Impact of architecture, pre-training approach and data efficiency",
+    "fingerprint": "61cb3cd787a3c2252a1b53fc1050da46beacb9e77f4380389e739c4817c9d11f",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "borgli2020hyperkvasir": {
+    "fetched_title": "HyperKvasir, a comprehensive multi-class image and video dataset for gastrointestinal endoscopy",
+    "fingerprint": "6c363878d5865d7cffba1ac48603e87e8fb5166be790ebca3ec89ace196badc9",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "burgert2025imagenettrained": {
+    "fetched_title": "ImageNet-trained CNNs are not biased towards texture: Revisiting feature reliance through controlled suppression",
+    "fingerprint": "8feb5f14fe624ed5c713c99cfeb87fc1aaa26439e31a565888cf3b51976135da",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "cai2026stcolonet": {
+    "fetched_title": "ST-ColoNet: Spatio-Temporal Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature Learning",
+    "fingerprint": "bb45534cbc7c5dd449f3664913eda2da93605454c43b0201f5f9b89a861bc313",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "chen2023coloscrl": {
+    "fetched_title": "Colo-SCRL: Self-Supervised Contrastive Representation Learning for Colonoscopic Video Retrieval",
+    "fingerprint": "5a11b1243611b37ec73bfac11f01bef6204c2f8db7a523ffb697538ee422dcdf",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "chen2026geometryaware": {
+    "fetched_title": "Geometry-Aware Camera Localization for Bronchoscopy",
+    "fingerprint": "da39b8819dbb124514122270aff67cea6005b9de653f841cd18f4056c36354bf",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "cold2025mapping": {
+    "fetched_title": "Mapping the colon through the colonoscope’s coordinates – The Copenhagen Colonoscopy Coordinate Database",
+    "fingerprint": "21d43b84caaed148f9bad2d4dbe32f8eccf83d9e0b69ad96ceb0e97412466268",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "cover1967nearest": {
+    "fetched_title": "Nearest neighbor pattern classification",
+    "fingerprint": "059c1bedbc5810040c28e420e18a79520d15d62805c2e7d36c9010fbcf6e4c22",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "cui2024surgicaldino": {
+    "fetched_title": "Surgical-DINO: adapter learning of foundation models for depth estimation in endoscopic surgery",
+    "fingerprint": "c86eda23ddb25bf6768b019a84abf47fa4400383eef8582c25c949216f22296e",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "dermyer2025endodino": {
+    "fetched_title": "EndoDINO: A Foundation Model for GI Endoscopy",
+    "fingerprint": "1330214264e357a30d1448d6a596aa26fb8d0b7937033730be9218f942d5d185",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "elvira2024cudasiftslam": {
+    "fetched_title": "CudaSIFT-SLAM: multiple-map visual SLAM for full procedure mapping in real human endoscopy",
+    "fingerprint": "5d909937930dbd85d69a35155f108e52b53fb6cf73c55ee9cbacf825ed11038a",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "encinargonzalez2025multimodal": {
+    "fetched_title": "Multi-modal Loop Closure Detection with Foundation Models in Severely Unstructured Environments",
+    "fingerprint": "e0535ca07eafc2024a2d0ba3d2b32f65f8206c3b9175f75daf5f426ff8faddcb",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "freedman2020detecting": {
+    "fetched_title": "Detecting Deficient Coverage in Colonoscopies",
+    "fingerprint": "f208f267d6cc6fa52927ec87e26101db03e6a57b440db9732958ad53db4439b1",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "gaubatz2022location": {
+    "fetched_title": "Location recognition in laparoscopic surgery",
+    "fingerprint": "554894ac95d25cbfdcaf8f393bb88dc652ac11a3b84a2ca68bf2b324aa16ed76",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "geirhos2018imagenettrained": {
+    "fetched_title": "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness",
+    "fingerprint": "b3190b564b384b323d26ab415cb5642679c8394dae9ef868564a19490820f27f",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "golhar2026c3vdv2": {
+    "fetched_title": "C3VDv2 - Colonoscopy 3D video dataset with enhanced realism",
+    "fingerprint": "1ac699728428fb8b9521d9396e80c324bdc00d17c62b6c04628b9e7f9e5c6c28",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "gomezrodriguez2024nrslam": {
+    "fetched_title": "NR-SLAM: Nonrigid Monocular SLAM",
+    "fingerprint": "6f13584ffa572a0e0995edd5aa4da7f6a0dbe98842f1664412bf6909314ed875",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "gorry2025imagebased": {
+    "fetched_title": "Image-Based Relocalization and Alignment for Long-Term Monitoring of Dynamic Underwater Environments",
+    "fingerprint": "28c3a77d788b1c90d3d349ab38d50a08c9adc71a2bb5472114132b62a58cd072",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "haitz2026evaluation": {
+    "fetched_title": "Evaluation of Visual Place Recognition Methods for Image Pair Retrieval in 3D Vision and Robotics",
+    "fingerprint": "60705c1b955d188aee4c3b9caccc43cdec1e06c5b30aeb20474567876e169484",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "han2024depth": {
+    "fetched_title": "Depth Anything in Medical Images: A Comparative Study",
+    "fingerprint": "d15d02743f981844487faf571aaa19d295bc1bb071ca4df6ce340e19d95d8023",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "hernandez2023investigating": {
+    "fetched_title": "Investigating keypoint descriptors for camera relocalization in endoscopy surgery",
+    "fingerprint": "44ae01b9861feb57bc7d9dba3b2d1e46c2299ada5a9ee1a79c5e46675967be3b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "hirsch2023selfsupervised": {
+    "fetched_title": "Self-supervised Learning for Endoscopic Video Analysis",
+    "fingerprint": "ff86c690485c034ab878f08140f52e4f3ea3edc2e169b02db1e05e4f1ab94944",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "huix2024natural": {
+    "fetched_title": "Are Natural Domain Foundation Models Useful for Medical Image Classification?",
+    "fingerprint": "6fe01e9c2b16aabfd6aa01ca4f8c4d783ff806ea75f5332ee6aafecd15cec6dc",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "intrator2023selfsupervised": {
+    "fetched_title": "Self-supervised Polyp Re-identification in Colonoscopy",
+    "fingerprint": "000f0d7e494c7c7bd35ac46ddc119685f77ea894a3800100b41a2f786a154869",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "ismagilov2026channel": {
+    "fetched_title": "One Channel to Rule Them All: Rethinking Input Representation for Visual Place Recognition",
+    "fingerprint": "b913ee08d0890b4ad76bd403d755c5345aeede6faac12100f8751f952f83cf00",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "izquierdo2024close": {
+    "fetched_title": "Close, But Not There: Boosting Geographic Distance Sensitivity in Visual Place Recognition",
+    "fingerprint": "05eeaff2a347253665463aeb29b6e68e3dfec51532463457aaa2a48a786688ba",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "izquierdo2024optimal": {
+    "fetched_title": "Optimal Transport Aggregation for Visual Place Recognition",
+    "fingerprint": "d6e335d185585ee51ddac4f2360b43968028a0061529a10b5559a2f76d8f3612",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "jaspers2026scaling": {
+    "fetched_title": "Scaling up self-supervised learning for improved surgical foundation models",
+    "fingerprint": "356e0331340ce1af18faff6d2e3f29f390a44426d871d7963eb5b8b4fe19dde6",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "jegou2009burstiness": {
+    "fetched_title": "On the burstiness of visual elements",
+    "fingerprint": "eac64f75ca5dabc2a62047e08ebbf0a75152094030ce21969eb49409a01d2c4e",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "jiang2025c3vdreg": {
+    "fetched_title": "C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization",
+    "fingerprint": "b5359606b7866c1f649f4561c45efcab08014c8bb53ac2a59c830dd8087dd7e3",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "jong2026gastronet5m": {
+    "fetched_title": "GastroNet-5M: A Multicenter Dataset for Developing Foundation Models in Gastrointestinal Endoscopy",
+    "fingerprint": "13c1267b2cf05f6e33cc4312e0cee2b224f89aef80ea5188395986d4bae1da58",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "keetha2024anyloc": {
+    "fetched_title": "<i>AnyLoc</i>\n                    : Towards Universal Visual Place Recognition",
+    "fingerprint": "155d00ec99b78aa85d05d0d7acb71d31426d2a2375ad4cfa9b46a1466cc55713",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "keuth2024airway": {
+    "fetched_title": "Airway label prediction in video bronchoscopy: capturing temporal dependencies utilizing anatomical knowledge",
+    "fingerprint": "1071e7269d3502de0dd09a38c4574d4128db5b82aced5e575884199f7a8c67b6",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "kim2024density": {
+    "fetched_title": "Density clustering-based automatic anatomical section recognition in colonoscopy video using deep learning",
+    "fingerprint": "3ddf4b4989e960017ccfad50f563b6f7508ff008268d39f4109bd5fa5c6c5c19",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "kim2025improving": {
+    "fetched_title": "Improving image-retrieval performance of foundation models in gastrointestinal endoscopic images",
+    "fingerprint": "a5dd07422f5de1684f7994dee03ca59a0c495db326e8ab50525a477dc9013d64",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "kim2026lesioncentered": {
+    "fetched_title": "Lesion-centered 3D mapping of colonoscopy procedures: validation of a hierarchical ensemble pipeline on public benchmark videos",
+    "fingerprint": "e54d095ca4415122a2b004240437b8317051b575831637e12c5dfe4459f7bace",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "kim2026visual": {
+    "fetched_title": "Are Visual Place Recognition Models Recognizing Places or Conditions? Distractor-Augmented Evaluation and Condition Suppression",
+    "fingerprint": "da198ae965e62b714cbcd826392f08d395d777dea69628dc35d205b92fad4ba4",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "knights2026wildcross": {
+    "fetched_title": "WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments",
+    "fingerprint": "89844d4d810b706cfe9f6bcc7704438a82bc5d8f8603d76ff5753080c3ba2e54",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "lajoie2019modeling": {
+    "fetched_title": "Modeling Perceptual Aliasing in SLAM via Discrete–Continuous Graphical Models",
+    "fingerprint": "25324c77ea32cdf15568957ede879d8af6650e46c0cc44e5437d67a46c8f3f36",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "lamarca2021defslam": {
+    "fetched_title": "DefSLAM: Tracking and Mapping of Deforming Scenes From Monocular Sequences",
+    "fingerprint": "7cd7a42e65a7f82d10960a087668dcce1ff42c3da6e41dd5f8fa1aa59e72bc52",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "larsen2026longterm": {
+    "fetched_title": "Long-term visual localization in dynamic benthic environments: the SEALOC dataset, footprint-based ground truth, and visual place recognition benchmark",
+    "fingerprint": "8d6c7f78e5ddae0f5a544370e346c53b4d16df11cde0322f5f883533a2b10b21",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "lefloch2025galar": {
+    "fetched_title": "Galar - a large multi-label video capsule endoscopy dataset",
+    "fingerprint": "89899eb64160fadeca8051c155bf9f05ccdaf34b6ede980b9ece512675e9277b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "leifman2023colonoscopy": {
+    "fetched_title": "Colonoscopy Coverage Revisited: Identifying Scanning Gaps in Real-Time",
+    "fingerprint": "9a67fa97426ec9e5216d3f92a0a5cd12716a3e69cf7a2870afa0c1aaa5768c5b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "li2026automated": {
+    "fetched_title": "Automated Assessment of Kidney Ureteroscopy Exploration for Training",
+    "fingerprint": "e513e816236ce539fbf08213cf1a4920c5fe357659f3d2597890d4ac3f113571",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "li2026raul": {
+    "fetched_title": "RAUL: Reference-Assisted Ureteroscopy Localization for Skill Assessment",
+    "fingerprint": "8f6dbe92786e2ebeab381709557359d8675c947aae7369e6c4c69eef7d91e5a8",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "liu2025dinov3": {
+    "fetched_title": "Does DINOv3 Set a New Medical Vision Standard? Benchmarking 2D and 3D Classification, Segmentation, and Registration",
+    "fingerprint": "1d8b4ac34a486bf52e1545d5e143fb25a0ff77ec062a7a5c353f5d309a0e0a0d",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "lowry2016visual": {
+    "fetched_title": "Visual Place Recognition: A Survey",
+    "fingerprint": "2e92a884286aa05b0e8a61572b506c2c8164307dd03bfa8f2483353dd046355c",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "lu2024seamless": {
+    "fetched_title": "Towards Seamless Adaptation of Pre-trained Models for Visual Place Recognition",
+    "fingerprint": "d11113e037eee7777bfa72fcd14f51dc286fc3fcc3717e9f9fed1f86a0ee0373",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "luk2026c3vddefcol": {
+    "fetched_title": "C3VD-DEFCOL: A Deformable Colonoscopy Dataset with Time-Resolved 3D Ground Truth and Realistic Appearance",
+    "fingerprint": "70e78b80b06c83e39b7e1ee720e5c5311b315f34eaaf96405e1702146e4f7528",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "ma2019realtime": {
+    "fetched_title": "Real-Time 3D Reconstruction of Colonoscopic Surfaces for Determining Missing Regions",
+    "fingerprint": "51502f89ae914a4b41479991d58d5be583dd3e7b72a8c557f8f7aa621471b3f4",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "ma2021colon10k": {
+    "fetched_title": "Colon10k: A Benchmark For Place Recognition In Colonoscopy",
+    "fingerprint": "83de0b5b140439185b0979fd1e1a986a4e6f22776a504dea98b606e5baa1d755",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "ma2021rnnslam": {
+    "fetched_title": "RNNSLAM: Reconstructing the 3D colon to visualize missing regions during a colonoscopy",
+    "fingerprint": "9739d334e259d8bc39647c2ce0fa7422489c48cc241539d7ef74f9ef7468ae7b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "matsoukas2022makes": {
+    "fetched_title": "What Makes Transfer Learning Work for Medical Images: Feature Reuse &amp; Other Factors",
+    "fingerprint": "d3babfddc7525ef6282467242149e8e2aa21da8c375b9ac120667c68711be0e5",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "mori2002tracking": {
+    "fetched_title": "Tracking of a bronchoscope using epipolar geometry analysis and intensity-based image registration of real and virtual endoscopic images",
+    "fingerprint": "e548f7423de35c4f69a0e5fbf3787b4c9093491fe65e6efea3e62bfdd6d249b9",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "morlana2021selfsupervised": {
+    "fetched_title": "",
+    "fingerprint": "68ffd36a41db6bb3e3be755db86f72118bbb2a3692cf92ec3ce6c0cdf7ad0ae6",
+    "justification": "OpenAlex work record (search by exact title, 2026-09-25) independently confirms title, all four authors (Morlana, Azagra Millan, Civera, Montiel) and year 2021, with landing page openreview.net/pdf?id=tgkEqYyA12p; no DOI or arXiv record exists for this MIDL 2021 short paper.",
+    "ratio": null,
+    "source": "manual"
+  },
+  "morlana2024colonmapper": {
+    "fetched_title": "ColonMapper: topological mapping and localization for colonoscopy",
+    "fingerprint": "fbef474c887d9eed1b02c43455f47946ba2558d31cdb4d68dc8e6f85bbcb383a",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "morlana2024topological": {
+    "fetched_title": "Topological SLAM in Colonoscopies Leveraging Deep Features and Topological Priors",
+    "fingerprint": "eb61c0c8c34e7b6b577065563c4c789816eb6199d02ff25d4ba1442e88bfc4f5",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "nam2024deep": {
+    "fetched_title": "Deep Learning-Based Real-Time Organ Localization and Transit Time Estimation in Wireless Capsule Endoscopy",
+    "fingerprint": "6a42456352206507353ff4c7e130e9dd0dbfccafce9122db0cace09f52e6f9fc",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "nedov2026geometryconditioned": {
+    "fetched_title": "Geometry-Conditioned Visual Place Recognition in Natural Environments",
+    "fingerprint": "26904d6272e446a07e6504810e2c810020d5a746f16e8c7317e8331cc9e32248",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "oquab2023dinov2": {
+    "fetched_title": "DINOv2: Learning Robust Visual Features without Supervision",
+    "fingerprint": "beff8b71d63f18ae23b8f3d79249eb677b74963d4932cf10e2f7280537b95920",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "ozyoruk2021endoslam": {
+    "fetched_title": "EndoSLAM dataset and an unsupervised monocular visual odometry and depth estimation approach for endoscopic videos",
+    "fingerprint": "8456950e292a3b50df1a23777a4f90c087a54c8784fecdfc56277496e63f18a7",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "parolari2026contrastive": {
+    "fetched_title": "Contrastive Learning under Noisy Temporal Self-Supervision for Colonoscopy Videos",
+    "fingerprint": "9ac81610a393d33771167a4ee115e11a1e4cacb5f87745f8920ac2706cb3ed85",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "posner2023c3fusion": {
+    "fetched_title": "$$\\hbox {C}^3$$Fusion: Consistent Contrastive Colon Fusion, Towards Deep SLAM in Colonoscopy",
+    "fingerprint": "9d5607976c7bf56e3c0e88253c14c45a9b9200ee2d893cdb24637bad68ad0f5c",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "raghu2019transfusion": {
+    "fetched_title": "Transfusion: Understanding Transfer Learning for Medical Imaging",
+    "fingerprint": "6256d881c3828e14e91ec21dbf30b752dba0fa8095cd9192f958fba5dfbc305c",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "rau2024simcol3d": {
+    "fetched_title": "SimCol3D — 3D reconstruction during colonoscopy challenge",
+    "fingerprint": "27fe0b74ad21eb6c9320c93be9ed29b42c459b25131a8889bca9d3cd3298533a",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "renggli2021evaluating": {
+    "fetched_title": "Evaluating Bayes Error Estimators on Real-World Datasets with FeeBee",
+    "fingerprint": "abae9a9923db7da67fe7e899ff5b4619cad5035b232390cf2840dcad70369d75",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "schmidt2024tracking": {
+    "fetched_title": "Tracking and mapping in medical computer vision: A review",
+    "fingerprint": "c612672fb3c7a5645758dc3ec63b8faaa76d87c4dbd1c8916fd6a852776f070f",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "schubert2021makes": {
+    "fetched_title": "What makes visual place recognition easy or hard?",
+    "fingerprint": "bb2d73676914e78db958f6214a2216ed29c3ff1967f62776b3912403d012b51e",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "schubert2024visual": {
+    "fetched_title": "Visual Place Recognition: A Tutorial",
+    "fingerprint": "60572961524d9876c2aac3c18c9ca5169eaf1fc7472d37930acbd4cf012d3439",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "sganga2019offsetnet": {
+    "fetched_title": "OffsetNet: Deep Learning for Localization in the Lung using Rendered Images",
+    "fingerprint": "edaf1beae50f7c90a177369361d555d9b130d4d27f42bd24119ba46437ba1739",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "shu2025bronchopt": {
+    "fetched_title": "BronchOpt : Vision-Based Pose Optimization with Fine-Tuned Foundation Models for Accurate Bronchoscopy Navigation",
+    "fingerprint": "54462c6896a69f014261d2e6ed931ab446c90b09cb2b639f53e88edae9c8d349",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "simeoni2025dinov3": {
+    "fetched_title": "DINOv3",
+    "fingerprint": "d096fa794f770cc28a6afac37d7d6f0ae4c3d442ead141b7b086cd5ca94b8ec4",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "smedsrud2021kvasircapsule": {
+    "fetched_title": "Kvasir-Capsule, a video capsule endoscopy dataset",
+    "fingerprint": "bbcda7adb05ab15c60e581f839b3342ff7195f5dc711f960814ff8600d7163a2",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "soberanismukul2026global": {
+    "fetched_title": "Global region reidentification for camera relocalization in video-based surgical navigation",
+    "fingerprint": "8f5260b0fec5595e0bccbda339103b5fba2dfac0b227aa0fd3ea7e6dab1caebb",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "song2025cascolon": {
+    "fetched_title": "CAS-Colon: A Comprehensive Colonoscopy Anatomical Segmentation Dataset for Artificial Intelligence Development",
+    "fingerprint": "23e3c07c4e5c0e5b901809e69daf2dacb1ffb2f94a5dcc21f002b929252c7d75",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "teufel2024oneslam": {
+    "fetched_title": "OneSLAM to map them all: a generalized approach to SLAM for monocular endoscopic imaging based on tracking any point",
+    "fingerprint": "11499f6209e49a09a8b0c8a13689cf491d1c3facb9f66e17c6e09201c09ba051",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "tian2025bronchotrack": {
+    "fetched_title": "BronchoTrack: Airway Lumen Tracking for Branch-Level Bronchoscopic Localization",
+    "fingerprint": "4ba588d9b359db898ec5ce9f43410da4ddac65b23efce185f277a0f4db5873ab",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "tian2025endomamba": {
+    "fetched_title": "EndoMamba: An Efficient Foundation Model for Endoscopic Videos via Hierarchical Pre-training",
+    "fingerprint": "063bf786cc541d58f20d648a1054dfe380a3b0d40773006aaaeec78d019bd4f5",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "tian2025harnessing": {
+    "fetched_title": "Harnessing Foundation Models for Robust and Generalizable 6-DOF Bronchoscopy Localization",
+    "fingerprint": "2b83c6114fac9dccd8d95df475e8917f16b942ebc38f6926b4226e56f8a9d111",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "tomasini2025online": {
+    "fetched_title": "Online Topological Localization for Navigation Assistance in Bronchoscopy",
+    "fingerprint": "ab97d42d1d05da9dc6f009a139d970aafc8b543fff177f64d0d0943cf1ade8af",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "tomasini2026bronchotop": {
+    "fetched_title": "BronchoTop: Bronchoscopy Navigation via RGB-Only Topological Localization",
+    "fingerprint": "9aa08fffef42b8b2f4e089cb890146e19816228d746c5d2fbdabc3f2286f47d0",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "torii2015visual": {
+    "fetched_title": "Visual Place Recognition with Repetitive Structures",
+    "fingerprint": "37e114cfd28325f87ea141e0ff1eaab7f8517937f0f8327095671b94f7806a21",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "tzachor2024effovpr": {
+    "fetched_title": "EffoVPR: Effective Foundation Model Utilization for Visual Place Recognition",
+    "fingerprint": "4f9aa6554c1d20af7d1d4624fbbd378e333f826868242a20b693e182231ea555",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "vasconcelos2004minimum": {
+    "fetched_title": "Minimum Probability of Error Image Retrieval",
+    "fingerprint": "0d04f2158c0fc82ef6299a5ff2bf2f9664be2fcb9327b16bb46a51eed2a1fc33",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "waheed2021improving": {
+    "fetched_title": "Improving Visual Place Recognition Performance by Maximising Complementarity",
+    "fingerprint": "1dee6644c96376917feb11b0117e3cbeb2cf8ca594e975f4319939fd9fb81389",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wang2023foundation": {
+    "fetched_title": "Foundation Model for Endoscopy Video Analysis via Large-Scale Self-supervised Pre-train",
+    "fingerprint": "4835926e76e0247502e0e8004694ff64236211ed2f5d1b90cb8098b3852fdd96",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wang2025improving": {
+    "fetched_title": "Improving Foundation Model for Endoscopy Video Analysis via Representation Learning on Long Sequences",
+    "fingerprint": "c6a4ccc9b34f9c83041d7cc01f7b25ecea29e459dcb036faf67812a136230ca0",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wang2025topobench": {
+    "fetched_title": "TOPO-Bench: An Open-Source Topological Mapping Evaluation Framework with Quantifiable Perceptual Aliasing",
+    "fingerprint": "4239896ef0a87e36b2c976762f5fa6cf9c36005c381f521f50113cf249dcb7a9",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "wei2023stereo": {
+    "fetched_title": "Stereo Dense Scene Reconstruction and Accurate Localization for Learning-Based Navigation of Laparoscope in Minimally Invasive Surgery",
+    "fingerprint": "98c7983c03f7ec4fccf35cbac608eefcda2375ca9fa2bb1e9e187a7382e4f432",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wei2025breaking": {
+    "fetched_title": "Breaking the Frame: Visual Place Recognition by Overlap Prediction",
+    "fingerprint": "013d2d8ca66603f5e5b543b9336709cbe9e9feb510df4a912239aaf463f4c2bd",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "werner2023precise": {
+    "fetched_title": "Precise Localization Within the GI Tract by Combining Classification of CNNs and Time-Series Analysis of HMMs",
+    "fingerprint": "770c1d53cb7de6cc7a24aed7a5fce7d038726e95dfc7061ba8c94a620a78b9d2",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wheat2025bayes": {
+    "fetched_title": "Bayes Error Rate Estimation in Difficult Situations",
+    "fingerprint": "1f9856632c7953b1da03148a02958f681ad28b7b6a50a86a28012eea935f43e7",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "widya2019whole": {
+    "fetched_title": "Whole Stomach 3D Reconstruction and Frame Localization From Monocular Endoscope Video",
+    "fingerprint": "2df0a2ab978d109d9d41e9eea85eaec0568961feda674d2e824457e692d9c9d7",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wu2019randomised": {
+    "fetched_title": "Randomised controlled trial of WISENSE, a real-time quality improving system for monitoring blind spots during esophagogastroduodenoscopy",
+    "fingerprint": "9ac5f5f6e0936e7dd88f60d2390323a432ce074707e82e80b6bbd6dbc5ac8975",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "yang2026endomatcher": {
+    "fetched_title": "EndoMatcher: Generalizable Endoscopic Image Matcher via Multi-Domain Pre-training for Robot-Assisted Surgery",
+    "fingerprint": "68f4ce6a7382b5c270027470cce278b4cce7c63e46b2ed141d6a9927921b0ccb",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "yao2021motionbased": {
+    "fetched_title": "Motion-based camera localization system in colonoscopy videos",
+    "fingerprint": "148c6ab3ff79ff08c5f2e97c515ff6dc998cfe5d0c3225ffbc0edcc8de7c09ee",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "ye2017image": {
+    "fetched_title": "An image retrieval framework for real-time endoscopic image retargeting",
+    "fingerprint": "8ff39b02a9c49f3c24f96a284a6426b9aa466d1d56aa030243cb2c0cbaea43e3",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "ye2017selfsupervised": {
+    "fetched_title": "Self-Supervised Siamese Learning on Stereo Image Pairs for Depth Estimation in Robotic Surgery",
+    "fingerprint": "e9822aef267146e853c97d45afe5bca6e807978649eb5044cd7fbca8819b703b",
+    "ratio": 1.0,
+    "source": "datacite"
+  },
+  "zaffar2021vprbench": {
+    "fetched_title": "VPR-Bench: An Open-Source Visual Place Recognition Evaluation Framework with Quantifiable Viewpoint and Appearance Change",
+    "fingerprint": "204b73d8f37468e3dfd44057affc0fc5be70e125cb2d804d1149ef25f5753ab7",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "zaffar2024estimation": {
+    "fetched_title": "On the Estimation of Image-Matching Uncertainty in Visual Place Recognition",
+    "fingerprint": "3fe3379f865a262309809c3a139dd9304d1fd2ad5ed5e94be70e3e26beaf0f63",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "zaffar2025overlooked": {
+    "fetched_title": "The Overlooked Value of Test-time Reference Sets in Visual Place Recognition",
+    "fingerprint": "79253aecf38c69dc248fdb37c8b8e56b6557d3c7fbb5191ed86e2e694f6d4011",
+    "ratio": 1.0,
+    "source": "datacite"
+  }
+}
