@@ -144,3 +144,19 @@ cover1967nearest	10.1109/tit.1967.1053964	crossref	Nearest neighbor pattern clas
 renggli2021evaluating	arXiv:2108.13034	arxiv	Evaluating Bayes Error Estimators on Real-World Datasets with FeeBee	1.000	True	True	PASS
 zaffar2024estimation	10.1109/cvpr52733.2024.01680	crossref	On the Estimation of Image-Matching Uncertainty in Visual Place Recognition	1.000	True	True	PASS
 zaffar2024estimation	arXiv:2404.00546	arxiv	On the Estimation of Image-matching Uncertainty in Visual Place Recognition	1.000	True	True	PASS (eprint)
+morlana2021selfsupervised	openreview:tgkEqYyA12p	openreview	Self-supervised Visual Place Recognition for Colonoscopy Sequences	1.000	True	True	PASS
+waheed2021improving	10.1109/lra.2021.3088779	crossref	Improving Visual Place Recognition Performance by Maximising Complementarity	1.000	True	True	PASS
+waheed2021improving	arXiv:2102.08416	arxiv	Improving Visual Place Recognition Performance by Maximising Complementarity	1.000	True	True	PASS (eprint)
+vasconcelos2004minimum	10.1109/tsp.2004.831125	crossref	Minimum Probability of Error Image Retrieval	1.000	True	True	PASS
+wheat2025bayes	arXiv:2506.03159	arxiv	Bayes Error Rate Estimation in Difficult Situations	1.000	True	True	PASS
+wang2025topobench	arXiv:2510.04100	arxiv	TOPO-Bench: An Open-Source Topological Mapping Evaluation Framework with Quantifiable Perceptual Aliasing	1.000	True	True	PASS
+schubert2021makes	arXiv:2106.12671	arxiv	What makes visual place recognition easy or hard?	1.000	True	True	PASS
+burgert2025imagenettrained	10.52202/085713-2033	crossref	ImageNet-trained CNNs are not biased towards texture: Revisiting feature reliance through controlled suppression	1.000	True	True	PASS
+burgert2025imagenettrained	arXiv:2509.20234	arxiv	ImageNet-trained CNNs are not biased towards texture: Revisiting feature reliance through controlled suppression	1.000	True	True	PASS (eprint)
+kim2026visual	arXiv:2608.06847	arxiv	Are Visual Place Recognition Models Recognizing Places or Conditions? Distractor-Augmented Evaluation and Condition Suppression	1.000	True	True	PASS
+ismagilov2026channel	arXiv:2606.00936	arxiv	One Channel to Rule Them All: Rethinking Input Representation for Visual Place Recognition	1.000	True	True	PASS
+nedov2026geometryconditioned	arXiv:2609.27370	arxiv	Geometry-Conditioned Visual Place Recognition in Natural Environments	1.000	True	True	PASS
+wei2023stereo	10.1109/tbme.2022.3195027	crossref	Stereo Dense Scene Reconstruction and Accurate Localization for Learning-Based Navigation of Laparoscope in Minimally Invasive Surgery	1.000	True	True	PASS
+wei2023stereo	arXiv:2110.03912	arxiv	Stereo Dense Scene Reconstruction and Accurate Localization for Learning-Based Navigation of Laparoscope in Minimally Invasive Surgery	1.000	True	True	PASS (eprint)
+ye2017image	10.1007/s11548-017-1620-7	crossref	An image retrieval framework for real-time endoscopic image retargeting	1.000	True	True	PASS
+gaubatz2022location	10.1515/cdbme-2022-0030	crossref	Location recognition in laparoscopic surgery	1.000	True	True	PASS

@@ -4,6 +4,7 @@
 **Status:** STAGED, with zero results. This file is related work only. Nothing here is a P4 result.
 **Bibliography:** `bib/references.bib`, 105 entries. Cite by bib key only.
 **Audit:** `notes/citation_audit.tsv`. There is one row per checked identifier: 105 primary records plus 40 secondary arXiv eprints, and every one passed.
+**(adversarial pass, 2026-09-25)** The adversarial novelty pass appended 13 entries (118 in total) and 16 audit rows: 13 primary and 3 secondary eprints, all PASS. The new entries are summarized in §17, and the verdicts are in positioning.md, "Adversarial novelty pass".
 **Positioning and novelty verdicts:** `notes/positioning.md`.
 
 ## How this review was produced (read before citing anything)
@@ -15,7 +16,7 @@
   - Year matches. For arXiv-only records, a one-year preprint-to-venue lag is tolerated. For a secondary eprint, the arXiv v1 year may be 0–2 years before publication.
 - **Negative control.** The same checks were run on mutated claims: swapped DOI, swapped arXiv id, year ±2, wrong first author, near-miss title, and a sibling paper by the same authors. All were rejected, so the 100% pass rate is not a vacuous check.
 - **Bib fields.** Every bib field (full author list, title, venue, volume, pages, year) comes from the fetched registry record, not from the researchers' notes. DOI-less works are `@misc`. Any venue they claim (an arXiv comment such as "Accepted to MICCAI 2026") is kept in `note` and marked as not confirmed in a DOI registry.
-- **Summaries.** Summaries below condense what the researchers reported from the abstract or full text. Entries marked **[FT]** were re-checked against the full text during this synthesis: ColonMapper, ColonSLAM, EndoMapper, AnyLoc, SEALOC, the underwater benchmark of Gorry et al., CudaSIFT-SLAM, RAUL, and Li et al. 2026. For Colon10k, the official dataset page was re-read, but the paper itself was not.
+- **Summaries.** Summaries below condense what the researchers reported from the abstract or full text. Entries marked **[FT]** were re-checked against the full text during this synthesis: ColonMapper, ColonSLAM, EndoMapper, AnyLoc, SEALOC, the underwater benchmark of Gorry et al., CudaSIFT-SLAM, RAUL, and Li et al. 2026. For Colon10k, the official dataset page was re-read, but the paper itself was not. **(adversarial pass)** Colon10k's abstract and introduction have since been read (IEEE Xplore; the rest is paywalled). The MIDL 2021 paper [morlana2021selfsupervised] has been read in full.
 - **Integrity rule.** Nothing below is a P4 result. Numbers quoted are *other papers'* reported numbers, attributed.
 
 ---
@@ -29,12 +30,15 @@ Every retrieval descriptor in this line that we could inspect is **trained or fi
 - ColonMapper fine-tunes ImageNet R50-GeM/NetVLAD on EndoMapper **[FT]**.
 - ColonSLAM fine-tunes the last two layers of Endo-FM **[FT]**.
 - The MIDL 2021 predecessor (Morlana et al.) is SfM-supervised. It is *unverified in any registry* and is not in the bib; see §15.
+  - **(adversarial pass)** It is now verified and in the bib as [morlana2021selfsupervised]. Its proposed model is fine-tuned, but it *also reports the off-the-shelf landmark/city-trained Radenović model* as a baseline on real colonoscopy (see §17). Not every retrieval descriptor *evaluated* in this line is colonoscopy-trained.
 
 Natural-image *local* matchers are, however, already used off-the-shelf inside these pipelines: ColonMapper uses LoFTR with outdoor weights, and ColonSLAM uses LightGlue/SuperPoint **[FT]**.
 
 **What is open.** We found no work that evaluates the modern outdoor-trained VPR zoo (NetVLAD, CosPlace, EigenPlaces, MixVPR, BoQ, SALAD, MegaLoc, AnyLoc) zero-shot on any colonoscopy place-recognition ground truth. We found no oracle-ceiling or Bayes-error decomposition for endoscopic place recognition either.
+- **(adversarial pass)** The "modern zoo" qualifier is now load-bearing. A 2021-era off-the-shelf retrieval model *has* been evaluated zero-shot on colonoscopy GT [morlana2021selfsupervised]. Colon10k's abstract says it evaluates "different existing place recognition techniques" [ma2021colon10k].
 
 **Open risk.** The Colon10k ISBI paper itself could not be read by any researcher. It is therefore **unknown** whether it already reports off-the-shelf, non-fine-tuned baselines.
+- **(adversarial pass)** Partly resolved. Its abstract (IEEE Xplore record; the same text is in OpenAlex) states: "traditional image retrieval techniques do not generalize well in colonic images". It also states: "We perform an extensive evaluation on different existing place recognition techniques using different metrics." Which techniques, and whether they were off-the-shelf, is still unread.
 
 - **[ma2021colon10k]** Colon10k is the first colonoscopy place-recognition benchmark: 20 short real sequences with endoscopist-verified same-place matches.
   - GT is one `<CASE-ID>-matchings.txt` per case, with lines `query_id | positive intervals`.
@@ -303,6 +307,7 @@ All of this is **classification, segmentation or depth**. None of it concerns sa
   - *Bearing:* optional newest-backbone control.
 - **[geirhos2018imagenettrained]** ImageNet CNNs rely on texture more than shape. The arXiv v1 is 2018; ICLR 2019 acceptance is an arXiv comment.
   - *Bearing:* the theoretical basis for the geometry-vs-texture diagnosis (C3). CNN-based zoo members may behave differently from DINOv2-based ones on uniform mucosa.
+  - **(adversarial pass)** Its conclusion is contested by [burgert2025imagenettrained] (NeurIPS 2025). Under controlled cue suppression, ImageNet CNNs "predominantly rely on local shape features", and medical-imaging models emphasize colour. Do not cite this paper alone as the basis for a texture-bias hypothesis.
 
 ## 10. The outdoor VPR model zoo
 
@@ -404,7 +409,14 @@ P4's protocol is therefore not novel. Its domain and its ceiling analysis are. S
 
 ## 14. Bayes error, recognizability and per-query difficulty
 
-**Synthesis.** P4 reuses Paper 3's ceiling estimator (`vprbench/analysis/recognizability.py`): an oracle-ensemble ceiling, a kNN Bayes-error bracket and a recoverable/irreducible split. The theory is classical [cover1967nearest]. The important caution is that **Bayes-error estimates depend on the embedding space** [renggli2021evaluating]. In anatomy, the embedding is exactly what may fail to transfer, so an "irreducible" fraction computed in outdoor-VPR feature space may partly be representation failure. The ceiling must be reported in more than one feature space, including a medical-pretrained one. Per-query VPR uncertainty [zaffar2024estimation] is the nearest VPR-internal notion of recognizability. It is related but not the same construct.
+**Synthesis.** P4 reuses Paper 3's ceiling estimator (`vprbench/analysis/recognizability.py`): an oracle-ensemble ceiling, a kNN Bayes-error bracket and a recoverable/irreducible split. **(adversarial pass) Attribution.**
+- The oracle construction for VPR is [waheed2021improving] (RA-L 2021).
+- The retrieval "irreducible + recoverable" split has a theoretical precedent in [vasconcelos2004minimum].
+- The kNN bracket is far outside the sample regime in which kNN BER estimates are reliable [wheat2025bayes].
+- The ceiling is zoo-relative, not model-independent.
+- A cross-environment, argued method-independent aliasing measure already exists [wang2025topobench].
+
+See §17. The theory is classical [cover1967nearest]. The important caution is that **Bayes-error estimates depend on the embedding space** [renggli2021evaluating]. In anatomy, the embedding is exactly what may fail to transfer, so an "irreducible" fraction computed in outdoor-VPR feature space may partly be representation failure. The ceiling must be reported in more than one feature space, including a medical-pretrained one. Per-query VPR uncertainty [zaffar2024estimation] is the nearest VPR-internal notion of recognizability. It is related but not the same construct.
 
 - **[cover1967nearest]** The asymptotic 1-NN error is at most twice the Bayes error.
   - *Bearing:* the theoretical basis of the kNN-BER bracket in the reused estimator.
@@ -422,7 +434,9 @@ P4's protocol is therefore not novel. Its domain and its ceiling analysis are. S
   - It is listed as reference 30 of [azagra2023endomapper] and [22] of [morlana2024colonmapper], and appears as "Morlana21" in ColonSLAM's baselines **[FT]**. It is the first colonoscopy-trained VPR network (R101-GeM, SfM-supervised, 3 sequences, per ColonMapper).
   - No CrossRef, arXiv or registry record could be fetched. OpenAlex returned HTTP 429 during this synthesis too, OpenReview returned a bot challenge, and DBLP returned a bot wall.
   - **Must be verified and cited before submission.** It is a baseline every reviewer from this group will expect. Whether it reports off-the-shelf outdoor baselines is also unknown.
+  - **(adversarial pass) RESOLVED.** The OpenReview venue record (via its API, from a browser session) was fetched, and the PDF was read in full. It is now [morlana2021selfsupervised]. It *does* report an off-the-shelf outdoor-trained baseline (§17).
 - **Colon10k's baseline table.** The ISBI paper full text has not been read by anyone in this program. See positioning.md, Attack 3.
+  - **(adversarial pass)** The abstract confirms that the paper evaluates "different existing place recognition techniques". The table itself is still unread (paywalled).
 - **Morlana PhD thesis, "SLAM and visual place recognition for colonoscopy"** (Universidad de Zaragoza, defended June 2025 per the author's homepage). There is no metadata record. It may contain descriptor comparisons, including off-the-shelf VPR.
 - **CLiMB26 / Endoscopic Vision Challenge 2026** (Zenodo, a DataCite DOI, not checked). Per web text it is a SLAM/VO benchmark on EndoMapper, not place recognition.
 - **Unfetched or unread records:**
@@ -436,10 +450,15 @@ P4's protocol is therefore not novel. Its domain and its ceiling analysis are. S
   - GalKva-2026 (arXiv 2605.15062);
   - "Acar et al. 2025" SfM-pipeline comparison;
   - the laparoscope NetVLAD localization paper (arXiv 2110.03912);
+    - **(adversarial pass)** Now [wei2023stereo] (TBME 2023), read from the arXiv HTML.
   - Gaubatz et al. 2022, "Location recognition in laparoscopic surgery" (CDBME, DOI 10.1515/cdbme-2022-0030; the CrossRef record exists but the content was not read). This would be a further early "place recognition in surgery" citation.
+    - **(adversarial pass)** Now [gaubatz2022location]. The abstract was read from the CrossRef record.
   - Iakovidis et al. BIBE 2013, capsule localization from visual features (the DOI resolves, but the content was not read);
   - M3GA-Wild (arXiv 2609.23003);
   - C3VDv2 preprint (arXiv 2506.24074). The published Sci Data version is in the bib, but this arXiv id was not fetched, so it was not attached as its eprint.
+  - **(adversarial pass)** arXiv metadata was fetched for EndoFinder (2407.11401), EndoCLIP (2607.28466), woma (2609.15130), ColonAdapter (2511.22250), REVEAL (2608.07176), GalKva-2026 (2605.15062), M3GA-Wild (2609.23003) and the C3VDv2 preprint (2506.24074).
+    - None of them evaluates place recognition, so none is a novelty threat.
+    - The C3VDv2 preprint (Golhar et al., 2025) matches [golhar2026c3vdv2]. It was not attached as an eprint, because the bib is regenerated by the audit.
 - **Verified by the researchers but omitted for focus** (available on request; not re-verified here): Barbed et al. MICCAI 2023 (10.1007/978-3-031-43907-0_56); PANS, MICCAI 2024 (10.1007/978-3-031-72089-5_44); SelaVPR++ TPAMI (10.1109/tpami.2025.3629287); NetVLAD TPAMI (10.1109/tpami.2017.2711011); Torii CVPR 2013 (10.1109/cvpr.2013.119); and the cluster-2 and cluster-3 "omitted" lists (e.g. RAD-DINO, EndoOmni, DBoW2, SD-DefSLAM, Revisit Anything/SegVLAD, TextInPlace, VPAir, Ishida et al. BER estimator).
 
 ## 16. Discrepancies found and resolved during synthesis
@@ -452,3 +471,49 @@ P4's protocol is therefore not novel. Its domain and its ceiling analysis are. S
 | PANSv2 venue | LNCS DOI (researcher 1); arXiv-only (researcher 2) | CrossRef confirms the MICCAI 2025 workshop LNCS chapter (kept, with eprint). |
 | EndoMapper region baseline | not reported by any researcher | Found in the full text **[FT]**: fine-tuned CNNs, Top-1 17.61–26.08% on Seq_094 (Table 7). This is a supervised E3 reference. |
 | ColonSLAM local matcher | "soft verification with LightGlue" | Full text **[FT]**: "off-the-shelf LightGlue", i.e. another natural-image model used zero-shot in the colon. |
+
+## 17. Adversarial novelty pass additions (2026-09-25)
+
+These entries were added by a skeptical-reviewer pass. Each was verified against its registry record; the rows are in `notes/citation_audit.tsv`. Severities and reframes are in positioning.md, "Adversarial novelty pass". Numbers are *other papers'* reported numbers, attributed.
+
+**Closest prior and "not first" evidence (C0/C1)**
+
+- **[morlana2021selfsupervised]** MIDL 2021 short paper. **Read in full** (OpenReview PDF).
+  - It fine-tunes the Radenović et al. R101-GeM retrieval CNN on SfM-clustered real colonoscopies: 3 training procedures, 1 validation, 1 test.
+  - It compares against "the best model reported in (Radenović et al., 2018), which was trained with images of popular landmarks and cities". That model is run off-the-shelf on a 6k-image held-out real colonoscopy, with COLMAP-covisibility GT and every image used as a query.
+  - Table 1, Recall@1 at minimum inter-frame distance D = 5/10/15: off-the-shelf 92.2/83.7/77.3; fine-tuned 96.1/90.5/85.3.
+  - *Bearing:* the earliest zero-shot evaluation of an outdoor-trained retrieval model on colonoscopy place-recognition GT found. It kills "first zero-shot" (C1). It shows that the temporal-exclusion window strongly controls difficulty, and that the zero-shot gap to fine-tuning was small in that setting.
+- **[ye2017image]** Image-retrieval-based inter-examination retargeting in GI endoscopy: 13 in-vivo videos, 6 patients, serial examinations. It reports that its descriptor outperforms "a number of alternative descriptors" (abstract).
+  - *Bearing:* a 2017 precedent for long-term, same-patient, retrieval-based place re-identification in the GI tract (C0).
+- **[gaubatz2022location]** Hierarchical bag-of-visual-words location recognition (loop closure) for stereo-laparoscope SLAM with an IMU (abstract).
+  - *Bearing:* surgical place recognition outside the colon (C0).
+- **[wei2023stereo]** Laparoscope relocalization. Its retrieval stage is a student network trained on pseudo-labels from pretrained NetVLAD, over Google Landmarks, SCARED and in-vivo clips. Retrieval accuracy is not reported (arXiv HTML).
+  - *Bearing:* another outdoor-VPR-derived model used as an unmeasured component (Attack 2).
+
+**Ceiling lineage (C2)**
+
+- **[waheed2021improving]** A McNemar-style complementarity framework for VPR, with upper and lower complementarity bounds and "an estimate of maximum VPR performance that may be achieved". It covers 8 methods on 10 datasets (abstract).
+  - *Bearing:* the oracle-ceiling construction P4 inherits via Paper 3. Cite it in the definition.
+- **[vasconcelos2004minimum]** Retrieval as statistical classification. Retrieval error is bounded by Bayes-error and density-estimation terms.
+  - *Bearing:* the conceptual precedent for the irreducible/recoverable split.
+- **[wheat2025bayes]** kNN is the most accurate non-parametric BER estimator, but it needs about 1000 samples per class (binary) for a <5% 95%-CI range, and about 2500 per class at 4 features.
+  - *Bearing:* the kNN-BER bracket cannot corroborate the oracle on Colon10k-sized positive sets.
+
+**Cross-environment difficulty (C4, and C2)**
+
+- **[wang2025topobench]** TOPO-Bench proposes "the first quantitative measure of dataset ambiguity to enable fair comparisons across environments". It also curates a benchmark "with calibrated ambiguity levels" (abstract).
+  - The arXiv HTML (read once) reports 25 indoor and outdoor environments and a mean inter-method correlation of 0.83 across 11 VPR methods. It concludes that ambiguity is "largely independent of the specific method used". The ICRA 2026 venue is an arXiv comment.
+  - *Bearing:* pre-empts any "first cross-domain difficulty measure" wording. C4 survives only as a test of whether the *oracle-ceiling structure* recurs.
+- **[schubert2021makes]** Set-up choices make VPR experiments "barely comparable across different papers" (abstract).
+  - *Bearing:* streets-vs-colon comparisons confound domain with set-up.
+
+**Representation diagnosis (C3)**
+
+- **[burgert2025imagenettrained]** NeurIPS 2025. Controlled suppression of shape, texture and colour shows that ImageNet CNNs "predominantly rely on local shape features", and that "medical imaging models emphasize color" (abstract).
+  - *Bearing:* undercuts the texture-bias premise of C3. It supplies the protocol C3 should adopt.
+- **[kim2026visual]** Distractor-Augmented Recall shows that VPR descriptors retrieve by condition as well as place, across 11 methods and 6 datasets (abstract).
+  - *Bearing:* the VPR precedent for the C3VDv2 clean/debris twin analysis.
+- **[ismagilov2026channel]** Grayscale matches RGB for VPR in general. Colour helps only with persistent, discriminative chromatic cues (abstract).
+  - *Bearing:* motivates a grayscale ablation in anatomy.
+- **[nedov2026geometryconditioned]** Geometry-conditioning a DINOv2 VPR model improves recall in repetitive natural (forest) environments on WildCross (abstract).
+  - *Bearing:* "appearance vs geometry" off-street is already studied as a method. P4's C3 is a frozen diagnosis.
