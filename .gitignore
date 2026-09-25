@@ -1,0 +1,12 @@
+# LaTeX build products (make pdf runs latexmk from the repo root on paper/main.tex)
+/main.pdf
+/main.aux
+/main.bbl
+/main.blg
+/main.fdb_latexmk
+/main.fls
+/main.log
+/main.out
+/main.synctex.gz
+*.aux
+.DS_Store

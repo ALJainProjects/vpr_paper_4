@@ -1,0 +1,119 @@
+% Pre-registered protocol.  Every numeric threshold is the owner's decision
+% and is fixed BEFORE any data are acquired; until then each is \pending.
+\section{Pre-Registered Protocol}
+\label{sec:protocol}
+
+The rules below and Table~\ref{tab:prereg} are fixed before any data are
+acquired; anything else is chosen on validation sequences $\mathcal{V}$.
+
+\begin{table}[t]
+\centering
+\caption{Pre-registered quantities: owner decisions, to be fixed before any
+data are seen. None has been set.}
+\label{tab:prereg}
+\scriptsize
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symbol & Role & Value \\
+\midrule
+$W^\star$, $\mathcal{W}$ & exclusion window; sweep
+  & \pending{pre-registered threshold: $W^\star$, $\mathcal{W}$} \\
+$\delta_{\mathrm{rand}}$ & G1 margin over random ranking
+  & \pending{pre-registered threshold: $\delta_{\mathrm{rand}}$} \\
+$\delta_{\mathrm{hand}}$ & G1 margin over handcrafted
+  & \pending{pre-registered threshold: $\delta_{\mathrm{hand}}$} \\
+$\delta_{\mathrm{ceil}}$ & G2 margin over chance ceiling
+  & \pending{pre-registered threshold: $\delta_{\mathrm{ceil}}$} \\
+$\alpha$, $B$ & CI level $1-\alpha$; resamples
+  & \pending{pre-registered threshold: $\alpha$, $B$} \\
+$o^\star$ & phantom view overlap
+  & \pending{pre-registered threshold: $o^\star$} \\
+$\tau$, $\theta$ & phantom pose (mm), angle (deg)
+  & \pending{pre-registered threshold: $\tau$, $\theta$} \\
+$I^\star$ & E2 ``large'' irreducible fraction
+  & \pending{pre-registered threshold: $I^\star$} \\
+$\varepsilon$ & E2 ``stable'' spread of $I$
+  & \pending{pre-registered threshold: $\varepsilon$} \\
+$\eta$ & E2 ``saturated'' last-member gain
+  & \pending{pre-registered threshold: $\eta$} \\
+$\delta_{\mathrm{probe}}$ & E3 probe margin (macro-F1)
+  & \pending{pre-registered threshold: $\delta_{\mathrm{probe}}$} \\
+$\mathcal{B}_q$ & image-quality strata
+  & \pending{pre-registered threshold: strata} \\
+$\mathcal{V}$ & Colon10k validation sequences
+  & \pending{pre-registered: sequence IDs} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{E1: zero-shot retrieval and the gate (Colon10k).} Every model in
+$\Zall$ is run; we report Recall@$k$, $k\in\{1,5,10\}$, at $W^\star$ and over
+$\mathcal{W}$. No large drop is hypothesized: the zero-shot gap
+of~\cite{morlana2021selfsupervised} was small, and frozen DINOv2 transfers
+well~\cite{dermyer2025endodino,parolari2026contrastive}.
+\emph{H1 (two-sided)} predicts no direction for three paired Recall@1
+contrasts: (a)~DINOv2-based minus CNN-based members of $\Zout$ (family
+means); (b)~each DINOv2-based VPR model minus raw DINOv2 (VPR training versus
+backbone); (c)~$\Zout$ minus $\Zmed$ (family means). An interval containing zero is reported as ``no
+difference detected'', never as equivalence. The transfer gap (street
+Recall@1 under the standard 25\,m protocol~\cite{berton2022deep}, run by our
+harness, minus Colon10k Recall@1) is descriptive only, since the ground truths
+differ in kind~\cite{schubert2021makes}. \emph{Gate.} With $\LB(\cdot)$ the
+lower confidence bound of a paired sequence-bootstrap difference, G1
+(signal) holds if some $m\in\Zall$ has $\LB(R_m-\Rrand)>\delta_{\mathrm{rand}}$
+and $\LB(R_m-\Rhand)>\delta_{\mathrm{hand}}$; G2 (ceiling beyond chance) holds
+if $\LB\bigl(C(\Zall)-\Crand(|\Zall|)\bigr)>\delta_{\mathrm{ceil}}$.
+\textsc{Go} (G1 and G2): run E2--E5. \textsc{Partial} (G1 only): report E1,
+report the Colon10k ceiling as a null, run E2 and E4 on phantoms only, and
+drop C4. \textsc{No-go} (not G1): there is no signal to diagnose; E2, E4 and
+E5 are not run on Colon10k, and the study narrows to E3 or is shelved:
+\pending{pre-registered decision: E3-only or shelve on NO-GO}. If the labels
+of ColonMapper's same-patient EndoMapper protocol (mAP) are obtainable, the
+zoo also runs on it beside the published fine-tuned
+descriptors~\cite{morlana2024colonmapper}.
+
+\paragraph{E2: the ceiling in the body (Colon10k, C3VD, C3VDv2).} For each
+ground truth (endoscopist, overlap, pose and angle), window in $\mathcal{W}$
+and zoo ($\Zout$, $\Zgen$, $\Zmed$, $\Zall$) we report $C$, $I$, every
+$\rho_m$, $\Crand$, the zoo-size curve and leave-one-out contributions. $I$
+is called \emph{large} only if $\LB(I)>I^\star$ under both ground-truth
+kinds (endoscopist and geometric) and in two or more feature families;
+\emph{stable} only if its spread across ground truths, zoos and windows is
+within $\varepsilon$; the ceiling is \emph{saturated} if the last member adds
+less than $\eta$. Stratifying irreducible queries by $\mathcal{B}_q$ keeps
+blurred or wall-contact frames from counting as aliasing. For C4,
+the street structure \emph{recurs} if, as on streets, G2 holds, $I$ is stable
+and the curve saturates; we add a TOPO-Bench-style
+score~\cite{wang2025topobench} and state that domain and set-up are
+confounded~\cite{schubert2021makes}.
+
+\paragraph{E3: sections from frozen features (REAL-Colon).} Frozen
+descriptors feed a $k$-nearest-neighbour classifier and a linear probe under
+the multi-centre cross-validation of~\cite{biffi2025temporal}, holding out
+patients and, separately, centres; we report macro-F1 and balanced accuracy.
+A probe \emph{separates sections} if its macro-F1 exceeds chance by
+$\delta_{\mathrm{probe}}$ at the lower confidence bound. The supervised
+ColonTCN~\cite{biffi2025temporal} and EndoMapper region
+baseline~\cite{azagra2023endomapper} are shown beside it as references, not
+competitors.
+
+\paragraph{E4: aliasing geometry and feature reliance (phantoms).} (a)~The
+displacement between each query and its wrong top-1 retrieval is split into
+a component along the local centreline (tangent of the smoothed trajectory)
+and a cross-sectional remainder. H4a (two-sided): the axial share for
+irreducible queries differs from that of random non-positive frames
+(permutation test at level $\alpha$); registration results predict an axial
+excess~\cite{jiang2025c3vdreg}. (b)~On C3VDv2 we contrast within- and
+cross-texture retrieval at fixed geometry, clean and debris-laden twins as
+distractors~\cite{kim2026visual}, and cue suppression
+after~\cite{burgert2025imagenettrained}, including
+grayscale~\cite{ismagilov2026channel}. H4b (two-sided): the recall change
+under each manipulation differs between CNN and DINOv2 families. Causal
+wording is confined to these contrasts, as ``in phantoms''; breakdowns on
+real data are correlational. (c)~Colon10k's confident wrong matches are shown
+by quality stratum.
+
+\paragraph{E5 (optional; Go only): sequence priors.} The companion study's
+temporal-prior retrieval is reported under full search, prior, prior-matched
+control and random window, separating the signal the prior adds from
+pruning; it is fit on $\mathcal{V}$.

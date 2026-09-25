@@ -1,0 +1,108 @@
+% Methods, written as the harness WILL implement them once the endoscopy data
+% layer (branch paper/p4-endoscopy-loaders) lands.  Nothing here has run.
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Frozen models}
+\label{sec:zoo}
+The \emph{outdoor VPR zoo} $\Zout$ holds NetVLAD~\cite{arandjelovic2016netvlad},
+CosPlace~\cite{berton2022rethinking}, EigenPlaces~\cite{berton2023eigenplaces}
+and MixVPR~\cite{alibey2023mixvpr} (CNN-based), SALAD~\cite{izquierdo2024optimal}
+and MegaLoc~\cite{berton2025megaloc} (DINOv2-based), and
+BoQ~\cite{alibey2024boq}, whose CNN and DINOv2 variants join their families.
+The \emph{generic arm} $\Zgen$ holds raw DINOv2~\cite{oquab2023dinov2} (CLS
+token; GeM-pooled patch tokens), which separates VPR training from the
+backbone, and AnyLoc~\cite{keetha2024anyloc} with GeM aggregation, which needs
+no vocabulary. AnyLoc-VLAD builds its vocabulary from the target database, so it is
+reported as a separate \emph{target-adapted} condition, outside every
+zero-shot claim. The
+\emph{medical arm} $\Zmed$, also frozen, holds EndoViT~\cite{batic2024endovit}
+(surgical pretraining), Endo-FM~\cite{wang2023foundation} (video) and the
+colonoscopy encoders of~\cite{hirsch2023selfsupervised}. GastroNet-5M~\cite{jong2026gastronet5m}
+and EndoDINO~\cite{dermyer2025endodino} (to $\Zmed$) and the landmark-trained
+anchor of~\cite{morlana2021selfsupervised} (to $\Zout$) join only if their
+weights prove obtainable.
+\pending{pre-registered: checkpoint, input size and descriptor dimension per
+model; Endo-FM frame-embedding recipe} No parameter is updated;
+reference-set fine-tuning~\cite{zaffar2025overlooked}, adapters and
+re-ranking are excluded by design, and some ``recoverable'' error may be
+recoverable by them. Descriptors are L2-normalized and ranked by exhaustive
+cosine similarity.
+
+\subsection{Datasets and ground truth}
+\label{sec:data}
+\paragraph{Colon10k (real).} Twenty short sequences from a single centre,
+undistorted to low-resolution pinhole frames~\cite{ma2021colon10k}. Per
+case, a matchings file lists for each annotated query the intervals of
+frames that an endoscopist verified as the same place; the loader expands
+them into positive sets. Published image totals disagree between sources, so we
+count what we acquire: \pending{Colon10k frame, query and positive counts as
+acquired}. Each query searches the other frames of its sequence. Frames within an exclusion window $W$ of the query leave
+both database and positives, as near-duplicates inflate
+recall~\cite{morlana2021selfsupervised}; queries left without a positive are
+dropped and counted. We could not read Colon10k's own protocol and do
+not compare with its numbers.
+
+\paragraph{C3VD and C3VDv2 (phantom).} Silicone phantoms with per-frame pose
+and depth~\cite{bobrow2023colonoscopy}; C3VDv2 adds two geometries with four
+textures each and, for every debris-laden video, a clean twin on the
+identical trajectory~\cite{golhar2026c3vdv2}. Queries come from one
+recording and the database from the other recordings of the same phantom,
+whose poses share the phantom frame through the dataset's 2D--3D
+registration (the loader checks this). The primary ground truth is
+\emph{view overlap}: the fraction of a query's valid pixels whose
+depth-back-projected points land in the database view with consistent depth,
+positive at $o^\star$ or above. The secondary one is \emph{pose and angle}:
+camera centres within $\tau$ and optical axes within $\theta$. Pose radius
+alone is never used, since nearby cameras in a tube may face different ways
+and share no view~\cite{larsen2026longterm,wei2025breaking}. Every phantom
+result is in-silico.
+
+\paragraph{Section labels (real, cross-patient).} REAL-Colon's frame-level
+section labels, from four centres~\cite{biffi2024realcolon,biffi2025temporal},
+are the E3 set; EndoMapper's region labels, on only five
+sequences~\cite{azagra2023endomapper}, give a leave-one-sequence-out repeat.
+No public dataset pairs real-patient endoscopic images with frame-level
+pose~\cite{cold2025mapping}.
+
+\paragraph{Preprocessing.} A field-of-view mask and a specular-highlight
+mask~\cite{schmidt2024tracking} precede resizing to each model's native
+input; their parameters are fixed in advance, and the unmodified street
+pipeline runs as an ablation.
+
+\subsection{Oracle ceiling and error decomposition}
+\label{sec:ceiling}
+Let $c_m(q)\in\{0,1\}$ mark that model $m$'s top-1 retrieval for query $q$
+is a positive under a given ground truth and window. For a zoo $Z$ the
+oracle ceiling~\cite{waheed2021improving} is
+$C(Z)=\frac{1}{|Q|}\sum_q \max_{m\in Z} c_m(q)$ and the irreducible fraction
+is $I(Z)=1-C(Z)$. Each model's top-1 error splits exactly as
+$1-R_m=\rho_m(Z)+I(Z)$, where
+$\rho_m(Z)=\frac{1}{|Q|}\sum_q \bigl(1-c_m(q)\bigr)\max_{m'\in Z} c_{m'}(q)$
+is the recoverable part: queries $m$ misses but another member retrieves,
+after the split of~\cite{vasconcelos2004minimum}. The ceiling is
+zoo-relative by construction, so we report (a) $C$ and $I$ for $\Zout$, $\Zgen$, $\Zmed$
+and their union $\Zall$, since the irreducible fraction depends on the
+embedding~\cite{renggli2021evaluating}; (b) the zoo-size curve (mean of
+$C(S)$ over subsets $S\subseteq Z$ of each size) and each leave-one-out
+contribution $C(Z)-C(Z\setminus\{m\})$; and (c) the \emph{chance ceiling} of
+$|Z|$ independent random rankings,
+$\Crand(|Z|)=\frac{1}{|Q|}\sum_q \bigl[1-(1-P_q/N_q)^{|Z|}\bigr]$ for $P_q$
+positives among $N_q$ database frames, because a union over many models
+collects chance hits and Colon10k's positive intervals can be wide. A
+nearest-neighbour Bayes-error bracket~\cite{cover1967nearest} is at most a
+labelled heuristic here: with a handful of positives per query in
+high-dimensional spaces it is far outside its reliable sample
+regime~\cite{wheat2025bayes}. Nothing in this paper is a Bayes-error
+estimate.
+
+\subsection{Baselines and statistics}
+\label{sec:stats}
+Two training-free baselines anchor ``non-trivial'': a random ranking, whose
+expected Recall@$k$ per query is $1-\binom{N_q-P_q}{k}\big/\binom{N_q}{k}$,
+and handcrafted global descriptors (a downsampled raw-pixel thumbnail and one
+fixed handcrafted descriptor). Confidence intervals are cluster bootstraps
+over sequences (Colon10k), recordings (C3VD) or patients and centres
+(REAL-Colon); model contrasts are paired within resamples, with Holm
+correction per pre-registered family. No number will be typed by hand: each
+comes from a hash-verified snapshot of the harness results.

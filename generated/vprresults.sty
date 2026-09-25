@@ -1,0 +1,100 @@
+%% vprresults.sty -- print results only from generated, provenance-checked macros.
+%%
+%% Part of vprbench.paper (vpr-testtime).  `python -m vprbench.paper numbers`
+%% copies this file next to the generated numbers.tex, so a paper compiles
+%% without Python (Overleaf/arXiv) once generated/ is committed.
+%%
+%% Usage:
+%%   \usepackage{generated/vprresults}            % draft (default)
+%%   \usepackage[final]{generated/vprresults}     % \pending becomes an error
+%%   options: numbers=<path to numbers.tex>  (default generated/numbers.tex)
+%%            tables=<dir of table bodies>   (default generated/tables)
+%%            draft | final
+%%
+%%   \res{key}         the value generated for `key'; undefined -> error + ??key??
+%%   \restable{name}   inside a tabular: the generated booktabs body
+%%   \pending{what}    a result that does not exist yet: visible marker in
+%%                     draft, error under the `final' option
+\NeedsTeXFormat{LaTeX2e}
+% Declared under the name it was loaded by (e.g. `generated/vprresults'), so
+% loading the generated copy by path does not trigger LaTeX's name warning.
+% (\@currpath exists since LaTeX 2020; older kernels just print that warning.)
+\ifdefined\@currpath
+  \ProvidesPackage{\@currpath\@currname}%
+    [2026/09/25 v1.0 provenance-checked result macros]
+\else
+  \ProvidesPackage{vprresults}%
+    [2026/09/25 v1.0 provenance-checked result macros]
+\fi
+\RequirePackage{kvoptions}
+\RequirePackage{booktabs}
+\SetupKeyvalOptions{family=vprr,prefix=vprr@}
+\DeclareBoolOption[false]{final}
+\DeclareComplementaryOption{draft}{final}
+\DeclareStringOption[generated/numbers.tex]{numbers}
+\DeclareStringOption[generated/tables]{tables}
+\ProcessKeyvalOptions{vprr}
+
+% numbers.tex wraps its definitions in \makeatletter ... \makeatother, which
+% would leave @ as `other' for the rest of this package; restore it.  The
+% restore is tokenised with the rest of \vprr@load, before the \input runs.
+\newcommand*\vprr@load{%
+  \edef\vprr@atcatcode{\the\catcode`\@}%
+  \IfFileExists{\vprr@numbers}{%
+    \input{\vprr@numbers}%
+  }{%
+    \ifvprr@final
+      \PackageError{vprresults}{Numbers file `\vprr@numbers' not found}{%
+        Run `make numbers' (python -m vprbench.paper numbers) to generate it.}%
+    \else
+      \PackageWarningNoLine{vprresults}{Numbers file `\vprr@numbers' not
+        found;\MessageBreak every \string\res\space will be undefined}%
+    \fi
+  }%
+  \catcode`\@=\vprr@atcatcode\relax
+}
+\vprr@load
+
+\DeclareRobustCommand*\res[1]{%
+  \ifcsname res@\detokenize{#1}\endcsname
+    \csname res@\detokenize{#1}\endcsname
+  \else
+    \PackageError{vprresults}{Undefined result key `\detokenize{#1}'}{%
+      `\detokenize{#1}' is not defined in \vprr@numbers.\MessageBreak
+      Add it to numbers.yaml and run `make numbers'. Never type the\MessageBreak
+      number by hand.}%
+    \textbf{??\detokenize{#1}??}%
+  \fi
+}
+
+% Expandable so that the generated body's \toprule (a \noalign) is the first
+% thing TeX sees in the alignment row.
+\newcommand*\restable[1]{%
+  \ifcsname restab@\detokenize{#1}\endcsname
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\@secondoftwo
+  \fi
+  {\@@input\vprr@tables/#1.tex }%
+  {\vprr@missingtable{#1}}%
+}
+\newcommand*\vprr@missingtable[1]{%
+  \PackageError{vprresults}{Missing generated table `\detokenize{#1}'}{%
+    Add table `\detokenize{#1}' to numbers.yaml and run `make numbers'.}%
+  \textbf{??\detokenize{#1}??}%
+}
+
+\DeclareRobustCommand\pending[1]{%
+  \ifvprr@final
+    \PackageError{vprresults}{Pending result in final mode: \detokenize{#1}}{%
+      \string\pending\space marks a result that does not exist yet.\MessageBreak
+      Produce it, add it to numbers.yaml, and replace \string\pending\space
+      with \string\res.}%
+  \fi
+  \ifdefined\textcolor
+    \textcolor{red}{\textbf{[PENDING: #1]}}%
+  \else
+    \textbf{[PENDING: #1]}%
+  \fi
+}
+\endinput

@@ -1,0 +1,66 @@
+% Introduction.  Binding reframes (notes/positioning.md): C0 conceded; C1 never
+% "first"; C2 is the core, with the oracle credited to waheed2021improving;
+% C3 is a feature-reliance diagnosis (texture-bias premise contested);
+% C4 is a test, qualified by wang2025topobench.
+\section{Introduction}
+\label{sec:intro}
+
+Colonoscopy reconstructions break into disconnected
+fragments~\cite{ma2021rnnslam}, and linking them or detecting a revisit is a
+place-recognition problem. Bag-of-words place recognition fails in the
+colon~\cite{elvira2024cudasiftslam}, while retrieval networks fine-tuned on
+colonoscopy now drive topological mapping and relocalization in real
+procedures~\cite{morlana2024colonmapper,morlana2024topological}. Endoscopic
+localization as image retrieval is thus established, from retargeting across
+examinations~\cite{ye2017image} to an endoscopist-verified
+benchmark~\cite{ma2021colon10k} and full-procedure
+data~\cite{azagra2023endomapper}. We claim no part of that formulation.
+
+We ask a narrower question: when retrieval fails in the colon, \emph{whose}
+failure is it? Off-street, outdoor VPR models lose recall, DINOv2-based ones
+least~\cite{keetha2024anyloc,larsen2026longterm}, and the colon adds low
+texture, specularities, deformation and repetitive
+folds~\cite{schmidt2024tracking,lamarca2021defslam}. An error may be a
+failure of the \emph{representation}, which a better model could recover, or
+genuine \emph{view ambiguity}: translation ambiguity along the tube already
+limits registration on phantoms~\cite{jiang2025c3vdreg}, and mapping
+pipelines discard frames humans judge unrecognizable~\cite{morlana2024colonmapper}.
+The remedies differ, and no study we found separates the two for retrieval.
+
+Zero-shot evidence exists, and we build on it rather than claim it. Morlana
+et al.~\cite{morlana2021selfsupervised} ran a landmark- and city-trained
+retrieval CNN off-the-shelf on a held-out real colonoscopy: it trailed its
+colonoscopy-fine-tuned counterpart by only single-digit Recall@1 margins, and
+its recall fell steeply as near-duplicate frames were excluded. Colon10k
+itself evaluated existing place-recognition techniques~\cite{ma2021colon10k}
+(which ones, we could not determine). To our knowledge (search to September
+2026), no prior work systematically benchmarks the 2022--2025 outdoor-trained
+VPR zoo, frozen and without medical fine-tuning, against endoscopic
+place-recognition ground truth. Off-the-shelf
+models do appear as unmeasured components of endoscopic localization
+pipelines~\cite{li2026automated,morlana2024colonmapper}, and training-free
+foundation-model re-identification has been demonstrated in cadaver
+endoscopy~\cite{soberanismukul2026global}.
+
+\paragraph{Contributions.} Design and decision rules are fixed here, before
+any data are acquired; every result slot is marked pending.
+\begin{itemize}
+\item[\textbf{C1}] A systematic zero-shot benchmark of the frozen
+  2022--2025 VPR zoo (with NetVLAD as anchor), AnyLoc and raw DINOv2, under
+  endoscopist and overlap-derived phantom ground truth, with a street-protocol
+  transfer gap and a frozen endoscopy-pretrained arm.
+\item[\textbf{C2}] The core contribution: a zoo-relative oracle ceiling
+  (after~\cite{waheed2021improving}; the estimator of a companion
+  street-scene study, reused unchanged), measured for the first time on
+  endoscopic place-recognition ground truth, as far as we found. Its
+  recoverable/irreducible split follows~\cite{vasconcelos2004minimum};
+  ``irreducible'' always means \emph{for this zoo, this ground truth and this
+  exclusion window}.
+\item[\textbf{C3}] A feature-reliance diagnosis of place retrieval: cue
+  suppression after~\cite{burgert2025imagenettrained} on the
+  geometry-by-texture design of C3VDv2~\cite{golhar2026c3vdv2}, two-sided,
+  with causal wording confined to phantoms.
+\item[\textbf{C4}] A test of whether the ceiling structure found on streets
+  recurs in anatomy and agrees with a TOPO-Bench-style ambiguity
+  score~\cite{wang2025topobench}: evidence, not proof, of domain generality.
+\end{itemize}

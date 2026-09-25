@@ -1,0 +1,63 @@
+% Paper 4 -- "Generalization": zero-shot transfer of frozen outdoor VPR models to
+% colonoscopic place recognition, and the zoo-relative oracle ceiling in the body.
+%
+% STATUS: STAGED, ZERO RESULTS.  No dataset has been acquired and nothing has been
+% run.  Every result slot is \pending{...}; every pre-registered threshold is
+% \pending{pre-registered threshold: ...} because it is the owner's decision.
+% Build from the repository root (see Makefile):  make sty check pdf
+% Numbers may enter this paper only through \res{key} (generated/numbers.tex,
+% produced by `make numbers' from a hash-verified snapshot).  Never type one.
+%
+% What may be claimed is governed by notes/EVIDENCE.md and notes/positioning.md.
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+% Draft mode: \pending renders a red [PENDING: ...] marker.  Switch to
+% \usepackage[final]{generated/vprresults} for submission: every remaining
+% \pending then stops the build.
+\usepackage{generated/vprresults}
+
+% Notation (symbols only; no macro may hold a number).
+\newcommand{\Zout}{\mathcal{Z}_{\mathrm{out}}}
+\newcommand{\Zgen}{\mathcal{Z}_{\mathrm{gen}}}
+\newcommand{\Zmed}{\mathcal{Z}_{\mathrm{med}}}
+\newcommand{\Zall}{\mathcal{Z}}
+\newcommand{\Crand}{C_{\mathrm{rand}}}
+\newcommand{\Rrand}{R_{\mathrm{rand}}}
+\newcommand{\Rhand}{R_{\mathrm{hand}}}
+\newcommand{\LB}{\operatorname{LB}}
+
+\begin{document}
+
+\title{How Much Colonoscopic Place-Recognition Error Is Recoverable?
+A Pre-Registered Zero-Shot Study of Frozen Outdoor VPR Models}
+\titlerunning{Recoverable Error in Colonoscopic Place Recognition}
+
+% Anonymized for double-blind review.
+\author{Anonymized Authors}
+\authorrunning{Anonymized Authors}
+\institute{Anonymized Affiliations\\\email{email@anonymized.com}}
+
+\maketitle
+
+\input{paper/sections/abstract}
+\input{paper/sections/introduction}
+\input{paper/sections/related}
+\input{paper/sections/methods}
+\input{paper/sections/protocol}
+\input{paper/sections/results}
+\input{paper/sections/outcomes}
+\input{paper/sections/limitations}
+\input{paper/sections/conclusion}
+
+\bibliographystyle{paper/splncs04p4}
+\bibliography{bib/references}
+
+\end{document}

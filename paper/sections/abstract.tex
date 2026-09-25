@@ -1,0 +1,28 @@
+% Abstract.  States the study design; the results sentence is pending.
+\begin{abstract}
+Place recognition by image retrieval is an established route to
+relocalization in colonoscopy, and an off-the-shelf retrieval model has
+already been evaluated on colonoscopy ground truth. What has not been
+measured is how much of the remaining error \emph{any} available
+representation can recover. We pre-register a study that transfers the
+modern visual place recognition (VPR) zoo, frozen and without medical
+fine-tuning, to colonoscopy and splits its error with a zoo-relative oracle
+ceiling into a recoverable part (some zoo member retrieves the right place)
+and an irreducible part (none does). The zoo spans CNN- and DINOv2-based VPR
+models, AnyLoc and raw DINOv2, beside a frozen endoscopy-pretrained arm.
+Ground truth is endoscopist-verified same-place intervals on real sequences
+(Colon10k) and view overlap from depth and pose on silicone phantoms (C3VD,
+C3VDv2); all phantom results are in-silico. Every quantity is reported per
+ground truth, temporal-exclusion window and feature family, against the
+ceiling that random rankings reach by chance. Controlled phantom contrasts
+support a feature-reliance diagnosis, and a frozen probe tests
+anatomical-section recognition across patients and centres. A two-sided
+primary hypothesis and a go/no-go gate are fixed before any data are seen.
+\pending{abstract results sentence: E1 go/no-go outcome; best frozen Recall@1,
+oracle ceiling, chance ceiling and irreducible fraction on Colon10k, with
+sequence-level confidence intervals}
+No clinical claim is made.
+
+\keywords{Place recognition \and Colonoscopy \and Zero-shot transfer \and
+Recognizability \and Pre-registration}
+\end{abstract}
