@@ -1,0 +1,146 @@
+key	id	source	fetched_title	ratio	first_author_ok	year_ok	status
+ma2021colon10k	10.1109/isbi48211.2021.9433780	crossref	Colon10k: A Benchmark For Place Recognition In Colonoscopy	1.000	True	True	PASS
+morlana2024colonmapper	10.1109/icra57147.2024.10610426	crossref	ColonMapper: topological mapping and localization for colonoscopy	1.000	True	True	PASS
+morlana2024colonmapper	arXiv:2305.05546	arxiv	ColonMapper: topological mapping and localization for colonoscopy	1.000	True	True	PASS (eprint)
+morlana2024topological	10.1007/978-3-031-72120-5_68	crossref	Topological SLAM in Colonoscopies Leveraging Deep Features and Topological Priors	1.000	True	True	PASS
+morlana2024topological	arXiv:2409.16806	arxiv	Topological SLAM in colonoscopies leveraging deep features and topological priors	1.000	True	True	PASS (eprint)
+azagra2023endomapper	10.1038/s41597-023-02564-7	crossref	Endomapper dataset of complete calibrated endoscopy procedures	1.000	True	True	PASS
+azagra2023endomapper	arXiv:2204.14240	arxiv	EndoMapper dataset of complete calibrated endoscopy procedures	1.000	True	True	PASS (eprint)
+biffi2025temporal	10.1016/j.cmpb.2025.108782	crossref	A temporal convolutional network-based approach and a benchmark dataset for colonoscopy video temporal segmentation	1.000	True	True	PASS
+biffi2025temporal	arXiv:2502.03430	arxiv	A Temporal Convolutional Network-Based Approach and a Benchmark Dataset for Colonoscopy Video Temporal Segmentation	1.000	True	True	PASS (eprint)
+bobrow2023colonoscopy	10.1016/j.media.2023.102956	crossref	Colonoscopy 3D video dataset with paired depth from 2D-3D registration	1.000	True	True	PASS
+bobrow2023colonoscopy	arXiv:2206.08903	arxiv	Colonoscopy 3D Video Dataset with Paired Depth from 2D-3D Registration	1.000	True	True	PASS (eprint)
+parolari2026contrastive	arXiv:2605.12320	arxiv	Contrastive Learning under Noisy Temporal Self-Supervision for Colonoscopy Videos	1.000	True	True	PASS
+chen2023coloscrl	10.1109/icme55011.2023.00185	crossref	Colo-SCRL: Self-Supervised Contrastive Representation Learning for Colonoscopic Video Retrieval	1.000	True	True	PASS
+chen2023coloscrl	arXiv:2303.15671	arxiv	Colo-SCRL: Self-Supervised Contrastive Representation Learning for Colonoscopic Video Retrieval	1.000	True	True	PASS (eprint)
+barbed2025automated	10.1007/s11548-025-03502-1	crossref	Automated overview of complete endoscopies with unsupervised learned descriptors	1.000	True	True	PASS
+kim2026lesioncentered	arXiv:2609.16672	arxiv	Lesion-centered 3D mapping of colonoscopy procedures: validation of a hierarchical ensemble pipeline on public benchmark videos	1.000	True	True	PASS
+elvira2024cudasiftslam	arXiv:2405.16932	arxiv	CudaSIFT-SLAM: multiple-map visual SLAM for full procedure mapping in real human endoscopy	1.000	True	True	PASS
+teufel2024oneslam	10.1007/s11548-024-03171-6	crossref	OneSLAM to map them all: a generalized approach to SLAM for monocular endoscopic imaging based on tracking any point	1.000	True	True	PASS
+hernandez2023investigating	10.1007/s11548-023-02918-x	crossref	Investigating keypoint descriptors for camera relocalization in endoscopy surgery	1.000	True	True	PASS
+li2026raul	arXiv:2609.19236	arxiv	RAUL: Reference-Assisted Ureteroscopy Localization for Skill Assessment	1.000	True	True	PASS
+li2026automated	arXiv:2602.15988	arxiv	Automated Assessment of Kidney Ureteroscopy Exploration for Training	1.000	True	True	PASS
+jiang2025c3vdreg	arXiv:2511.00260	arxiv	C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization	1.000	True	True	PASS
+barbed2022superpoint	10.1007/978-3-031-21083-9_5	crossref	SuperPoint Features in Endoscopy	1.000	True	True	PASS
+barbed2022superpoint	arXiv:2203.04302	arxiv	SuperPoint features in endoscopy	1.000	True	True	PASS (eprint)
+yang2026endomatcher	10.1109/tmi.2026.3721133	crossref	EndoMatcher: Generalizable Endoscopic Image Matcher via Multi-Domain Pre-training for Robot-Assisted Surgery	1.000	True	True	PASS
+yang2026endomatcher	arXiv:2508.05205	arxiv	EndoMatcher: Generalizable Endoscopic Image Matcher via Multi-Domain Pre-training for Robot-Assisted Surgery	1.000	True	True	PASS (eprint)
+intrator2023selfsupervised	10.1007/978-3-031-43904-9_57	crossref	Self-supervised Polyp Re-identification in Colonoscopy	1.000	True	True	PASS
+intrator2023selfsupervised	arXiv:2306.08591	arxiv	Self-Supervised Polyp Re-Identification in Colonoscopy	1.000	True	True	PASS (eprint)
+posner2023c3fusion	10.1007/978-3-031-46914-5_2	crossref	$$\hbox {C}^3$$Fusion: Consistent Contrastive Colon Fusion, Towards Deep SLAM in Colonoscopy	1.000	True	True	PASS
+posner2023c3fusion	arXiv:2206.01961	arxiv	C$^3$Fusion: Consistent Contrastive Colon Fusion, Towards Deep SLAM in Colonoscopy	1.000	True	True	PASS (eprint)
+ma2019realtime	10.1007/978-3-030-32254-0_64	crossref	Real-Time 3D Reconstruction of Colonoscopic Surfaces for Determining Missing Regions	1.000	True	True	PASS
+ma2021rnnslam	10.1016/j.media.2021.102100	crossref	RNNSLAM: Reconstructing the 3D colon to visualize missing regions during a colonoscopy	1.000	True	True	PASS
+freedman2020detecting	10.1109/tmi.2020.2994221	crossref	Detecting Deficient Coverage in Colonoscopies	1.000	True	True	PASS
+freedman2020detecting	arXiv:2001.08589	arxiv	Detecting Deficient Coverage in Colonoscopies	1.000	True	True	PASS (eprint)
+leifman2023colonoscopy	10.1007/978-3-031-45350-2_9	crossref	Colonoscopy Coverage Revisited: Identifying Scanning Gaps in Real-Time	1.000	True	True	PASS
+leifman2023colonoscopy	arXiv:2305.10026	arxiv	Colonoscopy Coverage Revisited: Identifying Scanning Gaps in Real-Time	1.000	True	True	PASS (eprint)
+yao2021motionbased	10.1016/j.media.2021.102180	crossref	Motion-based camera localization system in colonoscopy videos	1.000	True	True	PASS
+yao2021motionbased	arXiv:2012.01690	arxiv	Motion-based Camera Localization System in Colonoscopy Videos	1.000	True	True	PASS (eprint)
+kim2024density	10.1038/s41598-023-51056-6	crossref	Density clustering-based automatic anatomical section recognition in colonoscopy video using deep learning	1.000	True	True	PASS
+cai2026stcolonet	arXiv:2605.28119	arxiv	ST-ColoNet: Spatio-Temporal Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature Learning	1.000	True	True	PASS
+mori2002tracking	10.1016/s1361-8415(02)00089-0	crossref	Tracking of a bronchoscope using epipolar geometry analysis and intensity-based image registration of real and virtual endoscopic images	1.000	True	True	PASS
+sganga2019offsetnet	10.1109/icra.2019.8793940	crossref	OffsetNet: Deep Learning for Localization in the Lung using Rendered Images	1.000	True	True	PASS
+sganga2019offsetnet	arXiv:1809.05645	arxiv	OffsetNet: Deep Learning for Localization in the Lung using Rendered Images	1.000	True	True	PASS (eprint)
+keuth2024airway	10.1007/s11548-023-03050-6	crossref	Airway label prediction in video bronchoscopy: capturing temporal dependencies utilizing anatomical knowledge	1.000	True	True	PASS
+tomasini2025online	arXiv:2510.09144	arxiv	Online Topological Localization for Navigation Assistance in Bronchoscopy	1.000	True	True	PASS
+tomasini2026bronchotop	arXiv:2609.28328	arxiv	BronchoTop: Bronchoscopy Navigation via RGB-Only Topological Localization	1.000	True	True	PASS
+tian2025bronchotrack	10.1109/tmi.2024.3493170	crossref	BronchoTrack: Airway Lumen Tracking for Branch-Level Bronchoscopic Localization	1.000	True	True	PASS
+tian2025harnessing	10.1007/978-3-032-06004-4_13	crossref	Harnessing Foundation Models for Robust and Generalizable 6-DOF Bronchoscopy Localization	1.000	True	True	PASS
+tian2025harnessing	arXiv:2505.24249	arxiv	Harnessing Foundation Models for Robust and Generalizable 6-DOF Bronchoscopy Localization	1.000	True	True	PASS (eprint)
+shu2025bronchopt	arXiv:2511.09443	arxiv	BronchOpt : Vision-Based Pose Optimization with Fine-Tuned Foundation Models for Accurate Bronchoscopy Navigation	1.000	True	True	PASS
+chen2026geometryaware	arXiv:2608.07116	arxiv	Geometry-Aware Camera Localization for Bronchoscopy	1.000	True	True	PASS
+werner2023precise	10.1007/978-3-031-45676-3_18	crossref	Precise Localization Within the GI Tract by Combining Classification of CNNs and Time-Series Analysis of HMMs	1.000	True	True	PASS
+werner2023precise	arXiv:2310.07895	arxiv	Precise localization within the GI tract by combining classification of CNNs and time-series analysis of HMMs	1.000	True	True	PASS (eprint)
+nam2024deep	10.3390/biomedicines12081704	crossref	Deep Learning-Based Real-Time Organ Localization and Transit Time Estimation in Wireless Capsule Endoscopy	1.000	True	True	PASS
+wu2019randomised	10.1136/gutjnl-2018-317366	crossref	Randomised controlled trial of WISENSE, a real-time quality improving system for monitoring blind spots during esophagogastroduodenoscopy	1.000	True	True	PASS
+widya2019whole	10.1109/jtehm.2019.2946802	crossref	Whole Stomach 3D Reconstruction and Frame Localization From Monocular Endoscope Video	1.000	True	True	PASS
+soberanismukul2026global	10.1007/s11548-026-03650-y	crossref	Global region reidentification for camera relocalization in video-based surgical navigation	1.000	True	True	PASS
+golhar2026c3vdv2	10.1038/s41597-026-07471-1	crossref	C3VDv2 - Colonoscopy 3D video dataset with enhanced realism	1.000	True	True	PASS
+luk2026c3vddefcol	arXiv:2606.07891	arxiv	C3VD-DEFCOL: A Deformable Colonoscopy Dataset with Time-Resolved 3D Ground Truth and Realistic Appearance	1.000	True	True	PASS
+rau2024simcol3d	10.1016/j.media.2024.103195	crossref	SimCol3D — 3D reconstruction during colonoscopy challenge	1.000	True	True	PASS
+rau2024simcol3d	arXiv:2307.11261	arxiv	SimCol3D -- 3D Reconstruction during Colonoscopy Challenge	1.000	True	True	PASS (eprint)
+ozyoruk2021endoslam	10.1016/j.media.2021.102058	crossref	EndoSLAM dataset and an unsupervised monocular visual odometry and depth estimation approach for endoscopic videos	1.000	True	True	PASS
+ozyoruk2021endoslam	arXiv:2006.16670	arxiv	EndoSLAM Dataset and An Unsupervised Monocular Visual Odometry and Depth Estimation Approach for Endoscopic Videos: Endo-SfMLearner	0.934	True	True	PASS (eprint)
+allan2021stereo	arXiv:2101.01133	arxiv	Stereo Correspondence and Reconstruction of Endoscopic Data Challenge	1.000	True	True	PASS
+ye2017selfsupervised	arXiv:1705.08260	arxiv	Self-Supervised Siamese Learning on Stereo Image Pairs for Depth Estimation in Robotic Surgery	1.000	True	True	PASS
+borgli2020hyperkvasir	10.1038/s41597-020-00622-y	crossref	HyperKvasir, a comprehensive multi-class image and video dataset for gastrointestinal endoscopy	1.000	True	True	PASS
+smedsrud2021kvasircapsule	10.1038/s41597-021-00920-z	crossref	Kvasir-Capsule, a video capsule endoscopy dataset	1.000	True	True	PASS
+lefloch2025galar	10.1038/s41597-025-05112-7	crossref	Galar - a large multi-label video capsule endoscopy dataset	1.000	True	True	PASS
+biffi2024realcolon	10.1038/s41597-024-03359-0	crossref	REAL-Colon: A dataset for developing real-world AI applications in colonoscopy	1.000	True	True	PASS
+song2025cascolon	10.1038/s41597-025-05588-3	crossref	CAS-Colon: A Comprehensive Colonoscopy Anatomical Segmentation Dataset for Artificial Intelligence Development	1.000	True	True	PASS
+cold2025mapping	10.1038/s41597-025-05530-7	crossref	Mapping the colon through the colonoscope’s coordinates – The Copenhagen Colonoscopy Coordinate Database	1.000	True	True	PASS
+wang2023foundation	10.1007/978-3-031-43996-4_10	crossref	Foundation Model for Endoscopy Video Analysis via Large-Scale Self-supervised Pre-train	1.000	True	True	PASS
+wang2023foundation	arXiv:2306.16741	arxiv	Foundation Model for Endoscopy Video Analysis via Large-scale Self-supervised Pre-train	1.000	True	True	PASS (eprint)
+wang2025improving	10.1109/jbhi.2025.3532311	crossref	Improving Foundation Model for Endoscopy Video Analysis via Representation Learning on Long Sequences	1.000	True	True	PASS
+batic2024endovit	10.1007/s11548-024-03091-5	crossref	EndoViT: pretraining vision transformers on a large collection of endoscopic images	1.000	True	True	PASS
+jong2026gastronet5m	10.1053/j.gastro.2025.07.030	crossref	GastroNet-5M: A Multicenter Dataset for Developing Foundation Models in Gastrointestinal Endoscopy	1.000	True	True	PASS
+boers2024foundation	10.1016/j.media.2024.103298	crossref	Foundation models in gastrointestinal endoscopic AI: Impact of architecture, pre-training approach and data efficiency	1.000	True	True	PASS
+jaspers2026scaling	10.1016/j.media.2025.103873	crossref	Scaling up self-supervised learning for improved surgical foundation models	1.000	True	True	PASS
+jaspers2026scaling	arXiv:2501.09436	arxiv	Scaling up self-supervised learning for improved surgical foundation models	1.000	True	True	PASS (eprint)
+dermyer2025endodino	arXiv:2501.05488	arxiv	EndoDINO: A Foundation Model for GI Endoscopy	1.000	True	True	PASS
+tian2025endomamba	10.1007/978-3-032-05114-1_22	crossref	EndoMamba: An Efficient Foundation Model for Endoscopic Videos via Hierarchical Pre-training	1.000	True	True	PASS
+tian2025endomamba	arXiv:2502.19090	arxiv	EndoMamba: An Efficient Foundation Model for Endoscopic Videos via Hierarchical Pre-training	1.000	True	True	PASS (eprint)
+hirsch2023selfsupervised	10.1007/978-3-031-43904-9_55	crossref	Self-supervised Learning for Endoscopic Video Analysis	1.000	True	True	PASS
+hirsch2023selfsupervised	arXiv:2308.12394	arxiv	Self-Supervised Learning for Endoscopic Video Analysis	1.000	True	True	PASS (eprint)
+cui2024surgicaldino	10.1007/s11548-024-03083-5	crossref	Surgical-DINO: adapter learning of foundation models for depth estimation in endoscopic surgery	1.000	True	True	PASS
+kim2025improving	10.3389/fmed.2025.1727884	crossref	Improving image-retrieval performance of foundation models in gastrointestinal endoscopic images	1.000	True	True	PASS
+raghu2019transfusion	arXiv:1902.07208	arxiv	Transfusion: Understanding Transfer Learning for Medical Imaging	1.000	True	True	PASS
+azizi2021big	10.1109/iccv48922.2021.00346	crossref	Big Self-Supervised Models Advance Medical Image Classification	1.000	True	True	PASS
+azizi2021big	arXiv:2101.05224	arxiv	Big Self-Supervised Models Advance Medical Image Classification	1.000	True	True	PASS (eprint)
+matsoukas2022makes	10.1109/cvpr52688.2022.00901	crossref	What Makes Transfer Learning Work for Medical Images: Feature Reuse &amp; Other Factors	0.976	True	True	PASS
+matsoukas2022makes	arXiv:2203.01825	arxiv	What Makes Transfer Learning Work For Medical Images: Feature Reuse & Other Factors	1.000	True	True	PASS (eprint)
+huix2024natural	10.1109/wacv57701.2024.00746	crossref	Are Natural Domain Foundation Models Useful for Medical Image Classification?	1.000	True	True	PASS
+huix2024natural	arXiv:2310.19522	arxiv	Are Natural Domain Foundation Models Useful for Medical Image Classification?	1.000	True	True	PASS (eprint)
+baharoon2023evaluating	arXiv:2312.02366	arxiv	Evaluating General Purpose Vision Foundation Models for Medical Image Analysis: An Experimental Study of DINOv2 on Radiology Benchmarks	1.000	True	True	PASS
+liu2025dinov3	arXiv:2509.06467	arxiv	Does DINOv3 Set a New Medical Vision Standard? Benchmarking 2D and 3D Classification, Segmentation, and Registration	1.000	True	True	PASS
+han2024depth	arXiv:2401.16600	arxiv	Depth Anything in Medical Images: A Comparative Study	1.000	True	True	PASS
+keetha2024anyloc	10.1109/lra.2023.3343602	crossref	<i>AnyLoc</i>                     : Towards Universal Visual Place Recognition	1.000	True	True	PASS
+keetha2024anyloc	arXiv:2308.00688	arxiv	AnyLoc: Towards Universal Visual Place Recognition	1.000	True	True	PASS (eprint)
+oquab2023dinov2	arXiv:2304.07193	arxiv	DINOv2: Learning Robust Visual Features without Supervision	1.000	True	True	PASS
+simeoni2025dinov3	arXiv:2508.10104	arxiv	DINOv3	1.000	True	True	PASS
+larsen2026longterm	10.3389/frobt.2026.1821019	crossref	Long-term visual localization in dynamic benthic environments: the SEALOC dataset, footprint-based ground truth, and visual place recognition benchmark	1.000	True	True	PASS
+larsen2026longterm	arXiv:2603.04056	arxiv	Long-Term Visual Localization in Dynamic Benthic Environments: A Dataset, Footprint-Based Ground Truth, and Visual Place Recognition Benchmark	0.969	True	True	PASS (eprint)
+gorry2025imagebased	10.1109/iros60139.2025.11247445	crossref	Image-Based Relocalization and Alignment for Long-Term Monitoring of Dynamic Underwater Environments	1.000	True	True	PASS
+gorry2025imagebased	arXiv:2503.04096	arxiv	Image-Based Relocalization and Alignment for Long-Term Monitoring of Dynamic Underwater Environments	1.000	True	True	PASS (eprint)
+haitz2026evaluation	arXiv:2603.13917	arxiv	Evaluation of Visual Place Recognition Methods for Image Pair Retrieval in 3D Vision and Robotics	1.000	True	True	PASS
+arandjelovic2016netvlad	10.1109/cvpr.2016.572	crossref	NetVLAD: CNN Architecture for Weakly Supervised Place Recognition	1.000	True	True	PASS
+arandjelovic2016netvlad	arXiv:1511.07247	arxiv	NetVLAD: CNN architecture for weakly supervised place recognition	1.000	True	True	PASS (eprint)
+berton2022rethinking	10.1109/cvpr52688.2022.00483	crossref	Rethinking Visual Geo-localization for Large-Scale Applications	1.000	True	True	PASS
+berton2022rethinking	arXiv:2204.02287	arxiv	Rethinking Visual Geo-localization for Large-Scale Applications	1.000	True	True	PASS (eprint)
+berton2023eigenplaces	10.1109/iccv51070.2023.01017	crossref	EigenPlaces: Training Viewpoint Robust Models for Visual Place Recognition	1.000	True	True	PASS
+berton2023eigenplaces	arXiv:2308.10832	arxiv	EigenPlaces: Training Viewpoint Robust Models for Visual Place Recognition	1.000	True	True	PASS (eprint)
+alibey2023mixvpr	10.1109/wacv56688.2023.00301	crossref	MixVPR: Feature Mixing for Visual Place Recognition	1.000	True	True	PASS
+alibey2023mixvpr	arXiv:2303.02190	arxiv	MixVPR: Feature Mixing for Visual Place Recognition	1.000	True	True	PASS (eprint)
+alibey2024boq	10.1109/cvpr52733.2024.01685	crossref	BoQ: A Place is Worth a Bag of Learnable Queries	1.000	True	True	PASS
+alibey2024boq	arXiv:2405.07364	arxiv	BoQ: A Place is Worth a Bag of Learnable Queries	1.000	True	True	PASS (eprint)
+izquierdo2024optimal	10.1109/cvpr52733.2024.01672	crossref	Optimal Transport Aggregation for Visual Place Recognition	1.000	True	True	PASS
+izquierdo2024optimal	arXiv:2311.15937	arxiv	Optimal Transport Aggregation for Visual Place Recognition	1.000	True	True	PASS (eprint)
+izquierdo2024close	10.1007/978-3-031-73464-9_15	crossref	Close, But Not There: Boosting Geographic Distance Sensitivity in Visual Place Recognition	1.000	True	True	PASS
+izquierdo2024close	arXiv:2407.02422	arxiv	Close, But Not There: Boosting Geographic Distance Sensitivity in Visual Place Recognition	1.000	True	True	PASS (eprint)
+berton2025megaloc	10.1109/cvprw67362.2025.00269	crossref	MegaLoc: One Retrieval to Place Them All	1.000	True	True	PASS
+berton2025megaloc	arXiv:2502.17237	arxiv	MegaLoc: One Retrieval to Place Them All	1.000	True	True	PASS (eprint)
+lu2024seamless	arXiv:2402.14505	arxiv	Towards Seamless Adaptation of Pre-trained Models for Visual Place Recognition	1.000	True	True	PASS
+tzachor2024effovpr	arXiv:2405.18065	arxiv	EffoVPR: Effective Foundation Model Utilization for Visual Place Recognition	1.000	True	True	PASS
+zaffar2025overlooked	arXiv:2510.03751	arxiv	The Overlooked Value of Test-time Reference Sets in Visual Place Recognition	1.000	True	True	PASS
+knights2026wildcross	arXiv:2603.01475	arxiv	WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments	1.000	True	True	PASS
+encinargonzalez2025multimodal	arXiv:2511.05404	arxiv	Multi-modal Loop Closure Detection with Foundation Models in Severely Unstructured Environments	1.000	True	True	PASS
+berton2022deep	10.1109/cvpr52688.2022.00532	crossref	Deep Visual Geo-localization Benchmark	1.000	True	True	PASS
+zaffar2021vprbench	10.1007/s11263-021-01469-5	crossref	VPR-Bench: An Open-Source Visual Place Recognition Evaluation Framework with Quantifiable Viewpoint and Appearance Change	1.000	True	True	PASS
+lowry2016visual	10.1109/tro.2015.2496823	crossref	Visual Place Recognition: A Survey	1.000	True	True	PASS
+schubert2024visual	10.1109/mra.2023.3310859	crossref	Visual Place Recognition: A Tutorial [Tutorial]	1.000	True	True	PASS
+schubert2024visual	arXiv:2303.03281	arxiv	Visual Place Recognition: A Tutorial	1.000	True	True	PASS (eprint)
+torii2015visual	10.1109/tpami.2015.2409868	crossref	Visual Place Recognition with Repetitive Structures	1.000	True	True	PASS
+jegou2009burstiness	10.1109/cvpr.2009.5206609	crossref	On the burstiness of visual elements	1.000	True	True	PASS
+lajoie2019modeling	10.1109/lra.2019.2894852	crossref	Modeling Perceptual Aliasing in SLAM via Discrete–Continuous Graphical Models	1.000	True	True	PASS
+wei2025breaking	10.1109/wacv61041.2025.00232	crossref	Breaking the Frame: Visual Place Recognition by Overlap Prediction	1.000	True	True	PASS
+wei2025breaking	arXiv:2406.16204	arxiv	Breaking the Frame: Visual Place Recognition by Overlap Prediction	1.000	True	True	PASS (eprint)
+geirhos2018imagenettrained	arXiv:1811.12231	arxiv	ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness	1.000	True	True	PASS
+lamarca2021defslam	10.1109/tro.2020.3020739	crossref	DefSLAM: Tracking and Mapping of Deforming Scenes From Monocular Sequences	1.000	True	True	PASS
+lamarca2021defslam	arXiv:1908.08918	arxiv	DefSLAM: Tracking and Mapping of Deforming Scenes from Monocular Sequences	1.000	True	True	PASS (eprint)
+gomezrodriguez2024nrslam	10.1109/tro.2024.3422004	crossref	NR-SLAM: Nonrigid Monocular SLAM	1.000	True	True	PASS
+schmidt2024tracking	10.1016/j.media.2024.103131	crossref	Tracking and mapping in medical computer vision: A review	1.000	True	True	PASS
+cover1967nearest	10.1109/tit.1967.1053964	crossref	Nearest neighbor pattern classification	1.000	True	True	PASS
+renggli2021evaluating	arXiv:2108.13034	arxiv	Evaluating Bayes Error Estimators on Real-World Datasets with FeeBee	1.000	True	True	PASS
+zaffar2024estimation	10.1109/cvpr52733.2024.01680	crossref	On the Estimation of Image-Matching Uncertainty in Visual Place Recognition	1.000	True	True	PASS
+zaffar2024estimation	arXiv:2404.00546	arxiv	On the Estimation of Image-matching Uncertainty in Visual Place Recognition	1.000	True	True	PASS (eprint)
