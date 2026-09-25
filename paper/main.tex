@@ -2,8 +2,12 @@
 % colonoscopic place recognition, and the zoo-relative oracle ceiling in the body.
 %
 % STATUS: STAGED, ZERO RESULTS.  No dataset has been acquired and nothing has been
-% run.  Every result slot is \pending{...}; every pre-registered threshold is
-% \pending{pre-registered threshold: ...} because it is the owner's decision.
+% run.  Every result slot is \pending{...}; every threshold still to be fixed is a
+% \pending{...} in Table 1 because it is the owner's decision.  Nothing is
+% registered yet: say "pre-specified", never "pre-registered", until the signed
+% vpr-testtime docs/papers/P4_PREREGISTRATION.md has a public, timestamped
+% registry record (notes/EVIDENCE.md section 5).  That document is canonical for
+% the gate, the ground truths and the baselines; Sec. 4 must match it.
 % Build from the repository root (see Makefile):  make sty check pdf
 % Numbers may enter this paper only through \res{key} (generated/numbers.tex,
 % produced by `make numbers' from a hash-verified snapshot).  Never type one.
@@ -33,12 +37,14 @@
 \newcommand{\Rrand}{R_{\mathrm{rand}}}
 \newcommand{\Rhand}{R_{\mathrm{hand}}}
 \newcommand{\LB}{\operatorname{LB}}
+\newcommand{\UB}{\operatorname{UB}}
+\newcommand{\Zgate}{\mathcal{Z}_{\mathrm{gate}}}
 
 \begin{document}
 
-\title{How Much Colonoscopic Place-Recognition Error Is Recoverable?
-A Pre-Registered Zero-Shot Study of Frozen Outdoor VPR Models}
-\titlerunning{Recoverable Error in Colonoscopic Place Recognition}
+\title{How Much Colonoscopic Place-Recognition Error Could Model Selection
+Recover? A Pre-Specified Zero-Shot Study of Frozen Outdoor VPR Models}
+\titlerunning{Selection-Recoverable Error in Colonoscopic Place Recognition}
 
 % Anonymized for double-blind review.
 \author{Anonymized Authors}
@@ -53,7 +59,6 @@ A Pre-Registered Zero-Shot Study of Frozen Outdoor VPR Models}
 \input{paper/sections/methods}
 \input{paper/sections/protocol}
 \input{paper/sections/results}
-\input{paper/sections/outcomes}
 \input{paper/sections/limitations}
 \input{paper/sections/conclusion}
 

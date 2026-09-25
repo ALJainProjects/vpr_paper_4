@@ -1,10 +1,16 @@
 %% splncs04p4.bst -- vpr_paper_4 presentation variant of splncs04.bst (TeX Live 2025, llncs bundle).
-%% Two changes only, both presentation; bib/references.bib is untouched because
+%% Four changes only, all presentation; bib/references.bib is untouched because
 %% bib/verified.json fingerprints every field of every entry:
 %%   1. format.url prints nothing when the entry has a DOI (the audit stores the
 %%      DOI resolver URL in `url', so splncs04 printed every DOI twice);
 %%   2. format.note prints nothing (`note' holds citation-audit provenance, e.g.
-%%      "Venue not confirmed in a DOI registry", which is not reference text).
+%%      "Venue not confirmed in a DOI registry", which is not reference text);
+%%   3. format.names prints the first author and "et al." when an entry has
+%%      more than three authors (MICCAI's ~2-page reference allowance; review
+%%      M13).  Set max.names to a large value to restore full author lists;
+%%   4. format.url also prints nothing for an arXiv entry whose howpublished
+%%      already prints its id ("arXiv preprint arXiv:<eprint>"), the same
+%%      duplicate-identifier rule as change 1 (`eprint' added to ENTRY for it).
 %% Revert to \bibliographystyle{splncs04} if the venue requires the stock file.
 %% BibTeX bibliography style `splncs04'
 %%
@@ -86,6 +92,7 @@ ENTRY
     edition
     editor
     eid
+    eprint
     howpublished
     institution
     journal
@@ -447,6 +454,7 @@ FUNCTION {bibinfo.warn}
 }
 FUNCTION {format.url}
 { url empty$ doi empty$ not or  % splncs04p4: no URL when a DOI is printed
+  eprint empty$ not howpublished empty$ not and or  % ... or when howpublished prints the arXiv id
     { "" }
     { "\url{" url * "}" * }
   if$
@@ -465,6 +473,9 @@ INTEGERS { nameptr namesleft numnames }
 
 STRINGS  { bibinfo}
 
+FUNCTION {max.names} { #3 }    % splncs04p4: longer lists are truncated
+FUNCTION {kept.names} { #1 }   % splncs04p4: names kept before "et al."
+
 FUNCTION {format.names}
 { 'bibinfo :=
   duplicate$ empty$ 'skip$ {
@@ -472,7 +483,10 @@ FUNCTION {format.names}
   "" 't :=
   #1 'nameptr :=
   s num.names$ 'numnames :=
-  numnames 'namesleft :=
+  numnames max.names >
+    { kept.names 'namesleft := }
+    { numnames 'namesleft := }
+  if$
     { namesleft #0 > }
     { s nameptr
       "{vv~}{ll}{, jj}{, f{.}.}"
@@ -504,6 +518,7 @@ FUNCTION {format.names}
       namesleft #1 - 'namesleft :=
     }
   while$
+  numnames max.names > { ", " * bbl.etal * } 'skip$ if$
   } if$
 }
 FUNCTION {format.names.ed}

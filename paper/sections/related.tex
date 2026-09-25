@@ -1,55 +1,46 @@
 % Related work.  Written from notes/literature.md and notes/positioning.md;
 % every cited key exists in bib/references.bib.  Nothing positioning.md marks
-% "pre-empted" is claimed; the reframed wording is used instead.  The cited set
-% is the positioning must-cite core (space-limited; see notes/EVIDENCE.md).
+% "pre-empted" is claimed.  Space-limited: the cited set is the positioning
+% must-cite core minus the cuts listed in notes/EVIDENCE.md section 7.
+% Negative statements are restricted to what was verified (notes/review_response.md
+% M9--M12): wei2023stereo is NOT zero-shot (distilled on surgical video);
+% ColonSLAM reports an off-the-shelf LightGlue baseline; only the abstract of
+% soberanismukul2026global was readable.
 \section{Related Work}
 \label{sec:related}
 
 \paragraph{Place recognition in the body.}
-Retrieval-based place recognition in the gut includes retargeting across
-examinations~\cite{ye2017image}, the Colon10k benchmark~\cite{ma2021colon10k},
-retrieval trained on structure-from-motion
-clusters~\cite{morlana2021selfsupervised}, and topological mapping on
-fine-tuned descriptors~\cite{morlana2024colonmapper,morlana2024topological}
-over EndoMapper~\cite{azagra2023endomapper}. Section classification is an
-established supervised task~\cite{biffi2025temporal}; E3 only probes it.
-Zero-shot use is not new either: beyond the off-the-shelf baseline
-of~\cite{morlana2021selfsupervised}, NetVLAD retrieves candidate views in
-ureteroscopy~\cite{li2026automated}, a NetVLAD-distilled network does so in
-laparoscopy~\cite{wei2023stereo}, off-the-shelf local matchers (LoFTR with
-outdoor weights, LightGlue) run inside ColonMapper and
-ColonSLAM~\cite{morlana2024colonmapper,morlana2024topological},
-and a training-free foundation-model method re-identifies regions after scope
-reinsertion~\cite{soberanismukul2026global} (its model is not named in the
-record we could access). None measures per-model retrieval quality or its
-ceiling; frozen general and endoscopy foundation models have been compared
-only for object-level retrieval~\cite{parolari2026contrastive}.
+Off-the-shelf models are already used in the body: beside the
+landmark-trained baseline of~\cite{morlana2021selfsupervised}, NetVLAD retrieves candidate views in
+ureteroscopy~\cite{li2026automated}, off-the-shelf local matchers (LoFTR
+with outdoor weights, LightGlue) run inside ColonMapper and
+ColonSLAM~\cite{morlana2024colonmapper,morlana2024topological}, and a
+training-free foundation-model method re-identifies regions after scope
+reinsertion~\cite{soberanismukul2026global}. Apart from that baseline,
+ColonSLAM's off-the-shelf LightGlue baseline and Colon10k's unread
+evaluation, we found no measurement of an off-the-shelf model's
+place-recognition accuracy in the body, and no oracle ceiling
+(for~\cite{soberanismukul2026global}, as far as its abstract shows).
 
-\paragraph{Zero-shot VPR and natural-to-medical transfer.}
+\paragraph{Zero-shot VPR and frozen foundation features.}
 Moving a frozen VPR zoo to a texture-poor domain is an established
-genre~\cite{keetha2024anyloc,larsen2026longterm,gorry2025imagebased}, none
-of it medical; we borrow its protocol and add the domain and the
-ceiling. The value of natural-image pretraining for medical imaging is
-contested~\cite{raghu2019transfusion}, but frozen DINOv2 is strong: it beats
-ImageNet features on medical classification~\cite{huix2024natural} and
-matches an endoscopy-pretrained DINOv2 on GI landmarks~\cite{dermyer2025endodino}. Endoscopy foundation
-models~\cite{wang2023foundation,batic2024endovit,hirsch2023selfsupervised,jong2026gastronet5m}
-are usually evaluated after fine-tuning and, as far as we found, never on
-frozen same-place retrieval.
+genre~\cite{keetha2024anyloc,larsen2026longterm}, none of it medical; we
+borrow its protocol and add the domain and the ceiling. Frozen general and
+endoscopy foundation models have been compared for object- and class-level
+retrieval in GI endoscopy~\cite{parolari2026contrastive,kim2025improving},
+frozen DINOv2 being a strong baseline~\cite{parolari2026contrastive}, but as
+far as we found never for same-place retrieval; endoscopy foundation
+models~\cite{wang2023foundation,batic2024endovit,hirsch2023selfsupervised}
+are usually evaluated after fine-tuning.
 
 \paragraph{Ceilings, ambiguity and feature reliance.}
 The oracle ceiling---the fraction of queries that at least one method
 localizes---was introduced for VPR, for pairs of techniques, as an estimate
 of the maximum achievable performance~\cite{waheed2021improving}; we apply it
-to a zoo, with the error split of~\cite{vasconcelos2004minimum}. TOPO-Bench
-already measures dataset ambiguity across indoor and outdoor environments
-and argues that it is largely method-independent~\cite{wang2025topobench}, so
-C4 concerns only the oracle-ceiling construct. Repetition breaks retrieval~\cite{torii2015visual}, distance-threshold
-ground truth overestimates recall~\cite{larsen2026longterm,wei2025breaking},
-and set-up choices make VPR results hard to compare across
-papers~\cite{schubert2021makes}. The texture-bias account of CNNs is
-contested: under controlled cue suppression
-they rely mostly on local shape, and medical-imaging models emphasize
-colour~\cite{burgert2025imagenettrained}. VPR descriptors can retrieve by
-condition as well as by place~\cite{kim2026visual}, and colour helps only
-where chromatic cues are persistent and discriminative~\cite{ismagilov2026channel}.
+to a zoo. TOPO-Bench already measures dataset ambiguity across indoor and
+outdoor environments and argues that it is largely
+method-independent~\cite{wang2025topobench}; we propose no such measure.
+The texture-bias account of CNNs is contested: under controlled cue
+suppression they rely mostly on local shape, and medical-imaging models
+emphasize colour~\cite{burgert2025imagenettrained}; VPR descriptors can
+also retrieve by condition rather than place~\cite{kim2026visual}.

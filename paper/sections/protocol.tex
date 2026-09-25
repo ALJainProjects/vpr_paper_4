@@ -1,119 +1,139 @@
-% Pre-registered protocol.  Every numeric threshold is the owner's decision
-% and is fixed BEFORE any data are acquired; until then each is \pending.
-\section{Pre-Registered Protocol}
+% Pre-specified protocol.  CANONICAL SOURCE for the gate, the ground truths and
+% the baselines: vpr-testtime docs/papers/P4_PREREGISTRATION.md and
+% vprbench/analysis/preregistration.py (branch paper/p4-endoscopy-loaders,
+% eac266d).  This section must restate them exactly (review M1): GO / NO_GO /
+% OWNER_REVIEW; min_models_passing; the "meaningful split"; ONE handcrafted
+% baseline; H-E1a as a two-sided test.  The E2/E4/C4 rules below are additions
+% that must be merged into that document before it is signed (list in
+% notes/review_response.md).  Every threshold is the owner's decision and is
+% \pending until fixed.  E3 (section probe) and E5 (sequence priors) of the
+% outline are not in this paper (review M13, S11, S16).
+\section{Pre-Specified Protocol}
 \label{sec:protocol}
 
-The rules below and Table~\ref{tab:prereg} are fixed before any data are
-acquired; anything else is chosen on validation sequences $\mathcal{V}$.
+A protocol document released with the harness (an unsigned draft, to be
+registered) is canonical for the gate, ground truths and baselines;
+this section restates it and adds the E2 and E4 rules, to be merged into
+it. Every open quantity (Table~\ref{tab:prereg}) is to be fixed, and the
+signed document publicly registered with a timestamp, before any data are
+acquired.
 
 \begin{table}[t]
 \centering
-\caption{Pre-registered quantities: owner decisions, to be fixed before any
-data are seen. None has been set.}
+\caption{Quantities to be fixed before any data are acquired. Left: fields
+of the canonical protocol document (its names in \texttt{typewriter}). Right: this paper's additions. None is set:
+\pending{every value in Table 1 (owner decisions)}}
 \label{tab:prereg}
 \scriptsize
-\begin{tabular}{@{}lll@{}}
+\setlength{\tabcolsep}{2pt}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{\hspace{8pt}}l>{\raggedright\arraybackslash}X@{}}
 \toprule
-Symbol & Role & Value \\
-\midrule
-$W^\star$, $\mathcal{W}$ & exclusion window; sweep
-  & \pending{pre-registered threshold: $W^\star$, $\mathcal{W}$} \\
-$\delta_{\mathrm{rand}}$ & G1 margin over random ranking
-  & \pending{pre-registered threshold: $\delta_{\mathrm{rand}}$} \\
-$\delta_{\mathrm{hand}}$ & G1 margin over handcrafted
-  & \pending{pre-registered threshold: $\delta_{\mathrm{hand}}$} \\
-$\delta_{\mathrm{ceil}}$ & G2 margin over chance ceiling
-  & \pending{pre-registered threshold: $\delta_{\mathrm{ceil}}$} \\
-$\alpha$, $B$ & CI level $1-\alpha$; resamples
-  & \pending{pre-registered threshold: $\alpha$, $B$} \\
-$o^\star$ & phantom view overlap
-  & \pending{pre-registered threshold: $o^\star$} \\
-$\tau$, $\theta$ & phantom pose (mm), angle (deg)
-  & \pending{pre-registered threshold: $\tau$, $\theta$} \\
-$I^\star$ & E2 ``large'' irreducible fraction
-  & \pending{pre-registered threshold: $I^\star$} \\
-$\varepsilon$ & E2 ``stable'' spread of $I$
-  & \pending{pre-registered threshold: $\varepsilon$} \\
-$\eta$ & E2 ``saturated'' last-member gain
-  & \pending{pre-registered threshold: $\eta$} \\
-$\delta_{\mathrm{probe}}$ & E3 probe margin (macro-F1)
-  & \pending{pre-registered threshold: $\delta_{\mathrm{probe}}$} \\
-$\mathcal{B}_q$ & image-quality strata
-  & \pending{pre-registered threshold: strata} \\
-$\mathcal{V}$ & Colon10k validation sequences
-  & \pending{pre-registered: sequence IDs} \\
+\multicolumn{2}{@{}l}{Canonical document} & \multicolumn{2}{l@{}}{Additions (this paper)} \\
+\cmidrule(r{8pt}){1-2}\cmidrule{3-4}
+$k$ & gate Recall@$k$ (\texttt{k})
+  & $o^\star$, $\varepsilon_d$ & overlap threshold; depth tolerance \\
+$W^\star$, $\mathcal{W}$ & window in frame ids (\texttt{exclusion\_window}); sweep
+  & $\tau$, $\theta$ & pose radius; optical-axis angle \\
+$\Rhand$ & handcrafted baseline, settings (\texttt{handcrafted\_baseline})
+  & phantom & query/database videos; clusters; world frames \\
+$\delta_{\mathrm{rand}}$ & margin over chance (\texttt{min\_margin\_vs\_random})
+  & raw & raw-DINOv2 size, resolution per contrasted model \\
+$\delta_{\mathrm{hand}}$ & margin over $\Rhand$ (\texttt{min\_margin\_vs\_handcrafted})
+  & $\delta_{\Delta}$, $\varepsilon$, $\eta$ & E2 margins: excess $\Delta I$; spread; last increment \\
+$n_{\mathrm{pass}}$ & non-trivial members for \textsc{Go} (\texttt{min\_models\_passing})
+  & $n_a$, $\gamma$ & audit sample; miss-share bound; annotators \\
+$\rho^\star$, $I^\star$ & split bounds (\texttt{min\_recoverable\_frac}, \texttt{min\_irreducible\_frac})
+  & $\mathcal{B}_q$ & image-quality strata \\
+$\alpha$, $B$ & error rate (sets \texttt{ci\_level}); \texttt{n\_bootstrap}; \texttt{bootstrap\_seed}
+  & E4 & cue operators; mesh centreline; distance bins \\
+$\Zgate$, scope & gate zoo, AnyLoc vocabulary; database: own case or all
+  & & \\
+street, prep & street data for H1a; preprocessing on/off, parameters,
+  undistortion
+  & & \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
-\paragraph{E1: zero-shot retrieval and the gate (Colon10k).} Every model in
-$\Zall$ is run; we report Recall@$k$, $k\in\{1,5,10\}$, at $W^\star$ and over
-$\mathcal{W}$. No large drop is hypothesized: the zero-shot gap
-of~\cite{morlana2021selfsupervised} was small, and frozen DINOv2 transfers
-well~\cite{dermyer2025endodino,parolari2026contrastive}.
-\emph{H1 (two-sided)} predicts no direction for three paired Recall@1
-contrasts: (a)~DINOv2-based minus CNN-based members of $\Zout$ (family
-means); (b)~each DINOv2-based VPR model minus raw DINOv2 (VPR training versus
-backbone); (c)~$\Zout$ minus $\Zmed$ (family means). An interval containing zero is reported as ``no
-difference detected'', never as equivalence. The transfer gap (street
-Recall@1 under the standard 25\,m protocol~\cite{berton2022deep}, run by our
-harness, minus Colon10k Recall@1) is descriptive only, since the ground truths
-differ in kind~\cite{schubert2021makes}. \emph{Gate.} With $\LB(\cdot)$ the
-lower confidence bound of a paired sequence-bootstrap difference, G1
-(signal) holds if some $m\in\Zall$ has $\LB(R_m-\Rrand)>\delta_{\mathrm{rand}}$
-and $\LB(R_m-\Rhand)>\delta_{\mathrm{hand}}$; G2 (ceiling beyond chance) holds
-if $\LB\bigl(C(\Zall)-\Crand(|\Zall|)\bigr)>\delta_{\mathrm{ceil}}$.
-\textsc{Go} (G1 and G2): run E2--E5. \textsc{Partial} (G1 only): report E1,
-report the Colon10k ceiling as a null, run E2 and E4 on phantoms only, and
-drop C4. \textsc{No-go} (not G1): there is no signal to diagnose; E2, E4 and
-E5 are not run on Colon10k, and the study narrows to E3 or is shelved:
-\pending{pre-registered decision: E3-only or shelve on NO-GO}. If the labels
-of ColonMapper's same-patient EndoMapper protocol (mAP) are obtainable, the
-zoo also runs on it beside the published fine-tuned
+\paragraph{E1: zero-shot retrieval and the gate (Colon10k).} Every member
+of $\Zall$ is run; we report Recall@$k$, $k\in\{1,5,10\}$, at $W^\star$ and
+over $\mathcal{W}$, beside both baselines. Two-sided hypotheses:
+\emph{H1a}, per member: the transfer gap $\Delta_m=R_m^{\mathrm{street}}-R_m$
+(street side under the standard 25\,m protocol~\cite{berton2022deep})
+differs from zero; the ground truths differ in kind~\cite{schubert2021makes},
+so $\Delta_m$ does not isolate the domain. \emph{H1b}: each DINOv2-based VPR
+model (SALAD, BoQ-DINOv2, MegaLoc, AnyLoc) differs from backbone-matched raw
+DINOv2, CLS and GeM (VPR training or aggregation versus backbone). \emph{H1c}: the mean of
+NetVLAD, CosPlace, EigenPlaces and MixVPR differs from that of the
+DINOv2-based VPR models. $\Zout$ versus $\Zmed$ is descriptive. The small
+in-colon gap between off-the-shelf and fine-tuned
+retrieval~\cite{morlana2021selfsupervised} is not $\Delta_m$. An interval
+containing zero means ``no difference detected'', never equivalence.
+
+\emph{Gate} (gate's $k$, $W^\star$, $\Zgate$). A member \emph{beats random}
+if $\LB(R_m-\Rrand)>\delta_{\mathrm{rand}}$, and is \emph{non-trivial} if
+also $\LB(R_m-\Rhand)>\delta_{\mathrm{hand}}$. The split is
+\emph{meaningful} if $\LB(I)>I^\star$ and $\LB(\rho_{m^\star})>\rho^\star$,
+with $m^\star$ the member of highest Recall@$k$, chosen once on the full
+data. \textsc{Go}: at least $n_{\mathrm{pass}}$ non-trivial members and a
+meaningful split; E2 and E4 run. \textsc{No-go}: no member beats random; E1
+is reported as a negative benchmark (no signal detected above the chance
+margin),
+and the study narrows to an anatomical-section probe or is shelved. Otherwise
+\textsc{Owner review}: the protocol defines no action, and whatever follows
+is reported as post hoc. $C$ and $\Crand(|\Zgate|)$ are reported
+beside the split, not as gate terms. If ColonMapper's EndoMapper protocol
+labels are obtainable, the zoo also runs beside its fine-tuned
 descriptors~\cite{morlana2024colonmapper}.
 
-\paragraph{E2: the ceiling in the body (Colon10k, C3VD, C3VDv2).} For each
-ground truth (endoscopist, overlap, pose and angle), window in $\mathcal{W}$
-and zoo ($\Zout$, $\Zgen$, $\Zmed$, $\Zall$) we report $C$, $I$, every
-$\rho_m$, $\Crand$, the zoo-size curve and leave-one-out contributions. $I$
-is called \emph{large} only if $\LB(I)>I^\star$ under both ground-truth
-kinds (endoscopist and geometric) and in two or more feature families;
-\emph{stable} only if its spread across ground truths, zoos and windows is
-within $\varepsilon$; the ceiling is \emph{saturated} if the last member adds
-less than $\eta$. Stratifying irreducible queries by $\mathcal{B}_q$ keeps
-blurred or wall-contact frames from counting as aliasing. For C4,
-the street structure \emph{recurs} if, as on streets, G2 holds, $I$ is stable
-and the curve saturates; we add a TOPO-Bench-style
-score~\cite{wang2025topobench} and state that domain and set-up are
-confounded~\cite{schubert2021makes}.
+\paragraph{E2: the ceiling in the body (Colon10k, C3VD, C3VDv2).} At the
+gate's $k$, per ground truth, window in $\mathcal{W}$ and zoo (each arm, each backbone family,
+$\Zall$): $C$, $I$, every $\rho_m$, headroom, $\Crand$, the zoo-size curve and
+leave-one-out contributions. $I$ is \emph{large} if $\LB(I)>I^\star$ in two
+or more backbone families, under the endoscopist and a geometric ground truth
+(a conjunction: the two kinds also differ as real versus phantom data).
+Adding members never increases $I$, so when $Z'=\Zgen$ or $\Zmed$ joins
+$\Zout$, part of $\Zout$'s unsolved error is read as representation failure
+only if $\LB(\Delta I-\Delta I_{\mathrm{rand}})>\delta_{\Delta}$, with
+$\Delta I=I(\Zout)-I(\Zout\cup Z')$ and $\Delta
+I_{\mathrm{rand}}=\Delta I_{\mathrm{rand}}(\Zout,|Z'|)$. $I(\Zall)$ is
+\emph{stable} if $\UB$ of its spread (maximum minus minimum over the windows
+in $\mathcal{W}$ and, on phantoms, the two geometric ground truths) is at most
+$\varepsilon$; zoo size is not a stability axis. The ceiling is
+\emph{saturated} if $\UB\bigl(\bar C(|Z|)-\bar C(|Z|-1)-g\bigr)<\eta$, with
+$g$ the mean of $\Delta I_{\mathrm{rand}}(S,1)$ over subsets $S$ of size
+$|Z|-1$ (the gain of one random ranking).
 
-\paragraph{E3: sections from frozen features (REAL-Colon).} Frozen
-descriptors feed a $k$-nearest-neighbour classifier and a linear probe under
-the multi-centre cross-validation of~\cite{biffi2025temporal}, holding out
-patients and, separately, centres; we report macro-F1 and balanced accuracy.
-A probe \emph{separates sections} if its macro-F1 exceeds chance by
-$\delta_{\mathrm{probe}}$ at the lower confidence bound. The supervised
-ColonTCN~\cite{biffi2025temporal} and EndoMapper region
-baseline~\cite{azagra2023endomapper} are shown beside it as references, not
-competitors.
+\emph{Audit.} Before any Colon10k query is read as view ambiguity, $n_a$
+random zoo-unsolved queries are shown with every member's top-1 to annotators
+blind to model identity, and labelled ground-truth miss (a retrieved frame
+shows the query's place outside its intervals), ambiguous view (several
+places fit), low quality, or representation failure (the place is
+identifiable, yet no member retrieves it). Ambiguity is read only from the ``ambiguous''
+share, and not at all if $\UB$ of the miss share exceeds $\gamma$. Unsolved
+queries are also stratified by $\mathcal{B}_q$ (blur, specular area,
+exposure). A large, stable $I$ that survives the audit would be evidence
+that, for this zoo, colonoscopic place recognition is limited by view
+ambiguity, in line with~\cite{jiang2025c3vdreg}; a small $I$ is a reportable
+null (errors are mostly selection-recoverable); a ceiling near its chance
+ceiling mostly collects lucky hits. For C4, E2's statistics are also
+reported, with the same estimator and zoo, for the street data of H1a;
+domain and set-up (ground-truth kind, frame rate, window) are
+confounded~\cite{schubert2021makes}, so no recurrence verdict is drawn.
 
-\paragraph{E4: aliasing geometry and feature reliance (phantoms).} (a)~The
-displacement between each query and its wrong top-1 retrieval is split into
-a component along the local centreline (tangent of the smoothed trajectory)
-and a cross-sectional remainder. H4a (two-sided): the axial share for
-irreducible queries differs from that of random non-positive frames
-(permutation test at level $\alpha$); registration results predict an axial
-excess~\cite{jiang2025c3vdreg}. (b)~On C3VDv2 we contrast within- and
-cross-texture retrieval at fixed geometry, clean and debris-laden twins as
-distractors~\cite{kim2026visual}, and cue suppression
-after~\cite{burgert2025imagenettrained}, including
-grayscale~\cite{ismagilov2026channel}. H4b (two-sided): the recall change
-under each manipulation differs between CNN and DINOv2 families. Causal
-wording is confined to these contrasts, as ``in phantoms''; breakdowns on
-real data are correlational. (c)~Colon10k's confident wrong matches are shown
-by quality stratum.
-
-\paragraph{E5 (optional; Go only): sequence priors.} The companion study's
-temporal-prior retrieval is reported under full search, prior, prior-matched
-control and random window, separating the signal the prior adds from
-pruning; it is fit on $\mathcal{V}$.
+\paragraph{E4: aliasing geometry and feature reliance (phantoms).} (a)~For
+each zoo-unsolved query, the displacement to the camera of the wrong top-1
+of the dataset's best member is split into a component along the phantom
+centreline, taken from the released mesh (else (a) is not run), and a
+remainder. \emph{H4a}: the mean axial share differs from that of a
+distance-matched null (one non-positive frame per query from the retrieved
+frame's distance bin); registration results predict an axial
+excess~\cite{jiang2025c3vdreg}, and no excess would not by itself identify a
+cause. (b)~On C3VDv2, \emph{H4b}: the recall change under each manipulation
+differs between the CNN- and DINOv2-based families (means). Manipulations:
+cross- versus within-texture retrieval at fixed geometry, only if the
+textures' shared frame is confirmed; debris-laden queries against their
+clean twins (same places) plus debris-laden frames of other segments (same
+condition, other places), after~\cite{kim2026visual}; cue suppression with
+the operators of~\cite{burgert2025imagenettrained}, and grayscale. Causal
+wording is confined to these contrasts, as ``in phantoms''.

@@ -1,108 +1,138 @@
-% Methods, written as the harness WILL implement them once the endoscopy data
-% layer (branch paper/p4-endoscopy-loaders) lands.  Nothing here has run.
+% Methods, written as the harness WILL implement them.  The gate, the Colon10k and
+% pose+angle ground truths, the baselines and the preprocessing exist only on the
+% unmerged branch paper/p4-endoscopy-loaders (vpr-testtime@eac266d); the view-overlap
+% ground truth, raw DINOv2, the medical arm and AnyLoc-GeM / target-vocabulary
+% AnyLoc-VLAD do not exist on any branch.  Nothing here has run.
+% Never attribute to the code a check it does not do (review M4): the C3VD
+% loader does NOT verify a shared world frame across recordings or textures.
 \section{Methods}
 \label{sec:methods}
 
 \subsection{Frozen models}
 \label{sec:zoo}
-The \emph{outdoor VPR zoo} $\Zout$ holds NetVLAD~\cite{arandjelovic2016netvlad},
-CosPlace~\cite{berton2022rethinking}, EigenPlaces~\cite{berton2023eigenplaces}
-and MixVPR~\cite{alibey2023mixvpr} (CNN-based), SALAD~\cite{izquierdo2024optimal}
-and MegaLoc~\cite{berton2025megaloc} (DINOv2-based), and
-BoQ~\cite{alibey2024boq}, whose CNN and DINOv2 variants join their families.
-The \emph{generic arm} $\Zgen$ holds raw DINOv2~\cite{oquab2023dinov2} (CLS
-token; GeM-pooled patch tokens), which separates VPR training from the
-backbone, and AnyLoc~\cite{keetha2024anyloc} with GeM aggregation, which needs
-no vocabulary. AnyLoc-VLAD builds its vocabulary from the target database, so it is
-reported as a separate \emph{target-adapted} condition, outside every
-zero-shot claim. The
-\emph{medical arm} $\Zmed$, also frozen, holds EndoViT~\cite{batic2024endovit}
-(surgical pretraining), Endo-FM~\cite{wang2023foundation} (video) and the
-colonoscopy encoders of~\cite{hirsch2023selfsupervised}. GastroNet-5M~\cite{jong2026gastronet5m}
-and EndoDINO~\cite{dermyer2025endodino} (to $\Zmed$) and the landmark-trained
-anchor of~\cite{morlana2021selfsupervised} (to $\Zout$) join only if their
-weights prove obtainable.
-\pending{pre-registered: checkpoint, input size and descriptor dimension per
-model; Endo-FM frame-embedding recipe} No parameter is updated;
-reference-set fine-tuning~\cite{zaffar2025overlooked}, adapters and
-re-ranking are excluded by design, and some ``recoverable'' error may be
-recoverable by them. Descriptors are L2-normalized and ranked by exhaustive
-cosine similarity.
+The \emph{outdoor arm} $\Zout$ holds CNN-based models
+(NetVLAD~\cite{arandjelovic2016netvlad}, CosPlace~\cite{berton2022rethinking},
+EigenPlaces~\cite{berton2023eigenplaces}, MixVPR~\cite{alibey2023mixvpr},
+BoQ~\cite{alibey2024boq} on ResNet-50) and DINOv2-based ones
+(SALAD~\cite{izquierdo2024optimal}, MegaLoc~\cite{berton2025megaloc}, BoQ
+on DINOv2). The \emph{generic arm} $\Zgen$ holds raw
+DINOv2~\cite{oquab2023dinov2} (CLS token; GeM-pooled patch tokens) at the
+backbone size and input resolution of each model it is contrasted with, and
+AnyLoc-VLAD~\cite{keetha2024anyloc} with a vocabulary released for another
+domain, which is strictly zero-shot. AnyLoc-VLAD with a vocabulary built from
+the target database is a separate \emph{target-adapted} condition, outside
+every zero-shot claim; AnyLoc-GeM joins if a wrapper is written. The frozen
+\emph{medical arm} $\Zmed$ holds EndoViT~\cite{batic2024endovit} (surgical
+pretraining), Endo-FM~\cite{wang2023foundation} (video) and the colonoscopy
+encoders of~\cite{hirsch2023selfsupervised}; the landmark-trained anchor
+of~\cite{morlana2021selfsupervised} joins $\Zout$ if its weights prove
+obtainable. $\Zall$ is the union of the arms. A \emph{backbone family} is
+the set of CNN-based, of DINOv2-based (with $\Zgen$) or of medical members:
+the CNN and DINOv2 families share no backbone, whereas $\Zout$ and $\Zgen$
+do. \pending{per model: checkpoint, input size, dimension; Endo-FM frame
+recipe} No parameter is updated:
+reference-set fine-tuning, adapters and re-ranking are excluded, and some
+zoo-unsolved error may be solved by them. Descriptors are
+L2-normalized and ranked by exhaustive cosine similarity.
 
 \subsection{Datasets and ground truth}
 \label{sec:data}
-\paragraph{Colon10k (real).} Twenty short sequences from a single centre,
-undistorted to low-resolution pinhole frames~\cite{ma2021colon10k}. Per
-case, a matchings file lists for each annotated query the intervals of
-frames that an endoscopist verified as the same place; the loader expands
-them into positive sets. Published image totals disagree between sources, so we
-count what we acquire: \pending{Colon10k frame, query and positive counts as
-acquired}. Each query searches the other frames of its sequence. Frames within an exclusion window $W$ of the query leave
-both database and positives, as near-duplicates inflate
+\paragraph{Colon10k (real).} Twenty short sequences (cases) from one centre,
+undistorted to low-resolution pinhole frames~\cite{ma2021colon10k}. Per case,
+a matchings file lists for each annotated query the intervals of frames an
+endoscopist verified as the same place; its interval syntax, frame-id
+convention and end inclusivity are undocumented and are read off the first
+file before any model is run. Positives are the database frames inside the
+query's intervals; frames within $W$ frame ids of the query leave database
+and positives, as near-duplicates inflate
 recall~\cite{morlana2021selfsupervised}; queries left without a positive are
-dropped and counted. We could not read Colon10k's own protocol and do
-not compare with its numbers.
+dropped and counted. The database is the query's case or all cases
+(Table~\ref{tab:prereg}). Every frame outside the intervals is a negative,
+although whether the annotation is exhaustive is unknown (audit,
+Sec.~\ref{sec:protocol}). Totals are counted at acquisition:
+\pending{Colon10k frame, query, positive counts}. We could not
+read Colon10k's own protocol: this is our reading of its release, and we
+compare with none of its numbers.
 
-\paragraph{C3VD and C3VDv2 (phantom).} Silicone phantoms with per-frame pose
-and depth~\cite{bobrow2023colonoscopy}; C3VDv2 adds two geometries with four
-textures each and, for every debris-laden video, a clean twin on the
-identical trajectory~\cite{golhar2026c3vdv2}. Queries come from one
-recording and the database from the other recordings of the same phantom,
-whose poses share the phantom frame through the dataset's 2D--3D
-registration (the loader checks this). The primary ground truth is
-\emph{view overlap}: the fraction of a query's valid pixels whose
-depth-back-projected points land in the database view with consistent depth,
-positive at $o^\star$ or above. The secondary one is \emph{pose and angle}:
-camera centres within $\tau$ and optical axes within $\theta$. Pose radius
-alone is never used, since nearby cameras in a tube may face different ways
-and share no view~\cite{larsen2026longterm,wei2025breaking}. Every phantom
-result is in-silico.
+\paragraph{C3VD and C3VDv2 (phantom).} Colonoscopy video of silicone
+phantoms with per-frame pose and depth~\cite{bobrow2023colonoscopy}; C3VDv2
+has two sculpted geometries with four textures each and, for every
+debris-laden video, a clean twin on the identical
+trajectory~\cite{golhar2026c3vdv2}. E2 pairs recordings of one phantom and
+texture made on different trajectories (queries from one, database from the
+other); twins enter only E4. Video pairs and resampling clusters (phantom
+segments, not recordings, which share databases) are fixed from the
+release's structure before any model is run. That different recordings'
+poses share one phantom frame, via the 2D--3D registration, is an
+\emph{unverified precondition} of every cross-recording comparison. The
+primary ground truth, \emph{view overlap}, is not yet implemented: the
+fraction of a query's valid pixels (in the field of view, with depth in the
+released valid range) whose back-projected points, mapped by both poses and
+projected through the released fisheye calibration, land in the database
+view with depth agreeing within $\varepsilon_d$; it is directional (query to
+database) and positive at $o^\star$ or above. The secondary one, \emph{pose
+and angle} (implemented), needs camera centres within $\tau$ and optical
+axes within $\theta$. Pose radius alone is never used: nearby cameras in a
+tube may share no view~\cite{larsen2026longterm}.
 
-\paragraph{Section labels (real, cross-patient).} REAL-Colon's frame-level
-section labels, from four centres~\cite{biffi2024realcolon,biffi2025temporal},
-are the E3 set; EndoMapper's region labels, on only five
-sequences~\cite{azagra2023endomapper}, give a leave-one-sequence-out repeat.
-No public dataset pairs real-patient endoscopic images with frame-level
-pose~\cite{cold2025mapping}.
+\paragraph{Preprocessing.} If enabled (Table~\ref{tab:prereg}), pixels
+outside the field of view (largest bright connected component: max-channel
+threshold, opening, hole filling) or specular (bright and near-achromatic:
+HSV thresholds, dilated) are set to a constant fill colour before a
+mask-aware crop and resize to each model's input; nothing is inpainted or
+dropped. Defaults are untuned; the unmodified street pipeline is an ablation.
 
-\paragraph{Preprocessing.} A field-of-view mask and a specular-highlight
-mask~\cite{schmidt2024tracking} precede resizing to each model's native
-input; their parameters are fixed in advance, and the unmodified street
-pipeline runs as an ablation.
-
-\subsection{Oracle ceiling and error decomposition}
+\subsection{Zoo ceiling and error decomposition}
 \label{sec:ceiling}
-Let $c_m(q)\in\{0,1\}$ mark that model $m$'s top-1 retrieval for query $q$
-is a positive under a given ground truth and window. For a zoo $Z$ the
-oracle ceiling~\cite{waheed2021improving} is
-$C(Z)=\frac{1}{|Q|}\sum_q \max_{m\in Z} c_m(q)$ and the irreducible fraction
-is $I(Z)=1-C(Z)$. Each model's top-1 error splits exactly as
-$1-R_m=\rho_m(Z)+I(Z)$, where
-$\rho_m(Z)=\frac{1}{|Q|}\sum_q \bigl(1-c_m(q)\bigr)\max_{m'\in Z} c_{m'}(q)$
-is the recoverable part: queries $m$ misses but another member retrieves,
-after the split of~\cite{vasconcelos2004minimum}. The ceiling is
-zoo-relative by construction, so we report (a) $C$ and $I$ for $\Zout$, $\Zgen$, $\Zmed$
-and their union $\Zall$, since the irreducible fraction depends on the
-embedding~\cite{renggli2021evaluating}; (b) the zoo-size curve (mean of
-$C(S)$ over subsets $S\subseteq Z$ of each size) and each leave-one-out
-contribution $C(Z)-C(Z\setminus\{m\})$; and (c) the \emph{chance ceiling} of
-$|Z|$ independent random rankings,
-$\Crand(|Z|)=\frac{1}{|Q|}\sum_q \bigl[1-(1-P_q/N_q)^{|Z|}\bigr]$ for $P_q$
-positives among $N_q$ database frames, because a union over many models
-collects chance hits and Colon10k's positive intervals can be wide. A
-nearest-neighbour Bayes-error bracket~\cite{cover1967nearest} is at most a
-labelled heuristic here: with a handful of positives per query in
-high-dimensional spaces it is far outside its reliable sample
-regime~\cite{wheat2025bayes}. Nothing in this paper is a Bayes-error
-estimate.
+Let $c_m(q)\in\{0,1\}$ mark that model $m$'s top-$k$ list for query $q$
+contains a positive under a given ground truth and window, and $R_m$ its
+mean (Recall@$k$). For a zoo $Z$, let $o_Z(q)=\max_{m\in Z}c_m(q)$; the
+\emph{zoo ceiling} (after~\cite{waheed2021improving}) is
+$C(Z)=\frac{1}{|Q|}\sum_q o_Z(q)$ and the \emph{zoo-unsolved} fraction is
+$I(Z)=1-C(Z)$. Each member's error splits exactly as
+$1-R_m=\rho_m(Z)+I(Z)$, with
+$\rho_m(Z)=\frac{1}{|Q|}\sum_q \bigl(1-c_m(q)\bigr)\,o_Z(q)$: queries $m$
+misses but another member solves. $I(Z)$ is an oracle miss rate, not a
+Bayes error, and nothing in this paper estimates one.
+
+\emph{What $C(Z)$ bounds.} On this query set, ground truth, window and $k$,
+$C(Z)$ (i)~upper-bounds the Recall@$k$ of any per-query selector that
+returns one member's top-$k$ list (routing, cascades, plurality voting over
+top-1 answers); (ii)~lower-bounds the fraction of recognizable queries only
+up to chance hits, which inflate it, and ground-truth artefacts, which can
+move it either way; (iii)~bounds no model outside $Z$; and (iv)~does not
+bound score fusion, ranked-list voting, re-ranking or adaptation, which can
+return an item no member ranks first. So $\rho_m$ is the
+\emph{selection-recoverable} part of $m$'s error, the only sense of
+``recoverable'' used here, and $C(Z)-\max_m R_m$ is the headroom for
+selection.
+
+\emph{Chance.} A random ranking puts a positive among the top $k$ with
+probability $p_q=1-\binom{N_q-P_q}{k}\big/\binom{N_q}{k}$, for $P_q$
+positives among $N_q$ candidates. The chance ceiling of $n$ independent
+random rankings is $\Crand(n)=\frac{1}{|Q|}\sum_q\bigl[1-(1-p_q)^{n}\bigr]$,
+and adding $n'$ of them to $Z$ is expected to lower $I$ by
+$\Delta I_{\mathrm{rand}}(Z,n')=\frac{1}{|Q|}\sum_q\bigl(1-o_Z(q)\bigr)
+\bigl[1-(1-p_q)^{n'}\bigr]$: a union over many models collects chance hits,
+and Colon10k's positive intervals can be wide. The zoo-size curve $\bar
+C(n)$ is the mean of $C(S)$ over subsets $S\subseteq Z$ of size $n$; $m$'s
+leave-one-out contribution is $C(Z)-C(Z\setminus\{m\})$.
 
 \subsection{Baselines and statistics}
 \label{sec:stats}
-Two training-free baselines anchor ``non-trivial'': a random ranking, whose
-expected Recall@$k$ per query is $1-\binom{N_q-P_q}{k}\big/\binom{N_q}{k}$,
-and handcrafted global descriptors (a downsampled raw-pixel thumbnail and one
-fixed handcrafted descriptor). Confidence intervals are cluster bootstraps
-over sequences (Colon10k), recordings (C3VD) or patients and centres
-(REAL-Colon); model contrasts are paired within resamples, with Holm
-correction per pre-registered family. No number will be typed by hand: each
-comes from a hash-verified snapshot of the harness results.
+Two training-free baselines anchor ``non-trivial'': the exact random-ranking
+rate $p_q$ (mean $\Rrand$; random rankings never enter a zoo) and \emph{one}
+handcrafted descriptor fixed before data, a raw-pixel thumbnail compared by
+normalized cross-correlation or a Hellinger-normalized joint RGB histogram.
+Intervals are cluster percentile bootstraps over whole clusters (Colon10k
+cases; phantom segments), each replicate the pooled mean over their queries.
+$\LB$ and $\UB$ are the ends of a central interval of level
+$1-\alpha_{\mathrm{CI}}$, i.e.\ one-sided bounds at level
+$1-\alpha_{\mathrm{CI}}/2$, with $\alpha_{\mathrm{CI}}=2\alpha/|\Zgate|$ for
+the gate (Bonferroni over the gate zoo) and $2\alpha$ otherwise. Paired
+contrasts get two-sided $p$-values (twice the smaller share of replicates
+beyond zero, as $(b+1)/(B+1)$), Holm-corrected within H1a (one test per
+member), H1b (per DINOv2-based VPR model and raw variant) and H4b (per
+manipulation). With twenty or fewer clusters, percentile intervals may
+under-cover. There is no validation split, and nothing is tuned on
+evaluation data.

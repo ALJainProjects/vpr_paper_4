@@ -29,9 +29,10 @@ BIB         ?= bib/references.bib
 LOCK        ?= bib/verified.json
 RESULTS_SRC ?= $(VPRBENCH)
 # P4 is STAGED with zero results: there is no numbers.yaml and no snapshot/.
-# Before the first `make snapshot`, point PATTERNS at the P4 result files only
-# (the default below is the template's and would export other papers' results).
-PATTERNS    ?= results/final/*.csv results/final/figures/*.png
+# PATTERNS is deliberately EMPTY: the template default (results/final/*) would
+# export other papers' results.  Set it to the P4 result files only, once they
+# exist; until then `make snapshot` refuses to run (review D3).
+PATTERNS    ?=
 EXCLUDE     ?= $(GENERATED) $(SNAPSHOT)
 
 PAPERTOOL = PYTHONPATH="$(VPRBENCH)$(if $(PYTHONPATH),:$(PYTHONPATH))" "$(PY)" -m vprbench.paper
@@ -40,6 +41,7 @@ EXCLUDE_ARGS = $(foreach e,$(EXCLUDE),--exclude '$(e)')
 .PHONY: snapshot numbers sty lint bib bib-online pdf check clean
 
 snapshot:
+	$(if $(strip $(PATTERNS)),,$(error PATTERNS is empty: set it to the P4 result files before exporting a snapshot))
 	$(PAPERTOOL) export --src "$(RESULTS_SRC)" --dest "$(SNAPSHOT)" $(foreach p,$(PATTERNS),--pattern '$(p)')
 
 numbers:

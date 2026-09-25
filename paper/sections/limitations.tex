@@ -1,35 +1,30 @@
 % Limitations and threats to validity.  Every limitation in notes/EVIDENCE.md
-% and notes/positioning.md that a reviewer would raise appears here.
+% and notes/positioning.md that a reviewer would raise appears here, including
+% the blocking items of EVIDENCE.md section 6 that the reader must know about.
 \section{Limitations and Threats to Validity}
 \label{sec:limitations}
 
 \paragraph{Weak data; no clinical claim.} Nothing here evaluates navigation,
-workflow or patient outcome. Phantom results are in-silico: rigid silicone,
-pose from robot kinematics and 2D--3D registration~\cite{bobrow2023colonoscopy,golhar2026c3vdv2}. Real-patient
-retrieval evidence is Colon10k (twenty short sequences, one
-centre~\cite{ma2021colon10k}) plus, if obtainable, EndoMapper covisibility,
-which is structure-from-motion pseudo ground
-truth~\cite{azagra2023endomapper}. No public dataset pairs real-patient
-images with frame-level pose~\cite{cold2025mapping}. EndoMapper's region
-labels cover five sequences, so E3 rests on REAL-Colon; clustered intervals
-will be wide. EndoMapper is available by request, and no data-access
-agreement has been signed yet.
+workflow or patient outcome. Phantoms are rigid silicone with pose from
+robot kinematics and 2D--3D
+registration~\cite{bobrow2023colonoscopy,golhar2026c3vdv2}, and results on
+them make no claim about patients. Real-patient evidence is Colon10k (twenty
+short sequences, one centre~\cite{ma2021colon10k}), which carries no pose,
+plus, if obtainable, EndoMapper covisibility, a structure-from-motion pseudo
+ground truth~\cite{azagra2023endomapper} available by request (no
+data-access agreement is signed).
 
-\paragraph{``Irreducible'' is conditional.} The ceiling is relative to the
-zoo, the ground truth and the window, and the irreducible fraction depends
-on the embedding~\cite{renggli2021evaluating}. Distance thresholds overestimate
-recall~\cite{larsen2026longterm}, hence two geometric definitions. Excluded
-adaptation~\cite{zaffar2025overlooked} may recover ``irreducible'' queries.
-On real data, deformation~\cite{lamarca2021defslam}, specularities, blur and
-debris~\cite{schmidt2024tracking} are confounded with view ambiguity; quality
-strata reduce this, and only phantom contrasts isolate texture from
-geometry.
+\paragraph{``Zoo-unsolved'' is conditional.} The ceiling is relative to the
+zoo, ground truth, window and $k$, and bounds only per-query selection
+(Sec.~\ref{sec:ceiling}). Unlabelled revisits in Colon10k would count correct
+retrievals as errors and inflate $I$, hence the audit; excluded adaptation
+may solve zoo-unsolved queries; and on real data, deformation, specularities,
+blur and debris~\cite{schmidt2024tracking} are confounded with view
+ambiguity, which strata reduce and only phantom contrasts isolate.
 
-\paragraph{Comparisons and unread prior work.} The transfer gap and the
-streets-versus-colon ceilings confound domain with
-set-up~\cite{schubert2021makes}. We could not
-read Colon10k's results table, so which techniques it evaluated, and whether
-off-the-shelf, is unknown to us~\cite{ma2021colon10k}; the model
-of~\cite{soberanismukul2026global} is unidentified. The ColonMapper protocol
-labels and the GastroNet-5M and EndoDINO weights are unverified.
-
+\paragraph{Unread prior work and unbuilt parts.} Colon10k's results
+table~\cite{ma2021colon10k} is unread (which techniques it evaluated is
+unknown to us), the model of~\cite{soberanismukul2026global} is
+unidentified, and ColonMapper's protocol labels are unverified. The overlap
+ground truth, the raw-DINOv2, medical-arm and further AnyLoc wrappers, and
+the preprocessing wiring must be built before the runs that use them.
