@@ -1,6 +1,6 @@
 % Methods, written as the harness WILL implement them.  The gate, the Colon10k and
 % pose+angle ground truths, the baselines and the preprocessing exist only on the
-% unmerged branch paper/p4-endoscopy-loaders (vpr-testtime@eac266d); the view-overlap
+% unmerged branch paper/p4-endoscopy-loaders (vpr-testtime@eeba592); the view-overlap
 % ground truth, raw DINOv2, the medical arm and AnyLoc-GeM / target-vocabulary
 % AnyLoc-VLAD do not exist on any branch.  Nothing here has run.
 % Never attribute to the code a check it does not do (review M4): the C3VD
@@ -26,14 +26,15 @@ every zero-shot claim; AnyLoc-GeM joins if a wrapper is written. The frozen
 pretraining), Endo-FM~\cite{wang2023foundation} (video) and the colonoscopy
 encoders of~\cite{hirsch2023selfsupervised}; the landmark-trained anchor
 of~\cite{morlana2021selfsupervised} joins $\Zout$ if its weights prove
-obtainable. $\Zall$ is the union of the arms. A \emph{backbone family} is
+obtainable; $\Zall$ is their union. A \emph{backbone family} is
 the set of CNN-based, of DINOv2-based (with $\Zgen$) or of medical members:
 the CNN and DINOv2 families share no backbone, whereas $\Zout$ and $\Zgen$
 do. \pending{per model: checkpoint, input size, dimension; Endo-FM frame
 recipe} No parameter is updated:
 reference-set fine-tuning, adapters and re-ranking are excluded, and some
 zoo-unsolved error may be solved by them. Descriptors are
-L2-normalized and ranked by exhaustive cosine similarity.
+L2-normalized and ranked by exhaustive cosine similarity, with ties counted
+against the model (a tied negative ranks first).
 
 \subsection{Datasets and ground truth}
 \label{sec:data}
@@ -43,14 +44,13 @@ a matchings file lists for each annotated query the intervals of frames an
 endoscopist verified as the same place; its interval syntax, frame-id
 convention and end inclusivity are undocumented and are read off the first
 file before any model is run. Positives are the database frames inside the
-query's intervals; frames within $W$ frame ids of the query leave database
-and positives, as near-duplicates inflate
+query's intervals; frames within $W$ frames of the query (in the sorted image
+list) leave database and positives, as near-duplicates inflate
 recall~\cite{morlana2021selfsupervised}; queries left without a positive are
 dropped and counted. The database is the query's case or all cases
 (Table~\ref{tab:prereg}). Every frame outside the intervals is a negative,
 although whether the annotation is exhaustive is unknown (audit,
-Sec.~\ref{sec:protocol}). Totals are counted at acquisition:
-\pending{Colon10k frame, query, positive counts}. We could not
+Sec.~\ref{sec:protocol}); totals are counted at acquisition. We could not
 read Colon10k's own protocol: this is our reading of its release, and we
 compare with none of its numbers.
 
@@ -76,8 +76,8 @@ axes within $\theta$. Pose radius alone is never used: nearby cameras in a
 tube may share no view~\cite{larsen2026longterm}.
 
 \paragraph{Preprocessing.} If enabled (Table~\ref{tab:prereg}), pixels
-outside the field of view (largest bright connected component: max-channel
-threshold, opening, hole filling) or specular (bright and near-achromatic:
+outside the field of view (convex hull of the large lit components after a
+max-channel threshold and opening) or specular (bright and near-achromatic:
 HSV thresholds, dilated) are set to a constant fill colour before a
 mask-aware crop and resize to each model's input; nothing is inpainted or
 dropped. Defaults are untuned; the unmodified street pipeline is an ablation.

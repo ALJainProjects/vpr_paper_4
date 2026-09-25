@@ -24,7 +24,8 @@
 > and the baselines, the canonical document is
 > `vpr-testtime/docs/papers/P4_PREREGISTRATION.md` with its implementation
 > `vprbench/analysis/preregistration.py` (branch `paper/p4-endoscopy-loaders`,
-> `eac266d`, unmerged, unsigned). The paper's §4 restates it; the paper's E2/E4
+> `eac266d` as cited by the review; the paper was matched to the branch head
+> `eeba592`, unmerged, unsigned). The paper's §4 restates it; the paper's E2/E4
 > rules are additions that must be merged into it before it is signed
 > (list in `notes/review_response.md`, M1). Nothing is registered: the paper
 > says "pre-specified", never "pre-registered", until a public, timestamped
@@ -85,7 +86,7 @@ structure* recurs. Streets-vs-colon comparisons confound domain with set-up
     pairs of H1b are a Table 1 item.
 - **In progress, not merged, no results:** a separate agent is implementing the
   endoscopy data layer on branch `paper/p4-endoscopy-loaders` (worktree
-  `vpr-testtime-wt/p4-endoscopy`, `eac266d`): Colon10k interval-GT loader, C3VD pose+angle
+  `vpr-testtime-wt/p4-endoscopy`, head `eeba592`): Colon10k interval-GT loader, C3VD pose+angle
   GT, EndoMapper/REAL-Colon label interfaces, FOV/specular preprocessing,
   random-ranking and handcrafted baselines, and the pre-registration decision
   machinery (numeric thresholds left to the owner). Nothing from it may be
@@ -95,15 +96,26 @@ structure* recurs. Streets-vs-colon comparisons confound domain with set-up
     world frame ("Callers state world frames explicitly"), and **view-overlap
     GT is not implemented** (pose-radius + viewing-angle only);
   - `EndoscopyPreprocess` is **not wired into `run()`** (the descriptor cache
-    key lacks the transform); its thresholds are untuned defaults. Algorithm:
-    FOV = largest bright connected component (max-channel threshold, opening,
-    hole fill, circle fit); specular = HSV V ≥ threshold and S ≤ threshold,
-    dilated; masked pixels set to a constant fill colour, then mask-aware
-    crop/resize (no inpainting, no token dropping);
+    key lacks the transform); its thresholds are untuned defaults. Algorithm
+    (at `eeba592`, after fix F9): FOV = convex hull of the lit components
+    (max-channel threshold, opening) whose area is at least a fraction of the
+    largest one's, plus a circle fit; specular = HSV V ≥ threshold and
+    S ≤ threshold, dilated; masked pixels set to a constant fill colour, then
+    mask-aware crop/resize (no inpainting, no token dropping);
   - the gate (`decide_gate`) is GO / NO_GO / OWNER_REVIEW with
     `min_models_passing` and a "meaningful split"; it has **no chance-ceiling
     term** and **no multiplicity correction** across models (one `ci_level`
     for every bound); the bootstrap is a cluster percentile bootstrap.
+  - Changes between `eac266d` (cited by the review) and `eeba592` that the
+    paper now follows: the window is fixed in §8 **in frames of the image
+    list** (the id-unit value goes to §8c); `db_scope` is a §8 field, checked
+    against the scope derived from the GT (`GateEvidence.from_gt`);
+    `min_irreducible_frac` / `min_recoverable_frac` = `-inf` disables that half
+    of the split (otherwise a zero zoo-unsolved fraction can never reach GO);
+    ties are counted pessimistically and tie-sensitive queries reported;
+    sign-off is in **two dated stages** (A: §8/§8b before acquisition;
+    B: §8c file facts after acquisition, before any descriptor). The branch is
+    still moving: re-check it before signing.
 - **Paper scaffold (this repo):** `Makefile` (from the vprbench template),
   `paper/main.tex` + `paper/sections/*.tex` (llncs, anonymized),
   `paper/splncs04p4.bst` (presentation-only splncs04 variant, see §7),
@@ -355,7 +367,7 @@ That is an owner decision.
 
 ## 9. Change log (2026-09-25, Reviewer-2 revision; details in notes/review_response.md)
 1. Header: the harness document `P4_PREREGISTRATION.md` (+ `preregistration.py`,
-   `eac266d`) is canonical for the gate, GT and baselines; the paper matches it
+   `eac266d`; matched at `eeba592`) is canonical for the gate, GT and baselines; the paper matches it
    (M1). "Pre-specified", not "pre-registered", until a registry record exists
    (M2).
 2. §1, §2 C2/C4: Paper 3 terminology (zoo ceiling, zoo-unsolved,
@@ -380,3 +392,8 @@ That is an owner decision.
 7. §7: the PDF is 8 + 2 pages; 21 keys removed from the citation list, 1 added;
    two more presentation-only bst changes; results will not fit without moving
    Table 1 to the registration or changing venue (M13).
+8. Paper synced to the canonical branch head `eeba592` (the review cited
+   `eac266d`): window fixed in frames of the image list, `db_scope` as a
+   document field, −∞ disables a split bound, pessimistic ties, two-stage
+   signing (thresholds before acquisition; file facts after acquisition,
+   before any descriptor), FOV = convex hull of the large lit components.

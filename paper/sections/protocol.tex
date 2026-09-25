@@ -1,7 +1,8 @@
 % Pre-specified protocol.  CANONICAL SOURCE for the gate, the ground truths and
 % the baselines: vpr-testtime docs/papers/P4_PREREGISTRATION.md and
 % vprbench/analysis/preregistration.py (branch paper/p4-endoscopy-loaders,
-% eac266d).  This section must restate them exactly (review M1): GO / NO_GO /
+% matched at eeba592; the review cited eac266d).  This section must restate
+% them exactly (review M1): GO / NO_GO /
 % OWNER_REVIEW; min_models_passing; the "meaningful split"; ONE handcrafted
 % baseline; H-E1a as a two-sided test.  The E2/E4/C4 rules below are additions
 % that must be merged into that document before it is signed (list in
@@ -11,12 +12,12 @@
 \section{Pre-Specified Protocol}
 \label{sec:protocol}
 
-A protocol document released with the harness (an unsigned draft, to be
-registered) is canonical for the gate, ground truths and baselines;
-this section restates it and adds the E2 and E4 rules, to be merged into
-it. Every open quantity (Table~\ref{tab:prereg}) is to be fixed, and the
-signed document publicly registered with a timestamp, before any data are
-acquired.
+A protocol document released with the harness (an unsigned draft) is
+canonical for the gate, ground truths and baselines; this section restates
+it and adds the E2 and E4 rules, to be merged into it. It is to be signed and
+publicly registered with timestamps in two stages: Table~\ref{tab:prereg}
+before any data are acquired, facts only the files give
+(Sec.~\ref{sec:data}) before any descriptor is computed.
 
 \begin{table}[t]
 \centering
@@ -32,7 +33,7 @@ of the canonical protocol document (its names in \texttt{typewriter}). Right: th
 \cmidrule(r{8pt}){1-2}\cmidrule{3-4}
 $k$ & gate Recall@$k$ (\texttt{k})
   & $o^\star$, $\varepsilon_d$ & overlap threshold; depth tolerance \\
-$W^\star$, $\mathcal{W}$ & window in frame ids (\texttt{exclusion\_window}); sweep
+$W^\star$, $\mathcal{W}$ & window in frames (\texttt{exclusion\_window}); sweep
   & $\tau$, $\theta$ & pose radius; optical-axis angle \\
 $\Rhand$ & handcrafted baseline, settings (\texttt{handcrafted\_baseline})
   & phantom & query/database videos; clusters; world frames \\
@@ -46,10 +47,9 @@ $\rho^\star$, $I^\star$ & split bounds (\texttt{min\_recoverable\_frac}, \texttt
   & $\mathcal{B}_q$ & image-quality strata \\
 $\alpha$, $B$ & error rate (sets \texttt{ci\_level}); \texttt{n\_bootstrap}; \texttt{bootstrap\_seed}
   & E4 & cue operators; mesh centreline; distance bins \\
-$\Zgate$, scope & gate zoo, AnyLoc vocabulary; database: own case or all
+$\Zgate$, scope & gate zoo, AnyLoc vocabulary; own case or all (\texttt{db\_scope})
   & & \\
-street, prep & street data for H1a; preprocessing on/off, parameters,
-  undistortion
+street, prep & street data (H1a); preprocessing, undistortion
   & & \\
 \bottomrule
 \end{tabularx}
@@ -65,9 +65,7 @@ so $\Delta_m$ does not isolate the domain. \emph{H1b}: each DINOv2-based VPR
 model (SALAD, BoQ-DINOv2, MegaLoc, AnyLoc) differs from backbone-matched raw
 DINOv2, CLS and GeM (VPR training or aggregation versus backbone). \emph{H1c}: the mean of
 NetVLAD, CosPlace, EigenPlaces and MixVPR differs from that of the
-DINOv2-based VPR models. $\Zout$ versus $\Zmed$ is descriptive. The small
-in-colon gap between off-the-shelf and fine-tuned
-retrieval~\cite{morlana2021selfsupervised} is not $\Delta_m$. An interval
+DINOv2-based VPR models. $\Zout$ versus $\Zmed$ is descriptive. An interval
 containing zero means ``no difference detected'', never equivalence.
 
 \emph{Gate} (gate's $k$, $W^\star$, $\Zgate$). A member \emph{beats random}
@@ -75,7 +73,8 @@ if $\LB(R_m-\Rrand)>\delta_{\mathrm{rand}}$, and is \emph{non-trivial} if
 also $\LB(R_m-\Rhand)>\delta_{\mathrm{hand}}$. The split is
 \emph{meaningful} if $\LB(I)>I^\star$ and $\LB(\rho_{m^\star})>\rho^\star$,
 with $m^\star$ the member of highest Recall@$k$, chosen once on the full
-data. \textsc{Go}: at least $n_{\mathrm{pass}}$ non-trivial members and a
+data; a bound of $-\infty$ disables its half (else no zoo that solves every
+query reaches \textsc{Go}). \textsc{Go}: at least $n_{\mathrm{pass}}$ non-trivial members and a
 meaningful split; E2 and E4 run. \textsc{No-go}: no member beats random; E1
 is reported as a negative benchmark (no signal detected above the chance
 margin),
@@ -116,10 +115,9 @@ exposure). A large, stable $I$ that survives the audit would be evidence
 that, for this zoo, colonoscopic place recognition is limited by view
 ambiguity, in line with~\cite{jiang2025c3vdreg}; a small $I$ is a reportable
 null (errors are mostly selection-recoverable); a ceiling near its chance
-ceiling mostly collects lucky hits. For C4, E2's statistics are also
-reported, with the same estimator and zoo, for the street data of H1a;
-domain and set-up (ground-truth kind, frame rate, window) are
-confounded~\cite{schubert2021makes}, so no recurrence verdict is drawn.
+ceiling mostly collects lucky hits. For C4, the same statistics are reported
+for the street data of H1a, with no recurrence verdict: domain and set-up
+(ground truth, frame rate, window) are confounded~\cite{schubert2021makes}.
 
 \paragraph{E4: aliasing geometry and feature reliance (phantoms).} (a)~For
 each zoo-unsolved query, the displacement to the camera of the wrong top-1

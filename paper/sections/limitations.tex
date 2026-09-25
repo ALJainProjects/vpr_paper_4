@@ -14,17 +14,15 @@ plus, if obtainable, EndoMapper covisibility, a structure-from-motion pseudo
 ground truth~\cite{azagra2023endomapper} available by request (no
 data-access agreement is signed).
 
-\paragraph{``Zoo-unsolved'' is conditional.} The ceiling is relative to the
-zoo, ground truth, window and $k$, and bounds only per-query selection
-(Sec.~\ref{sec:ceiling}). Unlabelled revisits in Colon10k would count correct
-retrievals as errors and inflate $I$, hence the audit; excluded adaptation
+\paragraph{``Zoo-unsolved'' is conditional} (Sec.~\ref{sec:ceiling}).
+Unlabelled revisits in Colon10k would count correct retrievals as errors and
+inflate $I$, hence the audit; excluded adaptation
 may solve zoo-unsolved queries; and on real data, deformation, specularities,
 blur and debris~\cite{schmidt2024tracking} are confounded with view
 ambiguity, which strata reduce and only phantom contrasts isolate.
 
 \paragraph{Unread prior work and unbuilt parts.} Colon10k's results
-table~\cite{ma2021colon10k} is unread (which techniques it evaluated is
-unknown to us), the model of~\cite{soberanismukul2026global} is
-unidentified, and ColonMapper's protocol labels are unverified. The overlap
-ground truth, the raw-DINOv2, medical-arm and further AnyLoc wrappers, and
-the preprocessing wiring must be built before the runs that use them.
+table~\cite{ma2021colon10k} is unread, the model
+of~\cite{soberanismukul2026global} unidentified and ColonMapper's protocol
+labels unverified. The overlap ground truth, the raw-DINOv2, medical-arm and
+extra AnyLoc wrappers and the preprocessing wiring are not built yet.

@@ -16,7 +16,8 @@ D4) each have a rebuttal paragraph below.
 
 **M1 — two incompatible gates. Fixed.** The harness document
 `docs/papers/P4_PREREGISTRATION.md` plus `vprbench/analysis/preregistration.py`
-(`eac266d`) is now canonical for the gate, the ground truths and the
+(`eac266d`, as cited; the branch moved on, and the paper is matched to its
+head `eeba592`) is now canonical for the gate, the ground truths and the
 baselines, because it is the version with an implementation, tests and a
 sign-off slot. The paper was made to match it:
 - GO / NO_GO / OWNER_REVIEW, `min_models_passing`, and the "meaningful split"
@@ -34,11 +35,23 @@ sign-off slot. The paper was made to match it:
 - Table 1's left block lists the document's fields by their code names (`k`,
   `exclusion_window`, `handcrafted_baseline`, `min_margin_vs_random`,
   `min_margin_vs_handcrafted`, `min_models_passing`, `min_recoverable_frac`,
-  `min_irreducible_frac`, `ci_level`, `n_bootstrap`, `bootstrap_seed`) plus
-  §8b (DB scope, oracle-zoo membership and AnyLoc vocabulary, street data,
-  preprocessing).
+  `min_irreducible_frac`, `ci_level`, `n_bootstrap`, `bootstrap_seed`,
+  `db_scope`) plus §8b (oracle-zoo membership and AnyLoc vocabulary, street
+  data, preprocessing).
 - The validation split V is removed: the document has none, and nothing is
   tuned.
+- The branch changed after `eac266d`, and the paper follows its head
+  `eeba592`:
+  - the window is fixed in frames of the sorted image list (§8), with the
+    id-unit value recorded after acquisition;
+  - `db_scope` is a document field;
+  - a split bound of −∞ disables that half (the paper notes that otherwise a
+    zoo that solves every query cannot reach GO);
+  - ties are counted against the model;
+  - the document is signed in two dated stages: thresholds before
+    acquisition, file facts after acquisition but before any descriptor.
+  The branch is still being worked on, so the paper must be re-checked
+  against it before signing.
 
 **Amendments the owner must merge into the canonical document before signing**
 (the paper states these as additions; until merged, the two still differ on
@@ -66,10 +79,12 @@ Each must go into the document and the code first, then the paper.
 **M2 — "pre-registered" is false. Fixed in the paper; registration is an owner
 action.** Title "Pre-Registered" → "Pre-Specified". Keyword "Pre-registration"
 → "Pre-specified protocol". The section is now "Pre-Specified Protocol".
-Abstract, introduction and conclusion say the thresholds are "to be fixed and
-publicly registered before any data are acquired, and none is set yet". The
-protocol section calls the harness document an "unsigned draft, to be
-registered". Filing the OSF/AsPredicted registration after the owner fills and
+The abstract says the thresholds "are to be fixed and publicly registered
+before any data are acquired, and none is set yet"; the introduction says "no
+threshold is set yet"; the conclusion says they "remain to be fixed and
+registered". The protocol section calls the harness document "an unsigned
+draft" that "is to be signed and publicly registered with timestamps in two
+stages". Filing the OSF/AsPredicted registration after the owner fills and
 signs the document (citing its commit) cannot be done here. It is listed as
 blocking in EVIDENCE §6.
 
@@ -294,9 +309,11 @@ not linear", and per-frame vs temporal ColonTCN.
 - The missing wrappers are listed in Limitations and in EVIDENCE §3/§6.
 
 **S14 — preprocessing not reproducible. Fixed:**
-- The algorithm is named from `vprbench/preprocess/endoscopy.py`: largest
-  bright connected component (max-channel threshold, opening, hole filling);
-  specular = bright, near-achromatic HSV thresholds, dilated.
+- The algorithm is named from `vprbench/preprocess/endoscopy.py` as of
+  `eeba592`: convex hull of the large lit components after a max-channel
+  threshold and opening (fix F9 replaced the earlier largest-component +
+  hole-filling rule); specular = bright, near-achromatic HSV thresholds,
+  dilated.
 - The masking mechanism is constant fill-colour, then mask-aware crop/resize;
   no inpainting or token dropping.
 - Defaults are "untuned". On/off, parameters and undistortion are a Table 1
@@ -338,9 +355,11 @@ TPR is pre-empted.
 **S18 — wording errors. Fixed:**
 (1) "some zoo-unsolved error may be solved by them" (adaptation);
 (2) NO-GO: "no signal detected above the chance margin";
-(3) "The small in-colon gap between off-the-shelf and fine-tuned retrieval
-[morlana2021selfsupervised] is not Δ_m", with no direction hypothesized for
-Δ_m.
+(3) the "no large drop is hypothesized" sentence is gone. E1 predicts no
+direction for Δ_m, so the in-colon gap of [morlana2021selfsupervised] no
+longer serves as a rationale. A clarifying sentence ("the in-colon gap is not
+Δ_m") was drafted and then cut for space; the misuse it guarded against no
+longer exists.
 
 **S19 — Colon10k's protocol unread. Cannot fix here.** The ISBI paper is
 paywalled, and reading it remains blocking (EVIDENCE §6; canonical document
@@ -435,6 +454,11 @@ off the first matchings file before any model runs.
   - §5 new must-nots; §6 new blocking items; §7 venue;
   - §9 change log.
 - `notes/review_response.md`: this file.
+- Second commit: `paper/sections/{introduction,methods,protocol,limitations,
+  conclusion,results}.tex` synced to the canonical branch head `eeba592`
+  (window in frames, `db_scope`, −∞ split bounds, pessimistic ties, two-stage
+  signing, FOV convex hull), with line-neutral tightening to keep 8 + 2 pages.
+  The notes are updated to match.
 - Not changed: `bib/references.bib`, `bib/verified.json`,
   `notes/positioning.md`, `notes/literature.md`, `generated/vprresults.sty`,
   and anything in vpr-testtime.

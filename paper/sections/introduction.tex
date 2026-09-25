@@ -7,10 +7,9 @@
 \section{Introduction}
 \label{sec:intro}
 
-Colonoscopy mapping produces disconnected submaps, and linking them or
-detecting a revisit is a place-recognition
-problem~\cite{morlana2024topological}. Retrieval networks fine-tuned on
-colonoscopy now drive topological mapping and relocalization in real
+Linking colonoscopy submaps or detecting a revisit is place recognition, and
+retrieval networks fine-tuned on colonoscopy now drive topological mapping
+and relocalization in real
 procedures~\cite{morlana2024colonmapper,morlana2024topological}. Endoscopic
 localization as image retrieval is thus established, with an
 endoscopist-verified benchmark~\cite{ma2021colon10k} and full-procedure
@@ -28,7 +27,7 @@ registration on phantoms~\cite{jiang2025c3vdreg}, and mapping pipelines
 discard frames humans judge unrecognizable~\cite{morlana2024colonmapper}.
 The remedies differ, and no study we found separates the two for retrieval.
 
-Zero-shot evidence exists: Morlana
+Zero-shot evidence exists. Morlana
 et al.~\cite{morlana2021selfsupervised} ran a landmark- and city-trained
 retrieval CNN off-the-shelf on a held-out real colonoscopy: it trailed its
 colonoscopy-fine-tuned counterpart by only single-digit Recall@1 margins, and
@@ -41,10 +40,8 @@ fine-tuning, against endoscopic place-recognition ground truth, although
 off-the-shelf models already serve inside endoscopic pipelines
 (Sec.~\ref{sec:related}).
 
-\paragraph{Contributions.} Design and decision rules are specified here.
-Every threshold is to be fixed, signed and registered in a public,
-timestamped registry before any data are acquired; none is set yet
-(Table~\ref{tab:prereg}), and every result slot is marked pending.
+\paragraph{Contributions.} Design and decision rules are specified here; no
+threshold is set yet (Table~\ref{tab:prereg}), and every result is pending.
 \begin{itemize}
 \item[\textbf{C1}] A systematic zero-shot benchmark of the frozen
   2022--2025 VPR zoo (with NetVLAD as anchor), AnyLoc and raw DINOv2, under
