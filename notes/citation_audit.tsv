@@ -160,3 +160,35 @@ wei2023stereo	10.1109/tbme.2022.3195027	crossref	Stereo Dense Scene Reconstructi
 wei2023stereo	arXiv:2110.03912	arxiv	Stereo Dense Scene Reconstruction and Accurate Localization for Learning-Based Navigation of Laparoscope in Minimally Invasive Surgery	1.000	True	True	PASS (eprint)
 ye2017image	10.1007/s11548-017-1620-7	crossref	An image retrieval framework for real-time endoscopic image retargeting	1.000	True	True	PASS
 gaubatz2022location	10.1515/cdbme-2022-0030	crossref	Location recognition in laparoscopic surgery	1.000	True	True	PASS
+than2012review	10.1109/tbme.2012.2201715	crossref	A Review of Localization Systems for Robotic Endoscopic Capsules	1.000	True	True	PASS
+bianchi2019localization	10.1080/17434440.2019.1608182	crossref	Localization strategies for robotic endoscopic capsules: a review	1.000	True	True	PASS
+cao2024robotic	10.1038/s41467-024-49019-0	crossref	Robotic wireless capsule endoscopy: recent advances and upcoming technologies	1.000	True	True	PASS
+ali2025recent	10.3390/s25010253	crossref	Recent Advancements in Localization Technologies for Wireless Capsule Endoscopy: A Technical Review	1.000	True	True	PASS
+pore2023autonomous	10.1109/tro.2023.3269384	crossref	Autonomous Navigation for Robot-Assisted Intraluminal and Endovascular Procedures: A Systematic Review	1.000	True	True	PASS
+pore2023autonomous	arXiv:2305.04027	datacite	Autonomous Navigation for Robot-assisted Intraluminal and Endovascular Procedures: A Systematic Review	1.000	True	True	PASS (eprint)
+taddese2018enhanced	10.1177/0278364918779132	crossref	Enhanced real-time pose estimation for closed-loop robotic manipulation of magnetically actuated capsule endoscopes	1.000	True	True	PASS
+xu2022autonomous	10.1109/lra.2022.3141378	crossref	Autonomous Magnetic Navigation Framework for Active Wireless Capsule Endoscopy Inspired by Conventional Colonoscopy Procedures	1.000	True	True	PASS
+xu2022autonomous	arXiv:2111.01977	datacite	Autonomous Magnetic Navigation Framework for Active Wireless Capsule Endoscopy Inspired by Conventional Colonoscopy Procedures	1.000	True	True	PASS (eprint)
+kanaan2025enabling	10.1177/15533506251334690	crossref	Enabling Robotic Capsule Endoscopy Through Effective in-Body Capsule Localization	1.000	True	True	PASS
+iakovidis2013capsule	10.1109/bibe.2013.6701570	crossref	Capsule endoscope localization based on visual features	1.000	True	True	PASS
+dimas2017intelligent	10.1016/j.compbiomed.2017.08.029	crossref	Intelligent visual localization of wireless capsule endoscopes enhanced by color information	1.000	True	True	PASS
+bao2015hybrid	10.1109/jsen.2014.2367495	crossref	Hybrid Localization of Microrobotic Endoscopic Capsule Inside Small Intestine by Data Fusion of Vision and RF Sensors	1.000	True	True	PASS
+herp2021feature	10.3390/diagnostics11020193	crossref	Feature Point Tracking-Based Localization of Colon Capsule Endoscope	1.000	True	True	PASS
+turan2018deep	10.1016/j.neucom.2017.10.014	crossref	Deep EndoVO: A recurrent convolutional neural network (RCNN) based visual odometry approach for endoscopic capsule robots	1.000	True	True	PASS
+turan2018deep	arXiv:1708.06822	datacite	Deep EndoVO: A Recurrent Convolutional Neural Network (RCNN) based Visual Odometry Approach for Endoscopic Capsule Robots	1.000	True	True	PASS (eprint)
+turan2017nonrigid	10.1007/s41315-017-0036-4	crossref	A non-rigid map fusion-based direct SLAM method for endoscopic capsule robots	1.000	True	True	PASS
+turan2017nonrigid	arXiv:1705.05444	datacite	A Non-Rigid Map Fusion-Based RGB-Depth SLAM Method for Endoscopic Capsule Robots	0.943	True	True	PASS (eprint)
+turan2018magnetic	10.1109/iros.2018.8594485	crossref	Magnetic- Visual Sensor Fusion-based Dense 3D Reconstruction and Localization for Endoscopic Capsule Robots	1.000	True	True	PASS
+turan2018magnetic	arXiv:1803.01048	datacite	Magnetic-Visual Sensor Fusion-based Dense 3D Reconstruction and Localization for Endoscopic Capsule Robots	1.000	True	True	PASS (eprint)
+prendergast2018autonomous	10.1109/iros.2018.8594106	crossref	Autonomous Localization, Navigation and Haustral Fold Detection for Robotic Endoscopy	1.000	True	True	PASS
+bause2026capsulemotion	arXiv:2609.15367	arxiv	CapsuleMotion: A Lightweight Real-Time Visual Motion Predictor for Capsule Endoscopy	1.000	True	True	PASS
+martin2020enabling	10.1038/s42256-020-00231-9	crossref	Enabling the future of colonoscopy with intelligent and autonomous magnetic manipulation	1.000	True	True	PASS
+gu2022visionkinematics	10.1109/tmi.2022.3191317	crossref	Vision–Kinematics Interaction for Robotic-Assisted Bronchoscopy Navigation	1.000	True	True	PASS
+zhang2024ai	10.1038/s41467-023-44385-7	crossref	AI co-pilot bronchoscope robot	1.000	True	True	PASS
+wu2026longshort	arXiv:2603.07909	arxiv	Long-Short Term Agents for Pure-Vision Bronchoscopy Robotic Autonomy	1.000	True	True	PASS
+nelson2010microrobots	10.1146/annurev-bioeng-010510-103409	crossref	Microrobots for Minimally Invasive Medicine	1.000	True	True	PASS
+sitti2015biomedical	10.1109/jproc.2014.2385105	crossref	Biomedical Applications of Untethered Mobile Milli/Microrobots	1.000	True	True	PASS
+aziz2020medical	10.1021/acsnano.0c05530	crossref	Medical Imaging of Microrobots: Toward <i>In Vivo</i> Applications	1.000	True	True	PASS
+wang2020trends	10.1002/adma.202002047	crossref	Trends in Micro‐/Nanorobotics: Materials Development, Actuation, Localization, and System Integration for Biomedical Applications	1.000	True	True	PASS
+lassiter2025microscopic	10.1126/scirobotics.adu8009	crossref	Microscopic robots that sense, think, act, and compute	1.000	True	True	PASS
+lassiter2025microscopic	arXiv:2503.23085	datacite	Microscopic Robots That Sense, Think, Act, and Compute	1.000	True	True	PASS (eprint)

@@ -1,4 +1,10 @@
 {
+  "ali2025recent": {
+    "fetched_title": "Recent Advancements in Localization Technologies for Wireless Capsule Endoscopy: A Technical Review",
+    "fingerprint": "40409edc94c6b4adae411afe689ab665b3aa084b911bf9655e80d4a3c59dd509",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "alibey2023mixvpr": {
     "fetched_title": "MixVPR: Feature Mixing for Visual Place Recognition",
     "fingerprint": "64011f62f9d82a1d4b3ed0ff8a982486579e8fae173cc86824d71c0c1529eb18",
@@ -15,7 +21,7 @@
     "fetched_title": "Stereo Correspondence and Reconstruction of Endoscopic Data Challenge",
     "fingerprint": "a56159b2cf4fc23e12e3be2926f6698115226ca6e317ccd86b5a1c5cde30bbfc",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "arandjelovic2016netvlad": {
     "fetched_title": "NetVLAD: CNN Architecture for Weakly Supervised Place Recognition",
@@ -29,6 +35,12 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "aziz2020medical": {
+    "fetched_title": "Medical Imaging of Microrobots: Toward <i>In Vivo</i> Applications",
+    "fingerprint": "d2fe7d8f8a0fe5588a0294f06f6ca387304a7f37284d1a06ca966ff0d79224ef",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "azizi2021big": {
     "fetched_title": "Big Self-Supervised Models Advance Medical Image Classification",
     "fingerprint": "8cdfda1f448ce04fb81e629cd0d6014a130d4eacfaef83e657c5083846ed5ee5",
@@ -39,7 +51,13 @@
     "fetched_title": "Evaluating General Purpose Vision Foundation Models for Medical Image Analysis: An Experimental Study of DINOv2 on Radiology Benchmarks",
     "fingerprint": "189649b76f5c758899bfa884928da9d01735d7f5e58a23bde127b6fd9f689b01",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "bao2015hybrid": {
+    "fetched_title": "Hybrid Localization of Microrobotic Endoscopic Capsule Inside Small Intestine by Data Fusion of Vision and RF Sensors",
+    "fingerprint": "4556cff14f203593475de5ea6bd90491164d2fd3b6de3973855eafa873a84851",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "barbed2022superpoint": {
     "fetched_title": "SuperPoint Features in Endoscopy",
@@ -58,6 +76,12 @@
     "fingerprint": "90b76c6171ffde476739846e9e4233d189a1e0f3345fdf8d9b8df52d0a57bb26",
     "ratio": 1.0,
     "source": "crossref"
+  },
+  "bause2026capsulemotion": {
+    "fetched_title": "CapsuleMotion: A Lightweight Real-Time Visual Motion Predictor for Capsule Endoscopy",
+    "fingerprint": "9867b6d002bb50a228ece310f9e7e41be7a273b59f5ed4ce9807cc972963c78a",
+    "ratio": 1.0,
+    "source": "arxiv"
   },
   "berton2022deep": {
     "fetched_title": "Deep Visual Geo-localization Benchmark",
@@ -80,6 +104,12 @@
   "berton2025megaloc": {
     "fetched_title": "MegaLoc: One Retrieval to Place Them All",
     "fingerprint": "a7240ff326371dd41cdd58057efdc66d249b23e0fcd13bc9aafe9f047c765607",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "bianchi2019localization": {
+    "fetched_title": "Localization strategies for robotic endoscopic capsules: a review",
+    "fingerprint": "559a391ea8d35c8e35e87626a4bafce4274ee43a5e2b7f067b700b1ca6480917",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -123,7 +153,13 @@
     "fetched_title": "ST-ColoNet: Spatio-Temporal Colon Segment Recognition via Hybrid Attention and Edge-Guided Feature Learning",
     "fingerprint": "bb45534cbc7c5dd449f3664913eda2da93605454c43b0201f5f9b89a861bc313",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "cao2024robotic": {
+    "fetched_title": "Robotic wireless capsule endoscopy: recent advances and upcoming technologies",
+    "fingerprint": "9230215475949f4f592d011a94dcddfab8c2635b5eeedf46aa3924f4fcb26cfa",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "chen2023coloscrl": {
     "fetched_title": "Colo-SCRL: Self-Supervised Contrastive Representation Learning for Colonoscopic Video Retrieval",
@@ -135,7 +171,7 @@
     "fetched_title": "Geometry-Aware Camera Localization for Bronchoscopy",
     "fingerprint": "da39b8819dbb124514122270aff67cea6005b9de653f841cd18f4056c36354bf",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "cold2025mapping": {
     "fetched_title": "Mapping the colon through the colonoscope’s coordinates – The Copenhagen Colonoscopy Coordinate Database",
@@ -159,19 +195,25 @@
     "fetched_title": "EndoDINO: A Foundation Model for GI Endoscopy",
     "fingerprint": "1330214264e357a30d1448d6a596aa26fb8d0b7937033730be9218f942d5d185",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "dimas2017intelligent": {
+    "fetched_title": "Intelligent visual localization of wireless capsule endoscopes enhanced by color information",
+    "fingerprint": "f0504dfe518f0508888e2dd56fa5d19eb28605655494d21282632e5cb2d35535",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "elvira2024cudasiftslam": {
     "fetched_title": "CudaSIFT-SLAM: multiple-map visual SLAM for full procedure mapping in real human endoscopy",
     "fingerprint": "5d909937930dbd85d69a35155f108e52b53fb6cf73c55ee9cbacf825ed11038a",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "encinargonzalez2025multimodal": {
     "fetched_title": "Multi-modal Loop Closure Detection with Foundation Models in Severely Unstructured Environments",
     "fingerprint": "e0535ca07eafc2024a2d0ba3d2b32f65f8206c3b9175f75daf5f426ff8faddcb",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "freedman2020detecting": {
     "fetched_title": "Detecting Deficient Coverage in Colonoscopies",
@@ -189,7 +231,7 @@
     "fetched_title": "ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness",
     "fingerprint": "b3190b564b384b323d26ab415cb5642679c8394dae9ef868564a19490820f27f",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "golhar2026c3vdv2": {
     "fetched_title": "C3VDv2 - Colonoscopy 3D video dataset with enhanced realism",
@@ -209,21 +251,33 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "gu2022visionkinematics": {
+    "fetched_title": "Vision–Kinematics Interaction for Robotic-Assisted Bronchoscopy Navigation",
+    "fingerprint": "1f48e1365bbffe0ebd6070d9b4a4b086e6705c650935e626ecc360f2075b0f6b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "haitz2026evaluation": {
     "fetched_title": "Evaluation of Visual Place Recognition Methods for Image Pair Retrieval in 3D Vision and Robotics",
     "fingerprint": "60705c1b955d188aee4c3b9caccc43cdec1e06c5b30aeb20474567876e169484",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "han2024depth": {
     "fetched_title": "Depth Anything in Medical Images: A Comparative Study",
     "fingerprint": "d15d02743f981844487faf571aaa19d295bc1bb071ca4df6ce340e19d95d8023",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "hernandez2023investigating": {
     "fetched_title": "Investigating keypoint descriptors for camera relocalization in endoscopy surgery",
     "fingerprint": "44ae01b9861feb57bc7d9dba3b2d1e46c2299ada5a9ee1a79c5e46675967be3b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "herp2021feature": {
+    "fetched_title": "Feature Point Tracking-Based Localization of Colon Capsule Endoscope",
+    "fingerprint": "b6e0779939c032f0cb089a9e69af73babd23dcb5ebb9168bb42c93961826d42d",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -239,6 +293,12 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "iakovidis2013capsule": {
+    "fetched_title": "Capsule endoscope localization based on visual features",
+    "fingerprint": "50e93e8875e5d42cf0d62984c6f2877c5c661f1a990deefc7c7a75540cc189d9",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "intrator2023selfsupervised": {
     "fetched_title": "Self-supervised Polyp Re-identification in Colonoscopy",
     "fingerprint": "000f0d7e494c7c7bd35ac46ddc119685f77ea894a3800100b41a2f786a154869",
@@ -249,7 +309,7 @@
     "fetched_title": "One Channel to Rule Them All: Rethinking Input Representation for Visual Place Recognition",
     "fingerprint": "b913ee08d0890b4ad76bd403d755c5345aeede6faac12100f8751f952f83cf00",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "izquierdo2024close": {
     "fetched_title": "Close, But Not There: Boosting Geographic Distance Sensitivity in Visual Place Recognition",
@@ -279,11 +339,17 @@
     "fetched_title": "C3VDReg: A Benchmark for Local-to-Local Colonoscopic Registration toward Anatomical Localization",
     "fingerprint": "b5359606b7866c1f649f4561c45efcab08014c8bb53ac2a59c830dd8087dd7e3",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "jong2026gastronet5m": {
     "fetched_title": "GastroNet-5M: A Multicenter Dataset for Developing Foundation Models in Gastrointestinal Endoscopy",
     "fingerprint": "13c1267b2cf05f6e33cc4312e0cee2b224f89aef80ea5188395986d4bae1da58",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "kanaan2025enabling": {
+    "fetched_title": "Enabling Robotic Capsule Endoscopy Through Effective in-Body Capsule Localization",
+    "fingerprint": "442bc24d5571f4562f00c466c8678c3e5bc98c8d71ec1a92f22d5ea1298bf08c",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -315,19 +381,19 @@
     "fetched_title": "Lesion-centered 3D mapping of colonoscopy procedures: validation of a hierarchical ensemble pipeline on public benchmark videos",
     "fingerprint": "e54d095ca4415122a2b004240437b8317051b575831637e12c5dfe4459f7bace",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "kim2026visual": {
     "fetched_title": "Are Visual Place Recognition Models Recognizing Places or Conditions? Distractor-Augmented Evaluation and Condition Suppression",
     "fingerprint": "da198ae965e62b714cbcd826392f08d395d777dea69628dc35d205b92fad4ba4",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "knights2026wildcross": {
     "fetched_title": "WildCross: A Cross-Modal Large Scale Benchmark for Place Recognition and Metric Depth Estimation in Natural Environments",
     "fingerprint": "89844d4d810b706cfe9f6bcc7704438a82bc5d8f8603d76ff5753080c3ba2e54",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "lajoie2019modeling": {
     "fetched_title": "Modeling Perceptual Aliasing in SLAM via Discrete–Continuous Graphical Models",
@@ -347,6 +413,12 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "lassiter2025microscopic": {
+    "fetched_title": "Microscopic robots that sense, think, act, and compute",
+    "fingerprint": "72d6580033dc991aaf6fcbdb9e73e040950853cce17dabe5cbfeb35f34eb8822",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "lefloch2025galar": {
     "fetched_title": "Galar - a large multi-label video capsule endoscopy dataset",
     "fingerprint": "89899eb64160fadeca8051c155bf9f05ccdaf34b6ede980b9ece512675e9277b",
@@ -363,19 +435,19 @@
     "fetched_title": "Automated Assessment of Kidney Ureteroscopy Exploration for Training",
     "fingerprint": "e513e816236ce539fbf08213cf1a4920c5fe357659f3d2597890d4ac3f113571",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "li2026raul": {
     "fetched_title": "RAUL: Reference-Assisted Ureteroscopy Localization for Skill Assessment",
     "fingerprint": "8f6dbe92786e2ebeab381709557359d8675c947aae7369e6c4c69eef7d91e5a8",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "liu2025dinov3": {
     "fetched_title": "Does DINOv3 Set a New Medical Vision Standard? Benchmarking 2D and 3D Classification, Segmentation, and Registration",
     "fingerprint": "1d8b4ac34a486bf52e1545d5e143fb25a0ff77ec062a7a5c353f5d309a0e0a0d",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "lowry2016visual": {
     "fetched_title": "Visual Place Recognition: A Survey",
@@ -387,13 +459,13 @@
     "fetched_title": "Towards Seamless Adaptation of Pre-trained Models for Visual Place Recognition",
     "fingerprint": "d11113e037eee7777bfa72fcd14f51dc286fc3fcc3717e9f9fed1f86a0ee0373",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "luk2026c3vddefcol": {
     "fetched_title": "C3VD-DEFCOL: A Deformable Colonoscopy Dataset with Time-Resolved 3D Ground Truth and Realistic Appearance",
     "fingerprint": "70e78b80b06c83e39b7e1ee720e5c5311b315f34eaaf96405e1702146e4f7528",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "ma2019realtime": {
     "fetched_title": "Real-Time 3D Reconstruction of Colonoscopic Surfaces for Determining Missing Regions",
@@ -410,6 +482,12 @@
   "ma2021rnnslam": {
     "fetched_title": "RNNSLAM: Reconstructing the 3D colon to visualize missing regions during a colonoscopy",
     "fingerprint": "9739d334e259d8bc39647c2ce0fa7422489c48cc241539d7ef74f9ef7468ae7b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "martin2020enabling": {
+    "fetched_title": "Enabling the future of colonoscopy with intelligent and autonomous magnetic manipulation",
+    "fingerprint": "b5e82c133782544d7b86d9373fafde63d28fc6621e3a30ed6beb92411a559e41",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -454,13 +532,19 @@
     "fetched_title": "Geometry-Conditioned Visual Place Recognition in Natural Environments",
     "fingerprint": "26904d6272e446a07e6504810e2c810020d5a746f16e8c7317e8331cc9e32248",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "nelson2010microrobots": {
+    "fetched_title": "Microrobots for Minimally Invasive Medicine",
+    "fingerprint": "e97bda9a5cb2da01beb3cfa33c8715bb43312e4a238d46c78c22e6758291f089",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "oquab2023dinov2": {
     "fetched_title": "DINOv2: Learning Robust Visual Features without Supervision",
     "fingerprint": "beff8b71d63f18ae23b8f3d79249eb677b74963d4932cf10e2f7280537b95920",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "ozyoruk2021endoslam": {
     "fetched_title": "EndoSLAM dataset and an unsupervised monocular visual odometry and depth estimation approach for endoscopic videos",
@@ -472,7 +556,13 @@
     "fetched_title": "Contrastive Learning under Noisy Temporal Self-Supervision for Colonoscopy Videos",
     "fingerprint": "9ac81610a393d33771167a4ee115e11a1e4cacb5f87745f8920ac2706cb3ed85",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "pore2023autonomous": {
+    "fetched_title": "Autonomous Navigation for Robot-Assisted Intraluminal and Endovascular Procedures: A Systematic Review",
+    "fingerprint": "02147db1f78e3754560176ad0fe2f08657881731c75aa40826de8b9e100d1a9c",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "posner2023c3fusion": {
     "fetched_title": "$$\\hbox {C}^3$$Fusion: Consistent Contrastive Colon Fusion, Towards Deep SLAM in Colonoscopy",
@@ -480,11 +570,17 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "prendergast2018autonomous": {
+    "fetched_title": "Autonomous Localization, Navigation and Haustral Fold Detection for Robotic Endoscopy",
+    "fingerprint": "d488de94d5de098aeb7128b40a3eb76e7a1c3f51cd9192c596afecd463aad84b",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "raghu2019transfusion": {
     "fetched_title": "Transfusion: Understanding Transfer Learning for Medical Imaging",
     "fingerprint": "6256d881c3828e14e91ec21dbf30b752dba0fa8095cd9192f958fba5dfbc305c",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "rau2024simcol3d": {
     "fetched_title": "SimCol3D — 3D reconstruction during colonoscopy challenge",
@@ -496,7 +592,7 @@
     "fetched_title": "Evaluating Bayes Error Estimators on Real-World Datasets with FeeBee",
     "fingerprint": "abae9a9923db7da67fe7e899ff5b4619cad5035b232390cf2840dcad70369d75",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "schmidt2024tracking": {
     "fetched_title": "Tracking and mapping in medical computer vision: A review",
@@ -508,7 +604,7 @@
     "fetched_title": "What makes visual place recognition easy or hard?",
     "fingerprint": "bb2d73676914e78db958f6214a2216ed29c3ff1967f62776b3912403d012b51e",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "schubert2024visual": {
     "fetched_title": "Visual Place Recognition: A Tutorial",
@@ -526,13 +622,19 @@
     "fetched_title": "BronchOpt : Vision-Based Pose Optimization with Fine-Tuned Foundation Models for Accurate Bronchoscopy Navigation",
     "fingerprint": "54462c6896a69f014261d2e6ed931ab446c90b09cb2b639f53e88edae9c8d349",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "simeoni2025dinov3": {
     "fetched_title": "DINOv3",
     "fingerprint": "d096fa794f770cc28a6afac37d7d6f0ae4c3d442ead141b7b086cd5ca94b8ec4",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "sitti2015biomedical": {
+    "fetched_title": "Biomedical Applications of Untethered Mobile Milli/Microrobots",
+    "fingerprint": "068a72f105261368637baddda81fa38dac2dc7675f8bc0288837c2e33db0fe7b",
+    "ratio": 1.0,
+    "source": "crossref"
   },
   "smedsrud2021kvasircapsule": {
     "fetched_title": "Kvasir-Capsule, a video capsule endoscopy dataset",
@@ -552,9 +654,21 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "taddese2018enhanced": {
+    "fetched_title": "Enhanced real-time pose estimation for closed-loop robotic manipulation of magnetically actuated capsule endoscopes",
+    "fingerprint": "67aca894841e38c34eedccb5c0624ddf180009e9b53f77d4cfd4f5ccf85e46eb",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "teufel2024oneslam": {
     "fetched_title": "OneSLAM to map them all: a generalized approach to SLAM for monocular endoscopic imaging based on tracking any point",
     "fingerprint": "11499f6209e49a09a8b0c8a13689cf491d1c3facb9f66e17c6e09201c09ba051",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "than2012review": {
+    "fetched_title": "A Review of Localization Systems for Robotic Endoscopic Capsules",
+    "fingerprint": "db2cccfd1ef8a11f4de8231e40caf2334cab58a78ec9656ccb309956ce7cd364",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -580,13 +694,13 @@
     "fetched_title": "Online Topological Localization for Navigation Assistance in Bronchoscopy",
     "fingerprint": "ab97d42d1d05da9dc6f009a139d970aafc8b543fff177f64d0d0943cf1ade8af",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "tomasini2026bronchotop": {
     "fetched_title": "BronchoTop: Bronchoscopy Navigation via RGB-Only Topological Localization",
     "fingerprint": "9aa08fffef42b8b2f4e089cb890146e19816228d746c5d2fbdabc3f2286f47d0",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "torii2015visual": {
     "fetched_title": "Visual Place Recognition with Repetitive Structures",
@@ -594,11 +708,29 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "turan2017nonrigid": {
+    "fetched_title": "A non-rigid map fusion-based direct SLAM method for endoscopic capsule robots",
+    "fingerprint": "33af9220dce4ec54dcb62a4e54892482d61523272f2c47b8ff5d4c47d4bab7fe",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "turan2018deep": {
+    "fetched_title": "Deep EndoVO: A recurrent convolutional neural network (RCNN) based visual odometry approach for endoscopic capsule robots",
+    "fingerprint": "b80365aa57f2497d188e5dc209d465ee6fc11db7252d72b152c699303e52f712",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "turan2018magnetic": {
+    "fetched_title": "Magnetic- Visual Sensor Fusion-based Dense 3D Reconstruction and Localization for Endoscopic Capsule Robots",
+    "fingerprint": "62bb0a22c41c121a6c59720172e34987d9c93dc698f1b41d925c2576feb58346",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "tzachor2024effovpr": {
     "fetched_title": "EffoVPR: Effective Foundation Model Utilization for Visual Place Recognition",
     "fingerprint": "4f9aa6554c1d20af7d1d4624fbbd378e333f826868242a20b693e182231ea555",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "vasconcelos2004minimum": {
     "fetched_title": "Minimum Probability of Error Image Retrieval",
@@ -609,6 +741,12 @@
   "waheed2021improving": {
     "fetched_title": "Improving Visual Place Recognition Performance by Maximising Complementarity",
     "fingerprint": "1dee6644c96376917feb11b0117e3cbeb2cf8ca594e975f4319939fd9fb81389",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wang2020trends": {
+    "fetched_title": "Trends in Micro‐/Nanorobotics: Materials Development, Actuation, Localization, and System Integration for Biomedical Applications",
+    "fingerprint": "e7a9ced10b2893779cb047adc19ee78865fd74ae6b974b1f464124eb0f201c16",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -628,7 +766,7 @@
     "fetched_title": "TOPO-Bench: An Open-Source Topological Mapping Evaluation Framework with Quantifiable Perceptual Aliasing",
     "fingerprint": "4239896ef0a87e36b2c976762f5fa6cf9c36005c381f521f50113cf249dcb7a9",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "wei2023stereo": {
     "fetched_title": "Stereo Dense Scene Reconstruction and Accurate Localization for Learning-Based Navigation of Laparoscope in Minimally Invasive Surgery",
@@ -652,7 +790,7 @@
     "fetched_title": "Bayes Error Rate Estimation in Difficult Situations",
     "fingerprint": "1f9856632c7953b1da03148a02958f681ad28b7b6a50a86a28012eea935f43e7",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "widya2019whole": {
     "fetched_title": "Whole Stomach 3D Reconstruction and Frame Localization From Monocular Endoscope Video",
@@ -663,6 +801,18 @@
   "wu2019randomised": {
     "fetched_title": "Randomised controlled trial of WISENSE, a real-time quality improving system for monitoring blind spots during esophagogastroduodenoscopy",
     "fingerprint": "9ac5f5f6e0936e7dd88f60d2390323a432ce074707e82e80b6bbd6dbc5ac8975",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
+  "wu2026longshort": {
+    "fetched_title": "Long-Short Term Agents for Pure-Vision Bronchoscopy Robotic Autonomy",
+    "fingerprint": "19f2fae5db13d78c2474d1d66adacd9feddd90ac07fc84392db8e90cf0551412",
+    "ratio": 1.0,
+    "source": "arxiv"
+  },
+  "xu2022autonomous": {
+    "fetched_title": "Autonomous Magnetic Navigation Framework for Active Wireless Capsule Endoscopy Inspired by Conventional Colonoscopy Procedures",
+    "fingerprint": "056c09d836b19cd112a6edaa2460137d1b4d729793d8154fb82ed4745e3dd0e5",
     "ratio": 1.0,
     "source": "crossref"
   },
@@ -688,7 +838,7 @@
     "fetched_title": "Self-Supervised Siamese Learning on Stereo Image Pairs for Depth Estimation in Robotic Surgery",
     "fingerprint": "e9822aef267146e853c97d45afe5bca6e807978649eb5044cd7fbca8819b703b",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
   },
   "zaffar2021vprbench": {
     "fetched_title": "VPR-Bench: An Open-Source Visual Place Recognition Evaluation Framework with Quantifiable Viewpoint and Appearance Change",
@@ -706,6 +856,12 @@
     "fetched_title": "The Overlooked Value of Test-time Reference Sets in Visual Place Recognition",
     "fingerprint": "79253aecf38c69dc248fdb37c8b8e56b6557d3c7fbb5191ed86e2e694f6d4011",
     "ratio": 1.0,
-    "source": "datacite"
+    "source": "arxiv"
+  },
+  "zhang2024ai": {
+    "fetched_title": "AI co-pilot bronchoscope robot",
+    "fingerprint": "09e4131895bfc62b71bb5456b2a54ed4df3ff93205b80fa8cefaa8d9ced407b5",
+    "ratio": 1.0,
+    "source": "crossref"
   }
 }

@@ -22,6 +22,11 @@ The formulation that EVIDENCE §2 already concedes is assessed as C0.
 
 C2 is the paper's real contribution. The strength of C3 and C4 depends entirely on how C2 comes out.
 
+> **(in-body robot pass, 2026-09-28)** The owner reframed P4's motivation around vision-based self-localization for camera-carrying *miniature in-body robots*: robotic and magnetically actuated capsule endoscopes, and robotic flexible endoscopes, not nanorobots. The verdict (C-R) is in the final section, "In-body robot framing pass". In short:
+> - the robot-side gap is real;
+> - the data (conventional colonoscopy) cannot carry any robot claim;
+> - the framing is motivation, and the contribution is still the C1/C2 measurement.
+
 ---
 
 ## C0 — "Endoscopic localization as place recognition / retrieval"
@@ -464,3 +469,136 @@ A **validity lead, not a novelty threat**, was also surfaced: InfoColon (Scienti
 5. **C3's premise.** Texture bias from [geirhos2018imagenettrained] is contested by [burgert2025imagenettrained].
 
 Inline notes marked **(adversarial pass)** were added at each of these places in this file and in `notes/literature.md`.
+
+---
+
+## In-body robot framing pass (2026-09-28)
+
+**Context (no numbers restated).**
+- **Pre-registration.** `vpr-testtime/docs/papers/P4_PREREGISTRATION.md` is signed: Stages A and B, owner row C, and the §8d owner decisions, including the OWNER_REVIEW rule.
+- **Test gate.** The one-shot test gate ran from clean commit `91ea512` and returned **GO**. The record is `vpr-testtime/docs/papers/p4_test_gate_record.json` (committed in `f17b5cc`), and the outputs are under `vpr-testtime/results/p4_colon10k/test/`.
+- **Validation readout.** It is informational only. It had pointed to **OWNER_REVIEW**, and the fixed rule was **not** changed after seeing it.
+- **Numbers.** Headline numbers enter the paper only as `\res` macros from a verified snapshot; none are restated here.
+- **EVIDENCE.md is stale.** `notes/EVIDENCE.md` still reads "STAGED — zero results" and predates the gate. This pass did not edit it (see "Recommended changes" below).
+
+**Verification.** Every key cited below is in `bib/references.bib`. `bibcheck --online` re-verified all 144 entries with 0 errors. The evidence and reading depth for the 26 new keys are in `notes/literature.md` §18.
+
+### C-R — "Zero-shot outdoor VPR for self-localization of camera-carrying miniature in-body robots"
+
+**Scope.** Robotic and magnetically actuated capsule endoscopes, and robotic (including magnetic) flexible endoscopes. Nanorobots are excluded, because they carry no camera and are localized by external imaging [aziz2020medical, wang2020trends].
+
+**Closest prior.**
+- **Robot side, single closest:** [prendergast2018autonomous].
+  - It is the only in-body robot platform found running a general-purpose visual pipeline with place recognition: off-the-shelf ORB-SLAM2, whose loop closure uses DBoW2 bag-of-words.
+  - It ran on a 2x-scaled robotic capsule, and localization was assessed only by visual comparison with the simulator geometry.
+- **Revisit and retargeting on a capsule robot:** [xu2022autonomous]. The capsule returns to selected points of its recorded path by *magnetic* localization (SMAL).
+- **Capsule-robot SLAM that omits place recognition:** [turan2017nonrigid], verbatim: "does not check global loop closures since the inner organ volumes are quite small". See also [turan2018magnetic] (magnetic + visual fusion).
+- **How these robots localize today:**
+  - surveys: [than2012review], [bianchi2019localization], [cao2024robotic], [ali2025recent];
+  - magnetic: [taddese2018enhanced], [kanaan2025enabling], [martin2020enabling], where the magnetic flexible endoscope's pose comes from Hall-effect/IMU sensing and vision only centres the lumen;
+  - own-camera VO: [iakovidis2013capsule], [dimas2017intelligent], [herp2021feature], [turan2018deep];
+  - hybrid: [bao2015hybrid].
+- **Vision in robotic flexible endoscopes:**
+  - [wu2026longshort]: pure-vision robotic bronchoscopy, which matches predicted states to CT-derived target views;
+  - [gu2022visionkinematics]: CT-referenced, kinematics-aided;
+  - [zhang2024ai]: shared-control steering.
+- **Autonomy argument:** [pore2023autonomous] lists "automatic localisation" among the enabling technologies needed for higher autonomy in intraluminal robotics.
+- **VPR side (unchanged from C1):**
+  - [morlana2021selfsupervised]: the off-the-shelf landmark-trained retrieval on colonoscopy, 2021;
+  - [ma2021colon10k], [morlana2024colonmapper], [morlana2024topological];
+  - [keetha2024anyloc] and [larsen2026longterm] for the zero-shot genre.
+
+**What they did.**
+- **The camera's current jobs.** Robotic capsules and magnetic endoscopes get their pose from external fields (magnetic, RF) or kinematics. Their cameras are used for odometry, organ or segment classification, lumen steering, and fusion with magnetic or RF sensing.
+- **Nothing that retrieves same-place frames.** The 2024 review's taxonomy of capsule video localization has only topographical segmentation and VO-based motion estimation [cao2024robotic]. No capsule or robotic-endoscope work found retrieves same-place frames with a learned global descriptor.
+- **Revisit is solved magnetically.** Where revisit is demonstrated on a capsule robot, it uses magnetic localization [xu2022autonomous].
+- **One general-purpose pipeline, qualitative only.** The one general-purpose place-recognition-bearing pipeline on a robot platform (handcrafted ORB + DBoW2 inside ORB-SLAM2) was evaluated only qualitatively [prendergast2018autonomous]. DBoW2 is reported to fail on real colonoscopy [elvira2024cudasiftslam].
+
+**What we add.** A measurement of the component these robots do not currently have: frozen, street-trained VPR models, and their zoo-relative oracle, used as appearance-only same-place retrieval on real colonoscopy against endoscopist-verified GT. As far as we found, this is the first such evaluation framed for in-body robots. It is a *perception-component* measurement. No robot, capsule or closed loop is involved.
+
+**Verdict: novel as a framing (the gap is confirmed by search); the robot claim is motivation only.** The novelty of the measurement itself is unchanged: C1 incremental, C2 novel as a measurement. The robot framing adds a real, cited gap. We found no evaluation of general-purpose VPR for in-body robot localization, capsule surveys have no retrieval category, and capsule-robot SLAM omits global loop closure. It adds **no** evidence about robots, for five reasons that bind the wording:
+1. **Not robot data.** Colon10k is conventional, human-driven colonoscope video from one centre. It contains no capsule, robotic or magnetic endoscope.
+2. **Different imaging.** Capsule optics, resolution, illumination and motion (peristalsis or an external magnet) differ from a colonoscope's. Capsule video has a low and possibly adaptive frame rate [cao2024robotic, bause2026capsulemotion]. The pre-registered 10-frame exclusion window is defined in colonoscope frames and has no fixed time or distance meaning on a capsule. The 5/15-frame sweep is secondary and does not address this.
+3. **No closed loop.** Retrieval recall at a frame window is not localization accuracy for a controller, and no controller was run.
+4. **Compute is off-board.** Capsule compute is microcontroller-class (a single-core RISC-V demonstrator in [bause2026capsulemotion]), so the zoo would run on the transmitted or tethered video, not on the robot. P4 measures nothing about onboard feasibility, latency or power.
+5. **A complement, not a replacement.** Magnetic localization is mm-accurate in controlled settings [kanaan2025enabling, taddese2018enhanced, cao2024robotic], and robots already revisit with it [xu2022autonomous]. Appearance-based relocalization can only be argued as a complement. The cited reasons:
+   - its authors call the no-distortion assumption of magnetic localization "a challenging restriction in clinical environments" [martin2020enabling];
+   - single-source magnetic pose estimation has singular regions where the capsule nominally sits [taddese2018enhanced];
+   - surveys recommend multimodal fusion, and name retargeting and follow-up as goals [bianchi2019localization].
+   P4 runs no comparison with magnetic localization.
+
+**Reframe (recommended wording for the introduction; the owner decides).** "Camera-carrying miniature in-body robots, such as robotic and magnetically actuated capsule endoscopes and robotic flexible endoscopes, are localized mainly by external magnetic or RF sensing [bianchi2019localization, cao2024robotic]. The cameras they carry are used for odometry, organ classification and lumen steering, and capsule-robot SLAM has omitted global loop closure [turan2017nonrigid]. Appearance-based relocalization from the robot's own camera is therefore a missing component. We ask whether general-purpose place-recognition models trained on streets can supply it zero-shot. We measure this on real colonoscopy against endoscopist-verified same-place ground truth. Our data come from conventional colonoscopes, not robots: we measure the perception component, not a robot."
+
+**Nanorobot sentence (one line, only if the paper mentions them).** "We do not address nano- or most microrobots. They carry no camera and are localized by external medical imaging [aziz2020medical, wang2020trends]. Even a recent sub-millimetre robot with onboard computation carries temperature sensors, not an imager [lassiter2025microscopic]."
+
+**Never write:**
+- **Robot or deployment claims:**
+  - "we localize capsule robots";
+  - "we demonstrate self-localization of in-body robots";
+  - "enables autonomous navigation";
+  - "on-board", "embedded" or "real-time on the capsule".
+- **Nanorobot and microrobot claims:**
+  - "for nanorobots" or "micro/nanorobot localization";
+  - "microrobots cannot compute" (false: [lassiter2025microscopic] has an onboard processor).
+- **"First" claims:**
+  - "first place recognition on a medical robot" ([prendergast2018autonomous] ran ORB-SLAM2 with BoW loop closure on a robotic capsule platform);
+  - "first VPR-derived retrieval in robot-assisted surgery" ([wei2023stereo] distils NetVLAD for laparoscope navigation).
+- **Claims against magnetic localization:**
+  - "robots cannot revisit a location without place recognition" ([xu2022autonomous] does it magnetically);
+  - "outperforms", "replaces" or "removes the need for" magnetic localization;
+  - "vision-only capsule localization is inaccurate" as *our* finding (it is [cao2024robotic]'s statement about VO).
+- **Unit conversions:** any sentence that converts the frame window into seconds or millimetres for capsules.
+
+**Safe novelty phrasing.** "To our knowledge (search to Sept. 2026), no prior work evaluates general-purpose, street-trained place-recognition models for localizing camera-carrying in-body robots. Robotic capsule localization relies on external magnetic or RF sensing and on visual odometry [bianchi2019localization, cao2024robotic]. A robotic capsule platform has run general-purpose SLAM without a quantitative place-recognition evaluation [prendergast2018autonomous]."
+
+### Reviewer attack surface for the robot framing
+
+#### Attack 9: "Your data are not from a robot."
+- **Honest answer:** Correct. P4 measures a perception component on conventional colonoscopy, and the paper says so in the abstract.
+- **Required action:**
+  - Use "robot" only in the motivation and discussion.
+  - The title must not imply robot experiments.
+  - Do not use capsule datasets as a silent proxy.
+
+#### Attack 10: "Magnetic localization is already mm-accurate. Why appearance?"
+- **Honest answer:** Magnetic localization is mm-accurate in controlled settings [kanaan2025enabling, taddese2018enhanced, cao2024robotic]. We claim only complementarity, for the reasons in point 5 above.
+- **Hypothesis only:** that an external-frame pose is not the same as anatomical place identity across procedures is *our* argument, not a finding.
+- **What we did not run:** no comparison with magnetic localization.
+
+#### Attack 11: "Capsules cannot run a DINOv2-sized model."
+- **Honest answer:** Agreed as far as we know [bause2026capsulemotion]. Inference is assumed off-board on transmitted or tethered video.
+- **What we do not claim:** anything about onboard latency, power or memory.
+
+#### Attack 12: "Capsule frame rates differ. Your 10-frame window means nothing there."
+- **Honest answer:** Correct [cao2024robotic, bause2026capsulemotion]. The window is pre-registered in colonoscope frames. Transfer to capsule frame rates is untested and is listed as a limitation.
+
+#### Attack 13: "Place recognition already runs on robotic endoscopes (ORB-SLAM2)."
+- **Honest answer:** It ran as handcrafted BoW inside ORB-SLAM2 on a 2x-scaled platform, evaluated qualitatively [prendergast2018autonomous]. DBoW2 is reported to fail on real colonoscopy [elvira2024cudasiftslam].
+- **What we add:** a measurement of learned, street-trained global descriptors against human same-place GT.
+
+### Must-cite additions for the robot framing (MICCAI budget)
+
+- **Core (6):**
+  - [bianchi2019localization] (or [than2012review]);
+  - [cao2024robotic];
+  - [turan2017nonrigid];
+  - [xu2022autonomous];
+  - [martin2020enabling];
+  - [prendergast2018autonomous].
+- **Only if nanorobots are mentioned:** [aziz2020medical] (+ [lassiter2025microscopic]).
+- **Optional:** [pore2023autonomous] (the autonomy argument), [wu2026longshort] (the 2026 vision-only trend), [bause2026capsulemotion] (the frame-rate and compute limitation).
+- **Where they go:** in a MICCAI paper these fit in one related-work paragraph plus one limitations sentence.
+- **Cutting to fit:** if space forces cuts, keep [cao2024robotic], [turan2017nonrigid], [xu2022autonomous] and [prendergast2018autonomous].
+
+### Recommended changes to the planning documents (NOT applied; the owner decides)
+
+1. **`notes/EVIDENCE.md`**
+   - Record that the test gate ran and returned GO, with the record path, and that the informational validation readout had pointed to OWNER_REVIEW with the rule unchanged.
+   - Add C-R to the claim table, with the never-write list above.
+2. **Paper introduction and limitations**
+   - Adopt the reframe paragraph.
+   - Add a limitations sentence: conventional-colonoscope data; frame-defined window; off-board inference; no robot or closed loop.
+3. **Title and abstract**
+   - No robot, capsule or nanorobot wording that implies experiments on those platforms.
+
+The paper sources (`paper/`) and the Makefile were **not** touched by this pass.

@@ -5,6 +5,7 @@
 **Bibliography:** `bib/references.bib`, 105 entries. Cite by bib key only.
 **Audit:** `notes/citation_audit.tsv`. There is one row per checked identifier: 105 primary records plus 40 secondary arXiv eprints, and every one passed.
 **(adversarial pass, 2026-09-25)** The adversarial novelty pass appended 13 entries (118 in total) and 16 audit rows: 13 primary and 3 secondary eprints, all PASS. The new entries are summarized in §17, and the verdicts are in positioning.md, "Adversarial novelty pass".
+**(in-body robot pass, 2026-09-28)** The miniature in-body robot pass appended 26 entries (144 in total) and 32 audit rows: 26 primary and 6 secondary eprints, all PASS. `bibcheck --online` reported 0 errors. The entries are summarized in §18. The verdict for the reframed contribution is in positioning.md, "In-body robot framing pass".
 **Positioning and novelty verdicts:** `notes/positioning.md`.
 
 ## How this review was produced (read before citing anything)
@@ -143,6 +144,7 @@ E3 must therefore be framed as a *frozen-representation probe*, not a new task. 
 - medical foundation models used as features [tian2025harnessing].
 
 We found no appearance-based global-descriptor VPR benchmark in bronchoscopy, capsule endoscopy or gastroscopy. These are background for a one-paragraph "beyond the colon" framing. P4 does not evaluate these organs.
+- **(in-body robot pass)** This still holds after a dedicated search on robotic and magnetically actuated capsules and robotic flexible endoscopes (§18). Capsule video localization is organ or segment classification, or VO/SLAM. The one capsule SLAM whose full text we read states that it "does not check global loop closures" [turan2017nonrigid].
 
 - **[mori2002tracking]** Foundational bronchoscope tracking: epipolar motion estimation plus intensity registration of real frames to CT-rendered virtual views.
   - *Bearing:* the historical anchor for "localize by matching to a reference view".
@@ -454,6 +456,7 @@ See §17. The theory is classical [cover1967nearest]. The important caution is t
   - Gaubatz et al. 2022, "Location recognition in laparoscopic surgery" (CDBME, DOI 10.1515/cdbme-2022-0030; the CrossRef record exists but the content was not read). This would be a further early "place recognition in surgery" citation.
     - **(adversarial pass)** Now [gaubatz2022location]. The abstract was read from the CrossRef record.
   - Iakovidis et al. BIBE 2013, capsule localization from visual features (the DOI resolves, but the content was not read);
+    - **(in-body robot pass)** Now [iakovidis2013capsule], with the abstract read (OpenAlex). It is feature-tracking visual odometry, not place recognition (§18).
   - M3GA-Wild (arXiv 2609.23003);
   - C3VDv2 preprint (arXiv 2506.24074). The published Sci Data version is in the bib, but this arXiv id was not fetched, so it was not attached as its eprint.
   - **(adversarial pass)** arXiv metadata was fetched for EndoFinder (2407.11401), EndoCLIP (2607.28466), woma (2609.15130), ColonAdapter (2511.22250), REVEAL (2608.07176), GalKva-2026 (2605.15062), M3GA-Wild (2609.23003) and the C3VDv2 preprint (2506.24074).
@@ -517,3 +520,175 @@ These entries were added by a skeptical-reviewer pass. Each was verified against
   - *Bearing:* motivates a grayscale ablation in anatomy.
 - **[nedov2026geometryconditioned]** Geometry-conditioning a DINOv2 VPR model improves recall in repetitive natural (forest) environments on WildCross (abstract).
   - *Bearing:* "appearance vs geometry" off-street is already studied as a method. P4's C3 is a frozen diagnosis.
+
+## 18. Miniature in-body robots: how camera-carrying robots localize (in-body robot pass, 2026-09-28)
+
+**Why this section exists.** The owner framed P4 around *vision-based self-localization for miniature in-body robots that carry a camera*: robotic and magnetically actuated capsule endoscopes, and robotic flexible endoscopes. P4 is not about nanorobots, which carry no camera and are localized by external imaging (§18.5). This section covers the robot-side prior work that the colonoscopy sections (§1–§5) do not. The verdict for the reframed contribution is in positioning.md, "In-body robot framing pass".
+
+**Verification.** Every key below was fetched from its registry record and appended to `bib/references.bib` from that record. DOI entries used Crossref. The two arXiv-only entries and the six secondary eprints used the DataCite record of `10.48550/arXiv.<id>`. `bibcheck --online` then re-verified all 144 entries (0 errors), and the rows are in `notes/citation_audit.tsv`. Reading depth is marked per entry:
+- **[FT]**: the full text was read.
+- **[FT-part]**: the named sections of the full text were read, and every quoted sentence was checked verbatim against the raw text.
+- **[abs]**: the abstract only (Crossref, OpenAlex, Europe PMC or DataCite).
+Numbers are *other papers'* reported numbers, attributed. None of this is a P4 result.
+
+**Synthesis.**
+- **Localization is mostly external or proprioceptive.** Camera-carrying in-body robots are localized mainly by:
+  - external magnetic or RF sensing [than2012review, bianchi2019localization, taddese2018enhanced, xu2022autonomous, kanaan2025enabling, ali2025recent];
+  - robot kinematics or CT registration (bronchoscopy) [gu2022visionkinematics].
+- **The robot's own camera is used for other jobs.** These are:
+  - motion estimation, i.e. VO or SLAM [iakovidis2013capsule, dimas2017intelligent, herp2021feature, turan2018deep, turan2017nonrigid, turan2018magnetic];
+  - fusion with magnetic or RF sensing [bao2015hybrid, turan2018magnetic];
+  - organ or segment classification [werner2023precise, nam2024deep, bause2026capsulemotion];
+  - lumen-centre steering [martin2020enabling, prendergast2018autonomous, zhang2024ai].
+- **No retrieval category.** The 2024 Nature Communications review's taxonomy of capsule "video localization" has exactly two categories, topographical segmentation and VO-based motion estimation [cao2024robotic]. It has no retrieval or place-recognition category.
+- **Global loop closure is skipped.** The capsule-robot SLAM we read in full "does not check global loop closures since the inner organ volumes are quite small" [turan2017nonrigid].
+- **Revisits use magnetic localization.** Returning to a previously inspected point has been demonstrated with *magnetic* localization of the recorded trajectory [xu2022autonomous], not with appearance.
+- **One general-purpose place-recognition pipeline, checked only visually.** The only such pipeline we found running on a robotic endoscope platform is ORB-SLAM2, whose loop closure uses DBoW2. It ran on a 2x-scaled wheeled capsule platform and was assessed only by visual comparison with the simulator geometry [prendergast2018autonomous].
+- **No evaluation of general-purpose VPR for in-body robots.** We found **no work that evaluates general-purpose (street or outdoor) VPR models for localizing an in-body robot**. The nearest items are outdoor-VPR-derived retrieval used as an unmeasured component: NetVLAD-distilled retrieval for laparoscope navigation [wei2023stereo], and NetVLAD in ureteroscopy hloc pipelines [li2026raul, li2026automated]. Neither is on a miniature robot.
+
+### 18.1 Surveys of robotic capsule and intraluminal robot localization
+
+- **[than2012review]** IEEE TBME 2012 **[abs]**. A review of localization systems for robotic endoscopic capsules. It motivates localization both "to exactly determine the location of lesions in the GI tract" and to "provide essential feedback to an actuation mechanism controlling the device's movement".
+  - *Bearing:* the canonical survey citation for "robotic capsules need localization".
+- **[bianchi2019localization]** Expert Review of Medical Devices 2019 **[abs]**. An "exhaustive and critical review" of internal and external localization for endoscopic capsules.
+  - It calls magnetic and electromagnetic methods the most promising, and recommends integrating external and internal methods "with a multimodality approach".
+  - It lists "retargeting of pathologies, and follow-up" among the uses of localization.
+  - *Bearing:* retargeting and follow-up are exactly what place recognition supports. The review files them under localization in general, not under appearance-based methods.
+- **[cao2024robotic]** Nature Communications 2024 **[FT-part: localization section]**. A review of robotic wireless capsule endoscopy.
+  - Its video-localization categories are "topographical video segmentation and motion estimation" (VO).
+  - It states that "solely relying on video positioning may not fulfill the accuracy requirements for WCE localization, and the video transmission's low frame rate, along with the speed of image recognition, may lead to considerable latency".
+  - It reports Hall-effect sensor arrays reaching "a minimum of 1 mm, with an angular error of 5.1°".
+  - *Bearing:* the most recent high-profile survey. It has no retrieval or place-recognition category, and it names low frame rate and latency as the obstacles to video-only localization.
+- **[ali2025recent]** Sensors 2025 **[abs]**. A technical review of WCE localization over the past five years (magnetic, RF, video, hybrid). It states that "the existing active locomotion technologies do not have a practical localization system to control the capsule's movement within the body".
+  - *Bearing:* the 2025 state of the field. Localization for active capsules is still open.
+- **[pore2023autonomous]** IEEE T-RO 2023 (PRISMA systematic review) **[FT-part: level-of-autonomy sections, arXiv HTML]**.
+  - It observes that intraluminal procedures "commonly use images from a camera as sensory input".
+  - It lists "automatic localisation and shape sensing mechanisms" among the enabling technologies needed for higher levels of autonomy.
+  - *Bearing:* the autonomy argument for robot self-localization, from a systematic review rather than from us.
+
+### 18.2 Magnetic (external-field) localization of capsules and magnetic endoscopes
+
+- **[taddese2018enhanced]** IJRR 2018 **[abs]**.
+  - Single-source magnetic pose estimation has singular regions "where the capsule is nominally located during magnetic actuation".
+  - A hybrid static plus time-varying field removes the singularities, needs no accurate initialization, and supports closed-loop control of a tethered magnetic capsule.
+  - *Bearing:* the state of the art of the external-field alternative, and its failure modes.
+- **[xu2022autonomous]** IEEE RA-L 2022 (arXiv 2111.01977) **[abs]**. Autonomous navigation of an active capsule built on simultaneous magnetic actuation and localization (SMAL).
+  - The capsule first records a path through an unknown intestine. It can then be "autonomously navigated towards any point selected on the intestinal trajectory to allow accurate and repeated inspections".
+  - Evaluated in phantoms and an ex-vivo pig colon.
+  - *Bearing:* **revisit and retargeting on a capsule robot, done by magnetic localization.** This is the robot-side competitor to appearance-based place recognition. P4 must not imply that revisit is unsolved on robots.
+- **[kanaan2025enabling]** Surgical Innovation 2025 **[abs]**. A cyber-physical test system for magnetic capsule localization, reporting about 3.1 mm localization and 2.2° orientation error.
+  - *Bearing:* a 2025 data point that magnetic localization is mm-accurate in controlled settings.
+- **[martin2020enabling]** Nature Machine Intelligence 2020 **[FT-part: PMC full text, control and localization sections]**. Autonomous and intelligent control of a *magnetic flexible endoscope* in colonoscopy, run by non-experts, benchtop and in vivo (two porcine models).
+  - Pose comes from "a magnetic localisation algorithm and a Hall effect/IMU sensor circuit in the tip" (accuracy 5 mm ± 1 mm and 6° ± 0.8°, 100 Hz).
+  - Vision is used to detect "the centre of the lumen" for steering.
+  - The authors state that their methods "strongly rely on endoscope localisation, which operates under the assumption of no distortion in the magnetic field produced by the EPM", and that this "can be a challenging restriction in clinical environments".
+  - *Bearing:* the flagship robotic magnetic endoscope. Its camera does not localize; the magnetic localization is a single point of failure by the authors' own account.
+
+### 18.3 Localization from the capsule's own camera (VO, SLAM, hybrid)
+
+- **[iakovidis2013capsule]** BIBE 2013 **[abs]**. The first vision-only capsule localization. It uses feature-tracking VO to estimate rotation and displacement "from reference anatomical landmarks". It resolves the §15 lead.
+- **[dimas2017intelligent]** Computers in Biology and Medicine 2017 **[abs, Europe PMC]**. ANN-based VO using colour cues, with GT from a robotic-assisted setup. The lowest average localization error is 2.70 ± 1.62 cm.
+- **[herp2021feature]** Diagnostics 2021 **[abs]**. *Colon* capsule VO: feature-point tracking with the colon locally approximated as a cylinder.
+  - The path difference averaged 4 ± 0.7 cm across videos.
+  - Segment classification (rectum to ascending) reached 86% average accuracy.
+  - *Bearing:* the nearest capsule work to P4's organ (colon). It is odometry plus segment labels, not same-place retrieval.
+- **[bao2015hybrid]** IEEE Sensors Journal 2015 **[abs]**. A "microrobotic endoscopic capsule" localized by fusing image-derived motion with the RF signal. The average error fell from 6.8 cm (RF only) to under 2.3 cm.
+  - *Bearing:* vision as odometry inside a hybrid, not as place recognition.
+- **[turan2018deep]** Neurocomputing 2018 (arXiv 1708.06822) **[abs]**. Deep EndoVO: RCNN monocular VO for endoscopic capsule robots, evaluated on a real pig-stomach dataset.
+- **[turan2017nonrigid]** International Journal of Intelligent Robotics and Applications 2017 (arXiv 1705.05444, retitled from "RGB-Depth SLAM") **[FT-part: loop closure and experiments, arXiv version]**.
+  - Dense non-rigid surfel SLAM for capsule robots.
+  - Loop closure is local model-to-model registration between active and inactive surfels. Verbatim: "Our algorithm does not check global loop closures since the inner organ volumes are quite small."
+  - The data came from cameras mounted on a magnetically activated soft capsule endoscope in a Koken LM103 stomach *simulator*, with OptiTrack GT.
+  - *Bearing:* **the direct capsule-robot precedent for omitting global place recognition.** Its justification (small organ volume) was made for a stomach model. That it carries over to the much longer colon is our doubt, not a tested claim.
+- **[turan2018magnetic]** IROS 2018 (arXiv 1803.01048) **[abs]**. Fuses magnetic localization and vision in dense, non-rigid frame-to-model mapping on ex-vivo porcine stomachs. RMS surface reconstruction errors are 1.58–2.17 cm.
+  - *Bearing:* vision paired with external magnetic sensing, again with no global place recognition in the abstract.
+- **[bause2026capsulemotion]** arXiv 2026 **[abs]**. A patient-specific dynamic frame rate for capsules, driven by motion predicted from on-device image-compression metrics.
+  - Before the small intestine, a low-power mode runs a "LocalizationNet" to detect the current organ.
+  - Deployed on an ultra-low-power single-core RISC-V demonstrator, and evaluated on the Rhode Island VCE dataset.
+  - *Bearing:* (i) capsule frame rate is low and may be *adaptive*, so a frame-count exclusion window has no fixed time or distance meaning on capsules. (ii) The onboard compute budget is microcontroller-class, so any claim that P4's zoo runs *on* a capsule would be unsupported.
+
+Already in the bib and relevant here:
+- [werner2023precise] and [nam2024deep]: capsule organ classification plus temporal models (§5);
+- [ozyoruk2021endoslam]: capsule and conventional endoscopes on ex-vivo organs with robot-arm pose (§6).
+
+### 18.4 Robotic flexible endoscopes: vision in the navigation loop
+
+- **[prendergast2018autonomous]** IROS 2018 **[FT]**. REP-2 is a wheeled robotic endoscope platform, "a 2x scaled version" of a robotic capsule endoscope, with an onboard camera.
+  - It runs lumen-centre tracking and haustral-fold detection, and traverses 2 m of a 2x-scaled active colon simulator autonomously.
+  - Localization uses off-the-shelf monocular ORB-SLAM2. It was assessed only by "visual comparison" of the pose map and point cloud against the simulator geometry. There is no quantitative localization or loop-closure evaluation.
+  - The authors state that the device "is currently not a suitable size for in vivo applications".
+  - *Bearing:* **the only general-purpose visual place-recognition-bearing pipeline found on an in-body robot platform.** It is handcrafted (ORB + DBoW2), and DBoW2 place recognition is reported to fail on real colonoscopy [elvira2024cudasiftslam].
+- **[martin2020enabling]** (see §18.2). In the robotic flexible endoscope, vision steers and magnetism localizes.
+- **[gu2022visionkinematics]** IEEE TMI 2022 **[abs]**.
+  - Robotic-assisted bronchoscopy localization against CT virtual views, with a Visual Similarity Network for domain-invariant features and a Kinematic Refinement Network that uses robot control signals.
+  - It states that vision-based localization is "clinically preferable but [...] sensitive to visual variations".
+  - ATE is 8.01 mm (phantom) and 8.62 mm (porcine).
+  - *Bearing:* trained, CT-referenced, kinematics-aided. The opposite end from frozen, patient-agnostic retrieval.
+- **[zhang2024ai]** Nature Communications 2024 **[abs]**. An AI co-pilot bronchoscope robot. Its AI–human shared control, drawing on "historical bronchoscopic videos and expert imitation", gives novice doctors "safe steering in the lung", in vitro and in vivo.
+  - *Bearing:* vision drives steering, not localization. Cite it as context for vision-in-the-loop robotic endoscopy.
+- **[wu2026longshort]** arXiv 2026 **[abs]**. "Pure-vision" robotic bronchoscopy autonomy "without external tracking during navigation".
+  - A short-term reactive agent handles motion control, and a long-term agent handles "anatomically ambiguous points".
+  - A world-model critic selects "the action whose predicted state best matches the target view" (CT-derived virtual targets).
+  - Evaluated in a phantom, 3 ex-vivo porcine lungs and a live porcine model.
+  - *Bearing:* the 2026 trend is to remove external trackers from robotic endoscopes. Its view-matching step is the nearest robot-side analogue of place recognition, against CT renderings rather than a database of real frames.
+
+Already in the bib and relevant here:
+- [tomasini2026bronchotop], [tian2025harnessing], [shu2025bronchopt], [chen2026geometryaware]: bronchoscopy localization (§5);
+- [wei2023stereo]: laparoscope relocalization with NetVLAD-distilled retrieval (§17);
+- [soberanismukul2026global]: training-free re-identification after scope reinsertion (§2).
+
+### 18.5 Why nanorobots (and most microrobots) are out of scope
+
+- **[nelson2010microrobots]** Annual Review of Biomedical Engineering 2010 **[abs]** and **[sitti2015biomedical]** Proceedings of the IEEE 2015 **[abs]**. The standard surveys of untethered medical milli- and microrobots.
+  - *Bearing:* survey citations for the milli- and microrobot size range. The camera / no-camera distinction below rests on [aziz2020medical] and [lassiter2025microscopic], not on these two abstracts.
+- **[aziz2020medical]** ACS Nano 2020 **[abs]**. "Medical imaging techniques are required for localizing and tracking such tiny therapeutic machines", using signals "detected by an external system".
+- **[wang2020trends]** Advanced Materials (online 2020, volume 33, 2021) **[abs]**. Its in-vivo micro/nanorobot applications use "various clinical imaging techniques [...] for localization and tracking".
+- **[lassiter2025microscopic]** Science Robotics 2025 (arXiv 2503.23085) **[abs; preprint full text read for the sensor list]**.
+  - The abstract notes that "microrobots often lack [...] on-robot systems for decision-making, sensing, feedback, and programmable computation".
+  - The preprint's 210 × 340 × 50 µm³ robot fits "photovoltaic cells for power, sensors for temperature, four actuator control circuits, an optical receiver for downlink communication and programming, a processor, and memory" (about 500 bits of memory). It reports data back by modulating its motion, which a base station observes.
+  - *Bearing:* the precise statement is that sub-millimetre robots with onboard *computation* now exist, but none that we found carries an *imager*. Write "nanorobots carry no camera", not "microrobots carry no compute".
+
+### 18.6 General-purpose VPR for in-body robot localization: what was searched and not found
+
+No work was found that evaluates street- or outdoor-trained VPR models (NetVLAD, CosPlace, EigenPlaces, MixVPR, BoQ, SALAD, MegaLoc, AnyLoc, raw DINOv2) for localizing a capsule robot, a magnetic endoscope or a robotic flexible endoscope. This is a statement about our search, not proof of absence. The nearest items:
+- (i) handcrafted BoW place recognition inside ORB-SLAM2 on a scaled robotic capsule platform, evaluated only qualitatively [prendergast2018autonomous];
+- (ii) outdoor-VPR-derived retrieval as an unmeasured component in laparoscopy and ureteroscopy [wei2023stereo, li2026raul, li2026automated], which are not miniature robots;
+- (iii) capsule-robot SLAM that explicitly omits global loop closure [turan2017nonrigid].
+
+**Searches run in this pass (to 2026-09-28).**
+- *Web:*
+  - robotic capsule localization reviews;
+  - magnetic capsule VO and SLAM, 2024–2026;
+  - "visual place recognition" × capsule / robot / surgical robot;
+  - NetVLAD, AnyLoc, MegaLoc and SALAD × endoscopy / capsule / bronchoscopy;
+  - DINOv2 and foundation models × capsule localization;
+  - relocalization and loop closure × robotic endoscope, robotic bronchoscopy and capsule SLAM, 2025–2026;
+  - robotic colonoscope relocalization;
+  - robot-assisted retargeting;
+  - magnetic flexible endoscope localization;
+  - microrobot and nanorobot imaging and localization reviews;
+  - onboard sensing of microrobots.
+- *OpenAlex:* 8 free-text queries, 3 of which were throttled (HTTP 429). Those were covered by the web and Crossref searches.
+- *Crossref:* bibliographic search for the published versions of the arXiv records.
+- *DataCite:* 13 arXiv records.
+- *Europe PMC / PMC:* abstracts and full text where open.
+
+**Seen or verified but not added (framing only, redundant, or not verified).**
+- Crossref-verified, not added:
+  - Xu et al., Geo-spatial Information Science 2024, a review of capsule localization performance (10.1080/10095020.2024.2354239); redundant with [cao2024robotic] and [ali2025recent].
+- Crossref-search hits, not fetched as records:
+  - Endo-VMFuseNet, ICRA 2018 (10.1109/icra.2018.8461129);
+  - EndoSensorFusion, ICRA 2018 (10.1109/icra.2018.8460472);
+  - Turan et al., sparse-then-dense capsule mapping, MVA 2017 (10.1007/s00138-017-0905-8);
+  - Ali et al., IEEE Sensors Journal 2024, active-WCE autonomous navigation (10.1109/jsen.2024.3391797).
+- OpenAlex-only hits, not verified:
+  - Ciuti et al., "Frontiers of robotic endoscopic capsules: a review", J. Micro-Bio Robotics 2016;
+  - Shamsudhin et al., "Magnetically guided capsule endoscopy", Medical Physics 2017;
+  - Chen et al., "Magnetically actuated capsule robots: a review", IEEE Access 2022;
+  - Spyrou & Iakovidis, Meas. Sci. Technol. 2014;
+  - VR-Caps, MedIA 2021.
+- DataCite-verified, not added:
+  - V²-SfMLearner (arXiv 2412.17595), vibration-aided capsule ego-motion;
+  - Mangulabnan et al. (arXiv 2603.20045), policy-based endoscopic pose recovery in cadaveric sinus.
+- No DOI record found:
+  - Charreyron et al., "Visual-Kinematic Monocular SLAM using a Magnetic Endoscope", Hamlyn 2018.
