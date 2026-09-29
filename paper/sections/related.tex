@@ -3,17 +3,28 @@
 % robot-side prior work is in the introduction (MICCAI budget); keys cut for
 % space are listed in notes/EVIDENCE.md.  Negative statements are restricted
 % to what was verified: wei2023stereo is NOT zero-shot.
+% Colon10k (review round 2, M1): the two quotes are verbatim from its abstract
+% (OpenAlex record of 10.1109/isbi48211.2021.9433780, re-read 2026-09-28; the
+% full text is closed access, no open copy found).  In the abstract the
+% "do not generalize" statement motivates the benchmark; it is not
+% presented as a result of the evaluation, so write "state", never "found".  When the
+% results table is read, replace "we could read only its abstract ..." with
+% which techniques it ran and whether off the shelf (EVIDENCE.md 0.4).
 \section{Related Work}
 \label{sec:related}
 
 \paragraph{Place recognition in the body.}
-Colon10k provides endoscopist-verified same-place
-intervals~\cite{ma2021colon10k}, and a topological mapping system
-relocalizes with retrieval fine-tuned on
-colonoscopy~\cite{morlana2024colonmapper}. The closest
-measurement to ours is Morlana et al.'s off-the-shelf landmark-trained
-baseline on real colonoscopy, whose recall fell as near-duplicate frames
-were excluded~\cite{morlana2021selfsupervised}. On robotic capsules and
+Colon10k's authors report ``an extensive evaluation on different existing
+place recognition techniques'' on its endoscopist-verified same-place
+intervals and state that ``traditional image retrieval techniques do not
+generalize well in colonic images''~\cite{ma2021colon10k}. That evaluation,
+on the same dataset, is the closest to ours; we read only its abstract, so we
+cannot say which techniques it ran or whether any ran off the shelf, and we
+compare with none of its numbers. Morlana et al.'s
+off-the-shelf landmark-trained baseline on real colonoscopy lost recall as
+near-duplicate frames were excluded~\cite{morlana2021selfsupervised}, and a
+topological mapping system relocalizes with retrieval fine-tuned on
+colonoscopy~\cite{morlana2024colonmapper}. On robotic capsules and robotic
 endoscopes we found no retrieval of same-place frames with a learned global
 descriptor (Sec.~\ref{sec:intro}).
 

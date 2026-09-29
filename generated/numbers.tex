@@ -2,7 +2,7 @@
 % DO NOT EDIT: change numbers.yaml or the snapshot and regenerate.
 % source_repo: https://github.com/ALJainProjects/VPR_TESTTIME_COMPUTE_IMPROVEMENTS.git
 % source_commit: f17b5cccdc934669dc3774c837de487c4a4fbfc8 (source_dirty: false)
-% spec: numbers.yaml (sha256 02328479862cf74cdb364cbe504938e825acf39e233b7473148fa3376b3f8dc4)
+% spec: numbers.yaml (sha256 f50df553720bece2a0d2bcd68530a5ee4db3cff136b03f81fb795514c354fbd5)
 \makeatletter
 % bl-hist-r1 <- results/final_p4/baselines.csv where {baseline: color_histogram, split: test, window: 10} column r_at_1 fmt {:.1%} (sha256 0f543cc7b6d0)
 \@namedef{res@bl-hist-r1}{35.5\%}
@@ -10,6 +10,8 @@
 \@namedef{res@bl-rand-exp}{6.8}
 % bl-rand-hits <- results/final_p4/baselines.csv where {baseline: random_ranking, split: test, window: 10} column hits fmt {:.0f} (sha256 0f543cc7b6d0)
 \@namedef{res@bl-rand-hits}{7}
+% bl-rand-p <- results/final_p4/baselines.csv where {baseline: random_ranking, split: test, window: 10} column p_chance_at_least_hits fmt {:.2f} (sha256 0f543cc7b6d0)
+\@namedef{res@bl-rand-p}{0.52}
 % bl-raw-hi <- results/final_p4/baselines.csv where {baseline: raw_thumbnail, split: test, window: 10} column r_at_1_hi fmt {:.1%} (sha256 0f543cc7b6d0)
 \@namedef{res@bl-raw-hi}{62.7\%}
 % bl-raw-lo <- results/final_p4/baselines.csv where {baseline: raw_thumbnail, split: test, window: 10} column r_at_1_lo fmt {:.1%} (sha256 0f543cc7b6d0)
@@ -36,6 +38,8 @@
 \@namedef{res@gate-k}{1}
 % gate-minmargin-chance <- results/final_p4/gate.csv where {split: test} column min_margin_vs_chance fmt {:.2f} (sha256 5d559b75336f)
 \@namedef{res@gate-minmargin-chance}{0.05}
+% gate-minmargin-chance-pts <- derive: gate-minmargin-chance * 100 fmt {:.0f}
+\@namedef{res@gate-minmargin-chance-pts}{5}
 % gate-minmargin-comp <- results/final_p4/gate.csv where {split: test} column min_margin_vs_comparator fmt {:g} (sha256 5d559b75336f)
 \@namedef{res@gate-minmargin-comp}{0}
 % gate-minpass <- results/final_p4/gate.csv where {split: test} column min_models_passing fmt {:d} (sha256 5d559b75336f)
@@ -100,6 +104,10 @@
 \@namedef{res@pc-n-c13}{3}
 % pc-n-c19 <- results/final_p4/per_case.csv where {case: 19, model: boq_resnet50, split: test, window: 10} column n_answerable fmt {:d} (sha256 3bf0aaf90fa8)
 \@namedef{res@pc-n-c19}{24}
+% pc-ndb-c08 <- results/final_p4/per_case.csv where {case: 08, model: boq_resnet50, split: test, window: 10} column n_db fmt {:d} (sha256 3bf0aaf90fa8)
+\@namedef{res@pc-ndb-c08}{104}
+% pc-ndb-c14 <- results/final_p4/per_case.csv where {case: 14, model: boq_resnet50, split: test, window: 10} column n_db fmt {:d} (sha256 3bf0aaf90fa8)
+\@namedef{res@pc-ndb-c14}{879}
 % pm-boqr50-hi <- results/final_p4/per_model.csv where {model: boq_resnet50, split: test, window: 10} column r_at_1_hi fmt {:.1%} (sha256 35a43a65a47d)
 \@namedef{res@pm-boqr50-hi}{76.4\%}
 % pm-boqr50-lo <- results/final_p4/per_model.csv where {model: boq_resnet50, split: test, window: 10} column r_at_1_lo fmt {:.1%} (sha256 35a43a65a47d)

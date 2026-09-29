@@ -4,6 +4,13 @@
 % Say "internal pre-registration": the document is committed and signed but is
 % NOT in a public registry (EVIDENCE.md section 5).  Report the validation
 % readout as INFORMATIONAL (val-* keys), never as a result of the study.
+% AI-assistance disclosure (review round 2, S5): complete, per section 11 of
+% the protocol: Stage A values proposed by the assistant and approved by the
+% owner; Stage B drafted by it and countersigned (row C); the section 8d
+% options proposed by it.  Keeping or removing the disclosure is the owner's
+% call (EVIDENCE.md 0.4); if it stays, it stays complete.
+% "From a clean commit" is accurate; the gate ran from the main checkout, not
+% the separate worktree section 8d note 4 foresaw (EVIDENCE.md 0.7, review D2).
 \subsection{Pre-registration and its history}
 \label{sec:protocol}
 The protocol is an internal, version-controlled document, signed in dated
@@ -11,19 +18,18 @@ stages and committed with the code; it is not deposited in a public
 registry, so its timestamps are those of the repository history. Stage~A fixed
 the thresholds of Sec.~\ref{sec:gate}, the window and its two secondary sweep
 values, the database scope, the comparator, the zoo and the case split before
-the data were acquired. Stage~B recorded, after acquisition and before any
-descriptor was computed, the facts only the files could give: the annotation
-format, the frame-id convention, the image counts, the unusable validation
-case and the unanswerable queries. It was drafted from the files by an AI
-coding assistant, and the protocol owner countersigned it before the test
+the data were acquired; an AI coding assistant proposed these values and the
+protocol owner approved them. Stage~B recorded, after acquisition and before any
+descriptor was computed, the facts only the files could give (format, image
+counts, the unusable case, the unanswerable queries). It was drafted from the files by the same
+assistant, and the protocol owner countersigned it before the test
 gate, which the gate runner enforced. The AnyLoc-GeM wrapper was written
 after Stage~B and before any Colon10k descriptor was computed; its parameters,
 which the protocol had not fixed, were recorded unchanged before the test
 gate.
 
-The validation cases were reserved for method development, though nothing
-was tuned on them; their readout was informational, and the runner computes
-no outcome on them. At the gate window,
+Nothing was tuned on the validation cases; their readout was
+informational, and the runner computes no outcome on them. At the gate window,
 on \res{val-nans} answerable queries from \res{val-ncases} cases, all
 \res{val-nbeat} of \res{val-nzoo} members beat chance and \res{val-nnontriv}
 were non-trivial, the pattern the rule maps to \texttt{OWNER\_REVIEW}. After
@@ -35,8 +41,8 @@ and continue as a diagnostic study. (ii)~If the run crashed after writing its
 one-shot lock, one re-run would be allowed only if no gate quantity had been
 written. No threshold, window, comparator, zoo member or split was changed,
 and the secondary windows stayed non-gating. The gate then ran once on the
-test cases, from a clean commit: the runner refuses any path override, writes
-the one-shot lock before scoring, and verifies the vendored code it imports;
-the gate record it wrote, holding the lock's content and the hash of the
-decision file, was committed. Its protocol source is \texttt{\res{gate-protocol-source}}, i.e.\
-the window and scope were derived from the ground truth.
+test cases from a clean commit; the runner refuses path overrides, writes
+the one-shot lock before scoring and verifies the vendored code it imports,
+and the gate record it wrote (the lock's content and the decision file's
+hash) was committed. Its protocol source is
+\texttt{\res{gate-protocol-source}} (Sec.~\ref{sec:gate}).

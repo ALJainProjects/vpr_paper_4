@@ -67,6 +67,9 @@ values:
     where: {split: test}
     column: min_margin_vs_chance
     fmt: '{:.2f}'
+  # The chance margin in percentage points of Recall@1, the unit of every
+  # printed margin (review round 2, D4(e)); the raw 0.05 is kept for the derive.
+  gate-minmargin-chance-pts: {derive: gate-minmargin-chance * 100, fmt: '{:.0f}'}
   gate-minmargin-comp:
     file: results/final_p4/gate.csv
     where: {split: test}
@@ -195,6 +198,13 @@ values:
     where: {split: test, window: '10', baseline: random_ranking}
     column: expected_hits
     fmt: '{:.1f}'
+  # P(X >= hits) under the exact per-query chance model (§8d note 5; review
+  # round 2, D4(a)).  Informational, never a gate quantity.
+  bl-rand-p:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: random_ranking}
+    column: p_chance_at_least_hits
+    fmt: '{:.2f}'
   # ----------------------------------------- zoo members (test, window 10)
   pm-boqr50-r1:
     file: results/final_p4/per_model.csv
@@ -396,6 +406,19 @@ values:
     where: {split: test, window: '10', case: '13', model: boq_resnet50}
     column: n_answerable
     fmt: '{:d}'
+  # Per-case database sizes (frames in the case; test extremes: case 08 is the
+  # smallest, case 14 the largest).  Limitation "offline, within one procedure"
+  # (review round 2, S1).
+  pc-ndb-c08:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '08', model: boq_resnet50}
+    column: n_db
+    fmt: '{:d}'
+  pc-ndb-c14:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '14', model: boq_resnet50}
+    column: n_db
+    fmt: '{:d}'
   pc-drop-c06:
     file: results/final_p4/per_case.csv
     where: {split: test, window: '10', case: '06', model: boq_resnet50}
@@ -453,14 +476,15 @@ tables:
     - {column: recoverable_best_hi, header: $\UB$, fmt: '{:.1%}'}
     - {column: best_model, header: '$m^\star$'}
     - {column: chance_ceiling, header: '$\Crand$', fmt: '{:.1%}'}
-  # SECONDARY exclusion-window sweep (test).  reporting_role marks the headline row.
+  # SECONDARY exclusion-window sweep (test).  The caption names the headline
+  # row (the pre-registered gate window); the reporting_role column was dropped
+  # for width in review round 2 so both sweep tables fit side by side.
   sweep-counts:
     file: results/final_p4/counts.csv
     where: {split: test, window: ['5', '10', '15']}
     sort_by: [window]
     columns:
     - {column: window, header: $W$}
-    - {column: reporting_role, header: role}
     - {column: n_answerable, header: answ.}
     - {column: n_unanswerable_dropped, header: drop.}
     - {column: n_beating_chance, header: '$>$chance'}

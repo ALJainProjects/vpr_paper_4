@@ -4,7 +4,7 @@
     "source_dirty": false,
     "source_repo": "https://github.com/ALJainProjects/VPR_TESTTIME_COMPUTE_IMPROVEMENTS.git",
     "spec": "numbers.yaml",
-    "spec_sha256": "02328479862cf74cdb364cbe504938e825acf39e233b7473148fa3376b3f8dc4"
+    "spec_sha256": "f50df553720bece2a0d2bcd68530a5ee4db3cff136b03f81fb795514c354fbd5"
   },
   "tables": {
     "cases-best": {
@@ -269,10 +269,6 @@
           "header": "$W$"
         },
         {
-          "column": "reporting_role",
-          "header": "role"
-        },
-        {
           "column": "n_answerable",
           "header": "answ."
         },
@@ -352,6 +348,21 @@
       },
       "raw": 7.0,
       "value": "7"
+    },
+    "bl-rand-p": {
+      "provenance": {
+        "column": "p_chance_at_least_hits",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.2f}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "random_ranking",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.5245939170211995,
+      "value": "0.52"
     },
     "bl-raw-hi": {
       "provenance": {
@@ -532,6 +543,17 @@
       },
       "raw": 0.05,
       "value": "0.05"
+    },
+    "gate-minmargin-chance-pts": {
+      "provenance": {
+        "depends_on": [
+          "gate-minmargin-chance"
+        ],
+        "derive": "gate-minmargin-chance * 100",
+        "fmt": "{:.0f}"
+      },
+      "raw": 5.0,
+      "value": "5"
     },
     "gate-minmargin-comp": {
       "provenance": {
@@ -980,6 +1002,38 @@
       },
       "raw": 24,
       "value": "24"
+    },
+    "pc-ndb-c08": {
+      "provenance": {
+        "column": "n_db",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "08",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 104,
+      "value": "104"
+    },
+    "pc-ndb-c14": {
+      "provenance": {
+        "column": "n_db",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "14",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 879,
+      "value": "879"
     },
     "pm-boqr50-hi": {
       "provenance": {

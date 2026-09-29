@@ -1,3 +1,299 @@
+# Paper 4 — Response to Reviewer 2, round 2 (2026-09-28)
+
+Scope: the results paper at `bb4805f` (one-shot Colon10k test gate, GO).
+Nothing was run. The P4 test split was not touched, and neither was its lock.
+No dataset or weight was downloaded. No new number was typed: every added
+number is a `\res` value from the unchanged, hash-verified snapshot
+(`source_commit` `f17b5cc`). The vpr-testtime repository was read and not
+edited.
+
+After the revision:
+- `make check` passes: 8 snapshot files verified clean against `f17b5cc`,
+  generated files fresh, texlint 0 violations and 0 pragmas, bibcheck
+  0 errors.
+- `make pdf` gives 10 pages: body on pages 1–8, references on 9–10 (27 keys).
+  There are no overfull boxes and no undefined citations.
+- The PDF's Title and Author metadata are empty. Its text contains no name,
+  URL, "Paper 3", "Claude" or "vpr-testtime".
+
+Verdicts: **Fixed**, **Fixed differently** (with the reason), **Partly
+fixed** (what remains and why), **Documented** (for document items). No
+finding is rejected. A new rule is followed throughout: the added text had to
+fit the 8-page body. The last section lists every cut, so the reviewer can
+check that nothing substantive was removed.
+
+## Must-fix
+
+**M1 — Colon10k's own evaluation is not credited; the blocking check dropped
+off §0.4. Fixed. (b) cannot be completed here and remains blocking.**
+- (a) Related work now opens with Colon10k's evaluation and quotes its
+  abstract verbatim. Its authors report "an extensive evaluation on different
+  existing place recognition techniques" on its endoscopist-verified
+  intervals, and they state that "traditional image retrieval techniques do
+  not generalize well in colonic images". The paper calls this evaluation
+  "on the same dataset … the closest to ours". The introduction also credits
+  it: "existing techniques, among them an off-the-shelf network trained on
+  landmarks, have been evaluated on real colonoscopy [ma2021colon10k,
+  morlana2021selfsupervised]". I re-read the abstract from its OpenAlex record
+  before quoting it. The second statement comes before the benchmark in the
+  abstract, as motivation, so the paper writes "state", not "found".
+- (b) I tried to read the results table and could not:
+  - OpenAlex lists no open-access location for
+    10.1109/isbi48211.2021.9433780;
+  - PubMed and PMC have no record;
+  - the dataset page gives only the fine-tuning parameters.
+
+  The paper therefore says "we read only its abstract, so we cannot say which
+  techniques it ran or whether any ran off the shelf, and we compare with none
+  of its numbers". That restores the round-1 S19 wording. "Read the Colon10k
+  results table" is back at the top of EVIDENCE §0.4 as item 0, marked
+  **blocks submission**. It says what to do after reading: name its methods;
+  if it ran a zoo member such as NetVLAD off the shelf, say so and compare
+  **by method only**, since a numeric comparison would need a `\res`-backed
+  source. A comment in `related.tex` marks the sentence to replace.
+- (c) The novelty sentence now rests on the measurement, not the robot: "As
+  far as we found (search to September 2026), no VPR model published since
+  2022 has been evaluated frozen on colonoscopy same-place ground truth."
+  - Colon10k (ISBI 2021) and Morlana et al. (MIDL 2021) cannot contain a
+    post-2021 model.
+  - ColonMapper and ColonSLAM fine-tune their descriptors.
+  - This matches EVIDENCE §2 C1, "the 2022–2025 frozen VPR zoo".
+  - The robot gap stays as motivation only, stated as the cited facts of
+    paragraph 1.
+  - positioning.md's old "safe novelty phrasing" is marked superseded.
+  - NetVLAD (2016) is the one zoo member the sentence does not cover. It is
+    also the member Colon10k may have run.
+
+## Should-fix
+
+**S1 — non-causal, within-procedure evaluation. Fixed.**
+- Methods: "The database is the query's own case, frames recorded after the
+  query included, so the test is offline".
+- A new limitation, "Offline, within one procedure":
+  - a query may be answered by a revisit an on-line relocalizer would not yet
+    have seen, and we did not count such queries;
+  - all revisits lie inside one short procedure, with databases of
+    `\res{pc-ndb-c08}` to `\res{pc-ndb-c14}` frames per test case. These are
+    new `\res` keys over `per_case.csv`'s `n_db`. The test extremes are cases
+    08 and 14; the reviewer's 104–879 is the same range;
+  - relocalization across procedures, as at follow-up, is not tested.
+- The follow-up example is scoped, and a within-procedure need is added from
+  Colon10k's abstract: robots need their position "to recheck a region during
+  a procedure [ma2021colon10k] or to retarget a lesion at follow-up
+  [bianchi2019localization]; we test only the former (Sec. 5)".
+- The abstract says "offline".
+- The reviewer's validation-GT count (17 of 50) is **not** in the paper. It is
+  not in the snapshot. EVIDENCE §0.3 says it may enter only as a `\res` value
+  exported by the consolidator, and that on the test split it would be a
+  post-gate analysis.
+
+**S2 — the FOV-masked secondary run and H-E1b are not accounted for. Fixed.**
+- The limitations now say "The pre-registered secondary run with
+  field-of-view masking was not run (masking was never wired into the
+  evaluation code)". I checked this at `91ea512`:
+  - `EndoscopyPreprocess` is not imported by the runner or `run.py`;
+  - `p4_protocol.py` raises "EndoscopyPreprocess is not wired into this run".
+- They also say: "Raw DINOv2 was to join the zoo only if its wrapper existed
+  at Stage B, and it did not, so the pre-registered contrast of VPR training
+  with raw DINOv2 (H-E1b) is untestable". This is §8b's conditional clause
+  and §8d note 3; `b0a71b7` has no raw-DINOv2 wrapper, which I checked in its
+  tree.
+- The paragraph is now "Zoo, statistics, work not run".
+- EVIDENCE §0.4 item 11 records the owner's choice. Keep "not run", or approve
+  a separate, recorded procedure; the committed runner cannot do it.
+
+**S3 — the conclusion overstates when the protocol was fixed. Fixed.**
+- The conclusion now opens: "With thresholds, zoo, comparator and case split
+  fixed before any model was run in an internal pre-registration". This is the
+  abstract's scope.
+- EVIDENCE §0.5 makes this scope a wording rule, because the §8d rules, row C
+  and the AnyLoc-GeM parameters came later.
+
+**S4 — the ρ denominator; headroom is not called an oracle bound. Fixed.**
+- Methods: ρ_m "is the share of *all* queries that m misses and another
+  member solves", and ρ_{m*} "is also the headroom of an oracle per-query
+  selector over the best member".
+- Results: "The best member misses, while another member solves, ρ_{m*} = …
+  of all queries … the headroom of an oracle per-query selector over it (no
+  realizable selector was tested)".
+- Conclusion: "An oracle per-query selector would recover
+  `\res{or-rec-share}` of the best member's errors". That share is
+  ρ/(1 − R), which is conditional on the best member's errors, as worded.
+
+**S5 — the AI-assistance disclosure omits Stage A. Fixed.** Protocol: "Stage A
+fixed … before the data were acquired; an AI coding assistant proposed these
+values and the protocol owner approved them". This is §11 row A. The Stage B
+sentence now says "by the same assistant", and the §8d sentence is unchanged.
+Keeping or removing the whole disclosure is still the owner's call; EVIDENCE
+§0.4 item 6 now requires that, if kept, it stay complete.
+
+**S6 — MegaLoc called street-trained. Fixed. The title change goes beyond the
+request.**
+- Methods: "The VPR models, trained on street imagery (MegaLoc on a union of
+  VPR and landmark datasets), are …". That is literature.md's wording; I did
+  not assert MegaLoc's datasets beyond it.
+- Abstract: "frozen visual place recognition (VPR) models, most of them
+  trained on street imagery".
+- Title: "Frozen Street-Trained Place Recognition in the Colon: …" became
+  "Frozen Place Recognition in the Colon: …". AnyLoc-GeM is training-free too,
+  so "street-trained" was inaccurate for the zoo as a title-level claim. The
+  running title changed with it.
+- The owner may prefer "Mostly Street-Trained" (EVIDENCE §0.4 item 12).
+- The conclusion's "most of them street-trained" is kept, as the reviewer
+  allowed.
+
+**S7 — the input transform is not stated. Fixed.** Methods: "Every model and
+the thumbnail receive the harness's generic input: the frame upsampled with
+its aspect ratio kept, padded with black to a 448-pixel square and
+ImageNet-normalized (MixVPR resizes it to its fixed input size)." Checked at
+`91ea512`:
+- the runner docstring at lines 86–87;
+- `VPRTransform`: letterbox, target 448, black canvas, ImageNet mean and std;
+- MixVPR's wrapper interpolates to its fixed input size;
+- the handcrafted baselines invert the normalisation.
+
+The sentence sits right after "no endoscopy-specific preprocessing (masking)",
+which qualifies that claim as the reviewer asked.
+
+## Document items
+
+**D1 — the `\pending` markers, including an unmet pre-registered commitment.
+Documented, plus one text change.**
+- The street paragraph now says: "The pre-registered two-sided test of Δ_m
+  and the commitment to report each Δ_m with its interval are not yet met: the
+  interval method was chosen after the gate ran".
+- EVIDENCE §0.4 item 1 marks H-E1a as an unmet pre-registered reporting
+  commitment.
+- Item 10 lists all 7 markers, each of which stops the build under `[final]`:
+  H-E1c, the GT audit, H-E1a, E2, E4, E3, E5.
+- It notes that H-E1c can be computed from the saved per-query files without
+  re-running anything, reported as computed after the gate.
+- I did not compute H-E1c or approve MOVER. Both remain owner decisions (items
+  1–2).
+
+**D2 — the gate ran from the main checkout, not a worktree. Documented** in
+the new EVIDENCE §0.7. I re-checked what I could:
+- `91ea512` changes only `.gitignore` (the weight cache and the SelaVPR clone)
+  and `.gitmodules` (three `ignore = untracked` lines). It comes after row C
+  (`23dfcdc` is an ancestor).
+- The gate record's `out_root` and lock path are in the main checkout, with
+  `git_clean: true`.
+- The descriptor cache holds 570 files. 150 predate the lock timestamp; the
+  last is at 2026-09-27 23:51:41 −04:00. 420 follow it; the first is at
+  2026-09-28 20:22:13 −04:00, against the lock at 20:22:12 −04:00.
+- These are modification times, so they are not tamper-proof. The
+  5 × 15 × 2 and 14 × 15 × 2 split is recorded as the reviewer's reading
+  because the cache keys are hashes.
+
+The paper's "from a clean commit" stays. The signed protocol document is not
+edited from this repository.
+
+**D3 — provenance and anonymity. Documented** (EVIDENCE §0.4 items 7 and 9).
+- Item 9 now also says that the `.tex` comments name the harness checkout.
+- The generated and snapshot files keep `source_repo` by design, and editing
+  them would fail `make check`.
+- *Rebuttal (partial):* I did not strip the `.tex` comments. They are the
+  provenance trail that ties each paragraph to the protocol, the gate commit
+  and EVIDENCE. The plan stays: submit the PDF only, or strip comments and
+  those lines from any uploaded source bundle.
+- The stale status line 3 of `P4_PREREGISTRATION.md` is in the harness
+  repository. It stays an owner item (§0.4 item 8).
+
+**D4 — minor points. Fixed.**
+- (a) Results: the random ranking hit `\res{bl-rand-hits}` queries against
+  `\res{bl-rand-exp}` expected, "(probability of at least as many hits:
+  `\res{bl-rand-p}`)". This is a new key over `p_chance_at_least_hits`, as
+  §8d note 5 asks.
+- (b) The street-table caption now says "Not a domain effect alone."
+- (c) "On robotic capsules and robotic endoscopes".
+- (d) The nanorobot sentence now reads "which are localized by external
+  medical imaging [aziz2020medical]; even a recent sub-millimetre robot with
+  on-board computation carries no imager [lassiter2025microscopic]". The
+  lassiter key was already in the bib and the lock; bibcheck passes.
+  "Carry no camera" is no longer attributed to aziz.
+- (e) The chance threshold is now printed as "5 percentage points" in
+  Methods and "5 points" in the Table 1 caption. It comes from a derived key,
+  `gate-minmargin-chance-pts` (`gate-minmargin-chance * 100`), so no number
+  is typed. The raw key stays as the derive's input.
+- (f) Limitations: "on the `\res{val-ncases}` validation cases
+  `\res{val-nnontriv}` of `\res{val-nzoo}` members were non-trivial".
+
+## Cuts made to keep the body at 8 pages (nothing substantive removed)
+
+The revision added about 25 lines. These removals and compressions paid for
+them.
+- **Removed restatements** (each is still stated where named):
+  - "As the split condition was disabled, GO rests on this count alone"
+    (Results). Methods §3.3 keeps it.
+  - "The case-level intervals rest on these clusters…" (Results). The
+    limitations keep the power caveat.
+  - "The split condition of the gate was disabled" and "the zoo ceiling
+    bounds only per-query selection among these members" (Limitations).
+    §3.3 and §3.4 keep them.
+  - "The headline stays at the pre-registered window" and "that set changes
+    with the window". The sweep caption keeps both ("The row W = 10 is the
+    pre-registered headline"; "Query sets differ between rows").
+  - "the thumbnail's recall falls" in the sweep text; Table 5 shows it.
+  - "the window and scope were derived from the ground truth" (Protocol).
+    Methods §3.3 keeps it, and the protocol points to it.
+- **Shortened:**
+  - C1's history clause, since §3.5 has it;
+  - the Stage B fact list;
+  - the file-format sentence;
+  - the Table 2 and Table 3 captions;
+  - the per-case paragraph;
+  - the AnyLoc Δ_m sentence;
+  - the conclusion.
+- **Dropped:** "the window removed 11 queries of case 06, leaving 12". Its keys
+  `pc-drop-c06` and `pc-n-c06` stay in `numbers.yaml` but are no longer
+  printed; `pc-n-c13` likewise.
+- **Layout:**
+  - Tables 3 (per case), 4 (street) and 5 (sweep) share one float. The street
+    table is now Table 4, and the text order is per case, street, then the
+    secondary sweep.
+  - Table `sweep-counts` lost its `role` column so both sweep tables fit side
+    by side. The caption names the headline row instead. A reviewer who wants
+    the column back costs about four lines.
+
+## Every change made
+
+- `numbers.yaml`: +`gate-minmargin-chance-pts` (derive), +`bl-rand-p`,
+  +`pc-ndb-c08`, +`pc-ndb-c14`; `sweep-counts` without `reporting_role`.
+  Now 81 values and 8 tables. `generated/` was regenerated with `make numbers`.
+- `paper/main.tex`: title, running title, header comment.
+- `abstract.tex`: S6 scope, S1 "offline".
+- `introduction.tex`: S1 scoped example, D4(d) nanorobots, M1 credit and
+  novelty sentence, "offline", shorter C1.
+- `related.tex`: M1 (Colon10k quotes, unread table, no numbers compared),
+  D4(c).
+- `methods.tex`: S1 database, S6 MegaLoc, S7 input, D4(e) threshold in
+  points, S4 ρ and oracle headroom, shorter format and split sentences.
+- `protocol.tex`: S5 Stage A disclosure, shorter Stage B list and gate-run
+  sentence, D2 comment.
+- `results.tex`: D4(e) caption, D4(a) P(X ≥ hits), S4 ρ wording, D1 H-E1a
+  sentence, D4(b), float reorganisation, cuts.
+- `limitations.tex`: S1 new paragraph, S2 masked run and H-E1b, D4(f),
+  merged zoo / not-run paragraph, cuts.
+- `conclusion.tex`: S3 scope, S4 oracle, shorter.
+- `notes/EVIDENCE.md`:
+  - header;
+  - §0.1 spec count;
+  - §0.2 rows G, C1, B, C2, C-R;
+  - §0.3 new items;
+  - §0.4 new items 0 and 10–12, and items 1, 6 and 9 updated;
+  - §0.5 new rules;
+  - §0.6 paper state;
+  - new §0.7 (D2);
+  - §11 change log.
+- `notes/positioning.md`: superseded marker on the robot "safe novelty
+  phrasing" and the nanorobot citation note.
+- `notes/review_response.md`: this section.
+- Not changed: `bib/` (lassiter2025microscopic was already verified in the
+  lock), `snapshot/`, `Makefile`, `notes/literature.md`, and anything in
+  vpr-testtime.
+
+---
+
 # Paper 4 — Response to Reviewer 2 (2026-09-25)
 
 Scope: the staged, zero-result MICCAI draft at `5f51940`. Nothing was run, no

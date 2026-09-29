@@ -550,6 +550,8 @@ Inline notes marked **(adversarial pass)** were added at each of these places in
 - **Unit conversions:** any sentence that converts the frame window into seconds or millimetres for capsules.
 
 **Safe novelty phrasing.** "To our knowledge (search to Sept. 2026), no prior work evaluates general-purpose, street-trained place-recognition models for localizing camera-carrying in-body robots. Robotic capsule localization relies on external magnetic or RF sensing and on visual odometry [bianchi2019localization, cao2024robotic]. A robotic capsule platform has run general-purpose SLAM without a quantitative place-recognition evaluation [prendergast2018autonomous]."
+- **(review round 2, 2026-09-28) Superseded as the paper's novelty sentence.** The paper localizes no robot, so the robot qualifier must not carry the novelty, and Colon10k's own evaluation of existing techniques on the same dataset must be credited. The paper now says: "As far as we found (search to September 2026), no VPR model published since 2022 has been evaluated frozen on colonoscopy same-place ground truth." The robot gap stays as motivation (the prendergast/cao/turan facts). See `notes/EVIDENCE.md` §0.2 (C1, C-R) and `notes/review_response.md`.
+- **(review round 2)** The nanorobot sentence above cites [aziz2020medical, wang2020trends] for "carry no camera"; their abstracts support external imaging only. The paper writes "localized by external medical imaging [aziz2020medical]; even a recent sub-millimetre robot with on-board computation carries no imager [lassiter2025microscopic]".
 
 ### Reviewer attack surface for the robot framing
 

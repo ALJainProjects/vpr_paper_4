@@ -2,15 +2,17 @@
 % (notes/EVIDENCE.md, notes/positioning.md "In-body robot framing pass"): the
 % robots are the motivation only; the data are conventional colonoscope video;
 % "internal pre-registration" (no public registry); "zoo-unsolved" is always
-% qualified; no clinical, robot, on-board or closed-loop claim.
+% qualified; no clinical, robot, on-board or closed-loop claim.  Not
+% "street-trained" for the whole zoo (review round 2, S6).
 \begin{abstract}
 Camera-carrying miniature in-body robots, such as robotic and magnetically
 actuated capsule endoscopes and robotic flexible endoscopes, are localized
 mainly by external sensing or kinematics; their cameras serve
-odometry, organ classification and steering. We test whether frozen,
-street-trained visual place recognition (VPR) models could supply a missing
-component, relocalization from the robot's own images, on conventional
-colonoscopy video rather than robot data. The thresholds, model zoo,
+odometry, organ classification and steering. We test whether frozen visual
+place recognition (VPR) models, most of them trained on street imagery, could
+supply a missing component, relocalization from the robot's own images,
+offline on conventional colonoscopy video rather than robot data. The
+thresholds, model zoo,
 comparator and case split were fixed in a signed internal pre-registration
 before any model was run, and the go/no-go gate was scored once on held-out
 cases. On \res{gate-ncases} test cases of Colon10k (\res{gate-nq} answerable

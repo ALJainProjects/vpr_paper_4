@@ -2,6 +2,13 @@
 % (positioning.md attacks 1-13; EVIDENCE.md sections 5-6).  The \pending
 % markers name work that was NOT run; under [final] they stop the build, so
 % the owner must decide before submission whether to run or drop each one.
+% Review round 2: S1 (offline, whole-case database; within-procedure revisits
+% only; the reviewer's validation-GT count of queries whose only positives
+% follow the query is NOT in the snapshot and must not be printed unless it
+% becomes a \res value); S2 (the section 8b FOV-masked secondary run was not
+% run: EndoscopyPreprocess is not wired into the runner at 91ea512, which
+% refuses preprocessing_for_gate; H-E1b untestable per section 8d note 3:
+% no raw-DINOv2 wrapper at the Stage B commit b0a71b7).
 \section{Limitations}
 \label{sec:limitations}
 
@@ -15,24 +22,29 @@ loop would see. The models would run off the robot: capsule compute is
 microcontroller-class~\cite{bause2026capsulemotion}, and we measure no
 latency, memory or power. We ran no comparison with magnetic localization.
 
+\paragraph{Offline, within one procedure.} A query's database is its own
+case, later frames included, so a query may be answered by a revisit that an
+on-line relocalizer would not yet have seen; we did not count such queries.
+All revisits lie inside one short procedure (databases of \res{pc-ndb-c08}
+to \res{pc-ndb-c14} frames per test case); relocalization across procedures,
+as at follow-up, is not tested.
+
 \paragraph{Small, single-source evidence.} The gate rests on \res{gate-nq}
-answerable queries in \res{gate-ncases} cases of one dataset from one
-centre, a low power the protocol stated before any result; the intervals
-are wide, and on the \res{val-ncases} validation cases no member was
-non-trivial, so the test outcome may not replicate. The ground truth is of
-one kind, endoscopist intervals that are not known to be exhaustive; an
-unlabelled revisit turns a correct retrieval into an error, lowering recall
-and inflating the zoo-unsolved fraction. The \res{gate-ndrop} unanswerable
+answerable queries in \res{gate-ncases} cases of one dataset, a low power the protocol stated before any result; the intervals
+are wide, and on the \res{val-ncases} validation cases \res{val-nnontriv} of
+\res{val-nzoo} members were non-trivial, so the test outcome may not
+replicate. The ground truth is of
+one kind, endoscopist intervals not known to be exhaustive, so an unlabelled
+revisit lowers recall and inflates the zoo-unsolved fraction. The \res{gate-ndrop} unanswerable
 queries are dropped, so the results cover only queries with a same-place
-frame outside the window, and that set changes with the window.
+frame outside the window.
 
-\paragraph{Zoo and statistics.} Raw DINOv2 is absent, so VPR training is not
-separated from its backbone; no medical-domain encoder is included (no
-weights were obtained); AnyLoc enters only as GeM. The split condition of the
-gate was disabled, the bounds carry no multiplicity correction, and the zoo
-ceiling bounds only per-query selection among these members.
-
-\paragraph{Not run.} The ceiling on phantoms with geometric ground truth
+\paragraph{Zoo, statistics, work not run.} Raw DINOv2 was to join the zoo
+only if its wrapper existed at Stage~B, and it did not, so the pre-registered
+contrast of VPR training with raw DINOv2 (H-E1b) is untestable; no medical-domain encoder is included (no weights were obtained);
+AnyLoc enters only as GeM. The bounds carry no multiplicity correction.
+The pre-registered secondary run with field-of-view
+masking was not run (masking was never wired into the evaluation code). The ceiling on phantoms with geometric ground truth
 \pending{E2 on C3VD/C3VDv2: not run}, the phantom feature-reliance
 contrasts \pending{E4: not run}, an anatomical-section probe
 \pending{E3: not run} and sequence priors \pending{E5: not run} are not

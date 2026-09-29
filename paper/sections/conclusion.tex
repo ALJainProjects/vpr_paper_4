@@ -1,16 +1,18 @@
 % Conclusion.  Numbers via \res only.  Robots: motivation and next step, never
-% a demonstrated result.
+% a demonstrated result.  Review round 2 (S3): the pre-registration scope is
+% the abstract's (thresholds, zoo, comparator, split fixed before any model
+% ran); the section 8d rules, the row-C countersignature and the AnyLoc-GeM
+% parameters came later (protocol.tex).  S4: headroom is an oracle bound.
 \section{Conclusion}
 \label{sec:conclusion}
 
-Under an internal pre-registration fixed before any model was run, a zoo of
-frozen VPR models, most of them street-trained, found the same place in real
-colonoscopy far above chance, and \res{gate-nnontriv} of \res{gate-nzoo} did so detectably
-better than raw pixels: the one-shot gate returned
-\texttt{\res{gate-outcome}}. Some member solves \res{or-ceil} of the queries,
-and \res{or-rec-share} of the best member's errors are solved by another
-member, so per-query selection has headroom, while \res{or-irr} remain
-zoo-unsolved for this zoo, ground truth and window. For camera-carrying
-in-body robots, this makes frozen appearance-based relocalization a
-candidate complement to external sensing that is worth testing on robot
-video; it does not show that it works on a robot. No clinical claim is made.
+With thresholds, zoo, comparator and case split fixed before any model was
+run in an internal pre-registration, frozen VPR models, most of them
+street-trained, found the same place in real colonoscopy far above chance,
+\res{gate-nnontriv} of \res{gate-nzoo} detectably better than raw pixels
+(\texttt{\res{gate-outcome}}). An oracle per-query selector would recover
+\res{or-rec-share} of the best member's errors, and \res{or-irr} of the queries remain zoo-unsolved for this zoo,
+ground truth and window. For camera-carrying in-body robots, frozen
+appearance-based relocalization is thus a candidate complement to external
+sensing worth testing on robot video; we show no robot result and make no
+clinical claim.

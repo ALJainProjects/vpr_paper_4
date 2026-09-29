@@ -6,6 +6,12 @@
 % the GT audit, the phantom design and the Bonferroni/Holm rules of the staged
 % draft were NOT merged into the signed document: they are not stated as
 % pre-registered, and the gate used one ci_level for every bound.
+% Input (review round 2, S7): runner docstring at 91ea512 (lines 86-87) and
+% vprbench/data/transforms.py VPRTransform (letterbox, target 448, black
+% canvas, ImageNet mean/std); Colon10k frames are 270x216, so upsampled.
+% MixVPR's wrapper interpolates to its fixed input size; the handcrafted
+% baselines invert the normalisation.  MegaLoc (S6): "trained on a union of
+% VPR and landmark datasets" (literature.md); never "street-trained" alone.
 \section{Methods}
 \label{sec:methods}
 
@@ -14,15 +20,16 @@
 Colon10k~\cite{ma2021colon10k} holds twenty short colonoscopy sequences
 (cases) from one centre, undistorted to low-resolution pinhole frames. For
 each case, a matchings file lists, for each annotated query, the frame
-intervals that an endoscopist verified as the same place. The file format is
-undocumented; its interval syntax, frame-id convention and inclusive ends were
-read from the files and recorded before any model was run
+intervals that an endoscopist verified as the same place. The undocumented
+file format was read from the files before any model was run
 (Sec.~\ref{sec:protocol}). The positives of a query are the frames of its own
 case inside its intervals. Frames within $W$ frames of the query in the
 case's frame list, the query included, are removed from both the database and
 the positives, since near-duplicate neighbours inflate
 recall~\cite{morlana2021selfsupervised}; a query left without a positive is
-unanswerable and is dropped and counted. The database is the query's own case.
+unanswerable and is dropped and counted. The database is the query's own
+case, frames recorded after the query included, so the test is offline
+(Sec.~\ref{sec:limitations}).
 Correctness at $k$ is computed over the full ranking after the removed frames
 are taken out, and ties count against the model: a negative tied with the
 best positive ranks first.
@@ -38,7 +45,8 @@ which \res{gate-ndrop} are unanswerable, leaving \res{gate-nq}.
 \subsection{Frozen models and baselines}
 \label{sec:zoo}
 The gate zoo $\Zgate$ holds \res{gate-nzoo} frozen models with their released
-weights. The street-trained VPR models are CNN-based NetVLAD on
+weights. The VPR models, trained on street imagery (MegaLoc on a union of
+VPR and landmark datasets), are CNN-based NetVLAD on
 VGG16~\cite{arandjelovic2016netvlad}, CosPlace on ResNet-18, ResNet-50 and
 ResNet-101~\cite{berton2022rethinking}, EigenPlaces~\cite{berton2023eigenplaces},
 MixVPR~\cite{alibey2023mixvpr} and BoQ~\cite{alibey2024boq} on ResNet-50, and
@@ -47,8 +55,11 @@ MegaLoc~\cite{berton2025megaloc}, BoQ on DINOv2 and
 CricaVPR~\cite{lu2024cricavpr}. AnyLoc~\cite{keetha2024anyloc} enters in its
 training-free GeM form on DINOv2 ViT-G/14 patch features, following the
 authors' code. No parameter is updated and no endoscopy-specific
-preprocessing (masking) is applied; descriptors are L2-normalized and ranked
-by exhaustive inner product.
+preprocessing (masking) is applied. Every model and the thumbnail receive
+the harness's generic input: the frame upsampled with its aspect ratio kept,
+padded with black to a 448-pixel square and ImageNet-normalized (MixVPR
+resizes it to its fixed input size). Descriptors are L2-normalized and
+ranked by exhaustive inner product.
 Raw DINOv2 and medical-domain encoders are not in the zoo
 (Sec.~\ref{sec:limitations}).
 
@@ -64,19 +75,18 @@ information only.
 \subsection{The gate and its statistics}
 \label{sec:gate}
 The gate is evaluated at $k=\res{gate-k}$ and $W=\res{gate-window}$ frames on
-the test split. A member $m$ \emph{beats chance} if
-$\LB(R_m-\Rrand)>\res{gate-minmargin-chance}$ and is \emph{non-trivial} if,
-in addition, $\LB(R_m-\Rhand)>\res{gate-minmargin-comp}$; both margins
+the test split. A member $m$ \emph{beats chance} if $\LB(R_m-\Rrand)$
+exceeds \res{gate-minmargin-chance-pts} percentage points and is
+\emph{non-trivial} if, in addition, $\LB(R_m-\Rhand)>\res{gate-minmargin-comp}$; both margins
 ($\Drand$, $\Dhand$) are paired per query. The outcome is \texttt{GO} if at
 least \res{gate-minpass} members are non-trivial and the error split is
 meaningful, \texttt{NO\_GO} if no member beats chance, and
 \texttt{OWNER\_REVIEW} otherwise, a case for which the protocol at first
 defined no action (Sec.~\ref{sec:protocol}). A meaningful split needs lower
 bounds on the zoo-unsolved fraction and on the best member's
-selection-recoverable fraction (Sec.~\ref{sec:ceiling}) above two thresholds.
-Both thresholds were set to $-\infty$ before any data were acquired, because
-the split is this study's measurement whichever way it comes out; the split
-condition is therefore always met, and \texttt{GO} rests on the count of
+selection-recoverable fraction (Sec.~\ref{sec:ceiling}) above two thresholds,
+both set to $-\infty$ before any data were acquired (the split is this
+study's measurement either way), so \texttt{GO} rests on the count of
 non-trivial members alone. $\LB$ and $\UB$ are the ends of a central
 \res{gate-cilevel} percentile bootstrap interval over whole cases
 (\res{gate-nboot} replicates, each the pooled mean over the queries of the
@@ -93,10 +103,10 @@ $q$, and $R_m$ its mean (Recall@1). With $o(q)=\max_{m\in\Zgate}c_m(q)$, the
 \emph{zoo ceiling} (after~\cite{waheed2021improving}) is
 $C=\frac{1}{|Q|}\sum_q o(q)$ and the \emph{zoo-unsolved} fraction is $I=1-C$.
 Each member's error splits exactly as $1-R_m=\rho_m+I$, where
-$\rho_m=\frac{1}{|Q|}\sum_q\bigl(1-c_m(q)\bigr)\,o(q)$ counts the queries $m$
-misses and another member solves: its \emph{selection-recoverable} error.
-Hence $\rbest=C-R_{m^\star}$ is also the headroom of per-query selection over
-the best member. On this query set, ground truth and window, $C$ upper-bounds
+$\rho_m=\frac{1}{|Q|}\sum_q\bigl(1-c_m(q)\bigr)\,o(q)$ is the share of
+\emph{all} queries that $m$ misses and another member solves: its
+\emph{selection-recoverable} error. Hence $\rbest=C-R_{m^\star}$ is also the
+headroom of an oracle per-query selector over the best member. On this query set, ground truth and window, $C$ upper-bounds
 the Recall@1 of any selector that returns one member's answer per query. It
 bounds no model outside the zoo, nor score fusion, re-ranking or adaptation,
 which can return an item no member ranks first; chance hits inflate it, and
