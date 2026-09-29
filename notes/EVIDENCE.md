@@ -1,35 +1,155 @@
 # Paper 4 — Evidence Brief ("Generalization": anatomical VPR)
 
-> Status: **STAGED — zero results.** No data downloaded; no dataset access
-> agreements signed. The plan is `vpr-testtime/docs/papers/PAPER4_OUTLINE.md`,
-> **as corrected by this file** (see §8): where the outline and this file
-> disagree, this file wins.
+> **Status (2026-09-28): TEST GATE RUN — outcome GO; paper wired to results.**
+> The one-shot, internally pre-registered Colon10k test gate ran once from clean
+> commit `91ea512` of vpr-testtime; its record is
+> `vpr-testtime/docs/papers/p4_test_gate_record.json` (committed in `f17b5cc`).
+> The informational validation readout had shown the pattern the §7 rule maps
+> to OWNER_REVIEW; the fixed rule was not changed. **§0 below is now the source
+> of truth for what P4 may claim. Where §1–§9 (written while the paper was
+> staged) conflict with §0, §0 wins;** they are kept as history.
 >
-> **Hard rule:** this paper has *no* results section content until the Colon10k
-> go/no-go probe runs, and that needs the user's explicit go-ahead (plus data
-> access agreements). The scaffold may contain the method, protocol, and
-> related work. Until a `numbers.yaml` exists, every result slot is a
-> `\pending{...}` marker (it renders `[PENDING: ...]` in draft and **fails the
-> build** under `\usepackage[final]{generated/vprresults}`); once results exist,
-> each slot becomes a `\res{key}` generated from a hash-verified snapshot. No
-> number is ever typed by hand.
+> **Hard rules (unchanged in spirit).**
+> - Every number in the paper is a `\res{key}` / `\restable{name}` generated
+>   from the hash-verified `snapshot/` through `numbers.yaml`. No number is ever
+>   typed by hand; `make check` enforces it (texlint: 0 violations, 0 pragmas).
+> - **The P4 test split is never re-run.** It is one-shot and locked
+>   (`vpr-testtime/results/p4_colon10k/TEST_GATE.lock`). New analyses may only
+>   read saved outputs.
+> - `\pending{...}` remains only for work that was not run or awaits an owner
+>   decision (§0.4). Under `\usepackage[final]{generated/vprresults}` each one
+>   stops the build, so every one needs a decision before submission.
 >
-> This file is the single source of truth for what P4 may claim. It was
-> corrected on 2026-09-25 against `notes/positioning.md` (including its
-> "Adversarial novelty pass"); every change is listed in §8. It was revised
-> again on 2026-09-25 after a Reviewer-2 pass on the draft; those changes are
-> listed in §9 and answered finding by finding in `notes/review_response.md`.
->
-> **Canonical protocol.** For the Colon10k gate, the ground-truth definitions
-> and the baselines, the canonical document is
-> `vpr-testtime/docs/papers/P4_PREREGISTRATION.md` with its implementation
-> `vprbench/analysis/preregistration.py` (branch `paper/p4-endoscopy-loaders`,
-> `eac266d` as cited by the review; the paper was matched to the branch head
-> `eeba592`, unmerged, unsigned). The paper's §4 restates it; the paper's E2/E4
-> rules are additions that must be merged into it before it is signed
-> (list in `notes/review_response.md`, M1). Nothing is registered: the paper
-> says "pre-specified", never "pre-registered", until a public, timestamped
-> registry record of the signed document exists.
+> **Canonical protocol.** `vpr-testtime/docs/papers/P4_PREREGISTRATION.md`
+> (signed: Stages A and B, owner row C, §8d owner decisions) with
+> `vprbench/analysis/preregistration.py` and the runner
+> `scripts/eval_p4_colon10k.py` at the gate commit. The staged draft's E2 verdict
+> rules, GT audit, phantom design, E4 and the Bonferroni/Holm rules
+> (`notes/review_response.md`, M1) were **never merged** into the signed
+> document: they are not pre-registered and the paper does not present them as
+> such. The gate used one `ci_level` for every bound (no multiplicity
+> correction).
+
+## 0. What is claimable now (after the one-shot test gate, 2026-09-28)
+
+### 0.1 Provenance chain
+- **Gate outputs:** `vpr-testtime/results/p4_colon10k/test/` (gate_decision.json,
+  oracle.csv, manifests, per-model/per-case/per-query files). Validation outputs
+  (INFORMATIONAL) under `results/p4_colon10k/validation/`.
+- **Consolidation:** `scripts/consolidate_p4.py` at commit `8ffb0c5` (branch
+  `paper/p4-final-consolidation`, worktree `vpr-testtime-wt/p4-final`, **not
+  merged, not pushed**) wrote `vpr-testtime/results/final_p4/*.csv` and
+  `MANIFEST_README.md`. It re-checked the gate hashes (gate_decision.json
+  `3989157e…`, lock payload `7ec12480…`, data checksum `5a611722…`) and that the
+  test tables equal gate_decision.json at window 10.
+- **Snapshot:** `make snapshot` with `PATTERNS = results/final_p4/*.csv` exported
+  8 CSVs from the vpr-testtime main checkout at `f17b5cc` (clean). Because
+  results/ is gitignored there, `source_commit` pins the harness checkout, and
+  the per-file sha256 pins the data; the consolidator's own commit (`8ffb0c5`)
+  is recorded in every CSV row's provenance columns and in `numbers.yaml`.
+- **Spec:** `numbers.yaml` (77 values, 8 tables). Every lookup names `split`;
+  headline = `split: test, window: '10'`; windows 5/15 only in the secondary
+  sweep; `val-*` keys only in the protocol-history paragraph.
+
+### 0.2 Claim table (every number via the named keys)
+
+No result number is restated here (the paper cites only `\res` keys; values
+are in `generated/numbers.tex` and `results/final_p4/`). Counts that the
+protocol itself recorded before any model ran (14 test cases, 183 answerable
+and 40 unanswerable test queries; Stage B) appear as protocol facts.
+
+| # | Claim (as the paper words it) | Keys / tables | Required caveat |
+|---|---|---|---|
+| G | The one-shot gate returned GO: every member beats chance, and `gate-nnontriv` of `gate-nzoo` are non-trivial vs raw_thumbnail at the CI lower bound (at least `min_models_passing`). | `gate-*`, table `models-gate` | GO rests on the non-trivial count alone: `min_recoverable_frac` = `min_irreducible_frac` = −∞ switch the split condition off. Power caveat (14 clusters, 183 queries) stated in advance. |
+| C1 | A zero-shot test of 12 frozen models (11 street-trained VPR models + training-free AnyLoc-GeM) on endoscopist GT, under an internal pre-registration with a one-shot test gate. | `gate-nzoo`, `gate-nq`, `gate-ncases`, `gate-ndrop`, `cnt-test10-total` | Never "first" (morlana2021selfsupervised). "Internal pre-registration": committed and signed, not in a public registry. |
+| B | Best member boq_resnet50 R@1 with CI; raw_thumbnail R@1 with CI; colour histogram, chance, empirical random-ranking hits vs expected; no tie-sensitive query. | `pm-boqr50-*`, `bl-*`, `gate-chance`, `ties-sum` | Cite chance R@1 from gate.csv (the baselines.csv copy differs in the last digits). Random ranking is informational (§8d note 5). |
+| C2 | Zoo ceiling C, zoo-unsolved I, best member's selection-recoverable ρ (= headroom C − R_m*), chance ceiling; share of the best member's errors that another member solves. | `or-*`, table `ceiling-gate` | "for this zoo, this GT and this exclusion window" every time; NOT view ambiguity (GT audit not run; annotation not known to be exhaustive); the ceiling bounds only per-query selection among these members. "First … as far as we found" allowed once, for C2 only. |
+| P | Per-case variation: answerable queries per case and the best member's per-case R@1 vary widely; the per-case extremes come from the two cases with the fewest answerable queries. | `pc-*`, tables `cases-best`, `cases-raw` | Point estimates only (no per-case interval exists). |
+| S | Exclusion-window sweep: answerable, non-trivial count, thumbnail R@1, C/I/ρ change with the window. | `cnt-test5-*`, `cnt-test15-*`, `or-irr-w5`, `or-irr-w15`, tables `sweep-counts`, `sweep-ceiling` | SECONDARY: never replaces the headline (§8d); query sets differ between windows. |
+| C3 | Street comparison: street R@1 of the same weights (checksum-checked) and Δ_m point values. | `st-*`, tables `street-sfxl`, `street-nord` | CROSS-PROTOCOL: confounds domain with set-up (schubert2021makes). **Δ_m intervals not cited** (method pending, §0.4). AnyLoc has no Δ_m (VLAD vs GeM weights). |
+| V | Validation readout (informational): every member beats chance and none is non-trivial — the OWNER_REVIEW pattern; the owner's §8d rules (OWNER_REVIEW handling, crash-after-lock) were added after it and before any test case was scored; no threshold/window/comparator/zoo/split changed. | `val-*` | Never a result of the study; the runner computed no outcome on validation. |
+| C-R | Robot framing (positioning.md "In-body robot framing pass"): camera-carrying miniature in-body robots are localized mainly externally; appearance-based relocalization is a missing complement; no evaluation of street-trained VPR for them was found (search to Sept. 2026). | — | Motivation only. The data are conventional colonoscope video: no robot, capsule, on-board, real-time or closed-loop claim; no comparison with magnetic localization; no unit conversion of the frame window. Nanorobots: one sentence (no camera, external imaging; aziz2020medical). Full never-write list in positioning.md. |
+
+### 0.3 Not claimable (the paper says so, or keeps a `\pending`)
+- **H-E1a (Δ_m two-sided test):** no verdict. Δ_m intervals exist in
+  street_delta.csv (MOVER, Newcombe 1998 / Zou & Donner 2008) but the method was
+  chosen at consolidation, not pre-registered → `\pending` until the owner
+  approves it or picks another.
+- **H-E1b (VPR training vs raw DINOv2):** untestable — no raw-DINOv2 wrapper at
+  Stage B (§8d note 3). Stated as a limitation.
+- **H-E1c (CNN vs DINOv2 means):** not computed by the gate runner → `\pending`.
+  Only the descriptive fact that both families have members on each side of the
+  non-trivial threshold is stated.
+- **Zoo-unsolved = view ambiguity:** not claimable; the blind GT audit was not
+  run → `\pending`.
+- **Not run:** E2 on C3VD/C3VDv2 (phantom ceiling, geometric GT), E4 (phantom
+  feature reliance), E3 (section probe), E5 (sequence priors; dropped in review
+  S16 unless reinstated) → each a `\pending` in the limitations.
+- **Medical arm:** not in the gate (no weights obtained). No claim about
+  medical-domain encoders.
+- **Anything about robots, capsules, on-board inference, latency, power or
+  closed-loop accuracy.**
+- **"Most of what the models retrieve, a thumbnail also retrieves":** not
+  claimable (per-query overlap not measured); only the level comparison is.
+
+### 0.4 Open owner decisions (before `[final]`)
+1. Approve the Δ_m interval method (MOVER) or choose another; then replace the
+   H-E1a `\pending` with `\res` keys over `delta_m_ci_low/high` and a verdict.
+2. H-E1c: whether to compute the pre-registered family contrast from the saved
+   test per-query files (reading only; no re-run), reported as computed after
+   the gate, or to drop the sentence.
+3. The GT audit of zoo-unsolved queries (annotators, sample size), or drop the
+   `\pending` and keep the "not view ambiguity" statement.
+4. Run or drop each of E2-C3VD, E4, E3, E5 (each is a `\pending`).
+5. Whether to deposit the signed protocol in a public registry (the paper now
+   says "internal pre-registration" and "not deposited in a public registry").
+6. Keep or remove the disclosure that Stage B was drafted by an AI coding
+   assistant and that the §8d rules were chosen from options it proposed.
+7. Merge `paper/p4-final-consolidation` (8ffb0c5) into vpr-testtime main, then
+   re-export the snapshot so `source_commit` names the consolidator's commit.
+8. Fix the stale status line 3 of `P4_PREREGISTRATION.md` (says row C is blank;
+   §11 records it countersigned).
+9. Anonymity of the sources: the PDF carries no identity (checked: metadata
+   and text), but `snapshot/MANIFEST.json`, `generated/numbers.tex` and
+   `generated/numbers.json` record the harness's GitHub URL (vprbench.paper
+   keeps `source_repo` by design). Submit the PDF only for double-blind review,
+   or strip those lines before uploading any source bundle.
+
+### 0.5 Wording rules added or changed on 2026-09-28 (override §5 where they conflict)
+- "Pre-registered" may be used only with its qualifier at first mention:
+  "internal pre-registration … not deposited in a public registry; its
+  timestamps are those of the repository history". The title says
+  "Pre-Specified".
+- Colon10k now has a validation/test case split (§8b); §4's "no validation
+  split" is superseded.
+- AnyLoc enters the gate as AnyLoc-GeM (§8b, §8d note 1), not AnyLoc-VLAD.
+- The outcome names are the protocol's: `GO`, `NO_GO`, `OWNER_REVIEW`.
+- Model names in tables are the harness ids (boq_resnet50, cosplace_r18, …).
+
+### 0.6 Paper state (this revision)
+- MICCAI/LNCS, anonymized; body pages 1–8, references pages 9–10 (26 keys).
+- Keys cited now but not in the previous draft (10): aziz2020medical,
+  bause2026capsulemotion, bianchi2019localization, cao2024robotic,
+  herp2021feature, lu2024cricavpr (new bib entry, verified online on
+  2026-09-28), martin2020enabling, prendergast2018autonomous,
+  turan2017nonrigid, xu2022autonomous.
+- Keys no longer cited (16; all still in the bib and the lock):
+  azagra2023endomapper, batic2024endovit, bobrow2023colonoscopy,
+  burgert2025imagenettrained, golhar2026c3vdv2, hirsch2023selfsupervised,
+  jiang2025c3vdreg, kim2025improving, kim2026visual, li2026automated,
+  morlana2024topological, parolari2026contrastive, schmidt2024tracking,
+  soberanismukul2026global, wang2023foundation, wang2025topobench. Most belonged
+  to the phantom E2/E4 design and the medical arm, which were not run.
+- `make check` and `make pdf` pass.
+
+---
+*Sections 1–9 below were written while P4 was staged (2026-09-25). Where they
+conflict with §0, §0 wins.*
+
+> **(historical) Status 2026-09-25: STAGED — zero results.** The plan is
+> `vpr-testtime/docs/papers/PAPER4_OUTLINE.md`, as corrected by this file (§8).
+> Nothing is registered: the staged paper said "pre-specified", never
+> "pre-registered" (see §0.5 for the current rule).
 
 ## 1. Thesis
 Test whether Paper 3's two central results transfer from outdoor streets to
@@ -397,3 +517,18 @@ That is an owner decision.
    document field, −∞ disables a split bound, pessimistic ties, two-stage
    signing (thresholds before acquisition; file facts after acquisition,
    before any descriptor), FOV = convex hull of the large lit components.
+
+## 10. Change log (2026-09-28, results wiring after the one-shot test gate)
+1. Header and new §0: status (GO), provenance chain, claim table, not-claimable
+   list, open owner decisions, wording rules and paper state. §0 overrides
+   §1–§9 where they conflict.
+2. Makefile `PATTERNS = results/final_p4/*.csv`; `snapshot/` exported from
+   vpr-testtime `f17b5cc` (clean); `numbers.yaml` written (77 values, 8 tables);
+   `generated/` rebuilt.
+3. Paper rewritten for the miniature in-body robot framing (motivation only),
+   with the pre-registered protocol and its history as run, results from the
+   test gate, and limitations. `\pending` kept only for the items in §0.3.
+4. bib: `lu2024cricavpr` added (a gate-zoo member); verified with bibcheck
+   --online on that entry alone (Crossref, 0 errors); lock record merged;
+   `notes/citation_audit.tsv` row added.
+

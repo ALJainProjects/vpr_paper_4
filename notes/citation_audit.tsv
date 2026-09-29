@@ -192,3 +192,4 @@ aziz2020medical	10.1021/acsnano.0c05530	crossref	Medical Imaging of Microrobots:
 wang2020trends	10.1002/adma.202002047	crossref	Trends in Micro‐/Nanorobotics: Materials Development, Actuation, Localization, and System Integration for Biomedical Applications	1.000	True	True	PASS
 lassiter2025microscopic	10.1126/scirobotics.adu8009	crossref	Microscopic robots that sense, think, act, and compute	1.000	True	True	PASS
 lassiter2025microscopic	arXiv:2503.23085	datacite	Microscopic Robots That Sense, Think, Act, and Compute	1.000	True	True	PASS (eprint)
+lu2024cricavpr	10.1109/cvpr52733.2024.01587	crossref	CricaVPR: Cross-Image Correlation-Aware Representation Learning for Visual Place Recognition	1.000	True	True	PASS (2026-09-28 P4 wiring; bibcheck --online on this entry alone; its arXiv eprint 2402.19231 passed the same-work check, registry not recorded)

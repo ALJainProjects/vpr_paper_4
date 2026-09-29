@@ -1,0 +1,44 @@
+{
+  "exported_at": "2026-09-29T02:31:02+00:00",
+  "files": {
+    "results/final_p4/baselines.csv": {
+      "bytes": 25750,
+      "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc"
+    },
+    "results/final_p4/counts.csv": {
+      "bytes": 6156,
+      "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f"
+    },
+    "results/final_p4/gate.csv": {
+      "bytes": 2221,
+      "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6"
+    },
+    "results/final_p4/oracle.csv": {
+      "bytes": 7617,
+      "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec"
+    },
+    "results/final_p4/per_case.csv": {
+      "bytes": 806475,
+      "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece"
+    },
+    "results/final_p4/per_model.csv": {
+      "bytes": 82214,
+      "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1"
+    },
+    "results/final_p4/sources.csv": {
+      "bytes": 4013,
+      "sha256": "524806b58ce4c7a8096d34b2cd332dde381bb5f95e0456cd2942a23271a851fc"
+    },
+    "results/final_p4/street_delta.csv": {
+      "bytes": 82290,
+      "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe"
+    }
+  },
+  "patterns": [
+    "results/final_p4/*.csv"
+  ],
+  "schema_version": 1,
+  "source_commit": "f17b5cccdc934669dc3774c837de487c4a4fbfc8",
+  "source_dirty": false,
+  "source_repo": "https://github.com/ALJainProjects/VPR_TESTTIME_COMPUTE_IMPROVEMENTS.git"
+}

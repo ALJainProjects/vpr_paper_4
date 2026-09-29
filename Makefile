@@ -28,11 +28,16 @@ SPEC        ?= numbers.yaml
 BIB         ?= bib/references.bib
 LOCK        ?= bib/verified.json
 RESULTS_SRC ?= $(VPRBENCH)
-# P4 is STAGED with zero results: there is no numbers.yaml and no snapshot/.
-# PATTERNS is deliberately EMPTY: the template default (results/final/*) would
-# export other papers' results.  Set it to the P4 result files only, once they
-# exist; until then `make snapshot` refuses to run (review D3).
-PATTERNS    ?=
+# P4 results: ONLY the paper-ready CSVs of results/final_p4/, written by
+# vpr-testtime scripts/consolidate_p4.py (commit 8ffb0c5, branch
+# paper/p4-final-consolidation; read its MANIFEST_README.md and sources.csv)
+# from the one-shot test gate (clean commit 91ea512, record committed in
+# f17b5cc) and the informational validation readout.  The template default
+# (results/final/*) would export other papers' results (review D3), so the
+# pattern names final_p4 alone.  results/ is gitignored in vpr-testtime:
+# MANIFEST.json's source_commit pins the harness checkout the files were
+# exported from, and the per-file sha256 values pin the data.
+PATTERNS    ?= results/final_p4/*.csv
 EXCLUDE     ?= $(GENERATED) $(SNAPSHOT)
 
 PAPERTOOL = PYTHONPATH="$(VPRBENCH)$(if $(PYTHONPATH),:$(PYTHONPATH))" "$(PY)" -m vprbench.paper

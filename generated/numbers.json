@@ -1,0 +1,1424 @@
+{
+  "source": {
+    "source_commit": "f17b5cccdc934669dc3774c837de487c4a4fbfc8",
+    "source_dirty": false,
+    "source_repo": "https://github.com/ALJainProjects/VPR_TESTTIME_COMPUTE_IMPROVEMENTS.git",
+    "spec": "numbers.yaml",
+    "spec_sha256": "02328479862cf74cdb364cbe504938e825acf39e233b7473148fa3376b3f8dc4"
+  },
+  "tables": {
+    "cases-best": {
+      "columns": [
+        {
+          "column": "case",
+          "header": "case"
+        },
+        {
+          "column": "n_answerable",
+          "header": "answ."
+        },
+        {
+          "column": "r_at_1",
+          "fmt": "{:.0%}",
+          "header": "$m^\\star$"
+        }
+      ],
+      "file": "results/final_p4/per_case.csv",
+      "rows": 14,
+      "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+      "where": {
+        "model": "boq_resnet50",
+        "split": "test",
+        "window": "10"
+      }
+    },
+    "cases-raw": {
+      "columns": [
+        {
+          "column": "case",
+          "header": "case"
+        },
+        {
+          "column": "r_at_1",
+          "fmt": "{:.0%}",
+          "header": "$\\Rhand$"
+        }
+      ],
+      "file": "results/final_p4/per_case.csv",
+      "rows": 14,
+      "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+      "where": {
+        "model": "raw_thumbnail",
+        "split": "test",
+        "window": "10"
+      }
+    },
+    "ceiling-gate": {
+      "columns": [
+        {
+          "column": "ceiling",
+          "fmt": "{:.1%}",
+          "header": "$C$"
+        },
+        {
+          "column": "ceiling_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB$"
+        },
+        {
+          "column": "ceiling_hi",
+          "fmt": "{:.1%}",
+          "header": "$\\UB$"
+        },
+        {
+          "column": "irreducible",
+          "fmt": "{:.1%}",
+          "header": "$I$"
+        },
+        {
+          "column": "irreducible_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB$"
+        },
+        {
+          "column": "irreducible_hi",
+          "fmt": "{:.1%}",
+          "header": "$\\UB$"
+        },
+        {
+          "column": "recoverable_best",
+          "fmt": "{:.1%}",
+          "header": "$\\rbest$"
+        },
+        {
+          "column": "recoverable_best_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB$"
+        },
+        {
+          "column": "recoverable_best_hi",
+          "fmt": "{:.1%}",
+          "header": "$\\UB$"
+        },
+        {
+          "column": "best_model",
+          "header": "$m^\\star$"
+        },
+        {
+          "column": "chance_ceiling",
+          "fmt": "{:.1%}",
+          "header": "$\\Crand$"
+        }
+      ],
+      "file": "results/final_p4/oracle.csv",
+      "rows": 1,
+      "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+      "where": {
+        "split": "test",
+        "window": "10"
+      }
+    },
+    "models-gate": {
+      "columns": [
+        {
+          "column": "model",
+          "header": "member"
+        },
+        {
+          "column": "r_at_1",
+          "fmt": "{:.1%}",
+          "header": "R@1"
+        },
+        {
+          "column": "r_at_1_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB$"
+        },
+        {
+          "column": "r_at_1_hi",
+          "fmt": "{:.1%}",
+          "header": "$\\UB$"
+        },
+        {
+          "column": "margin_vs_chance_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB(\\Drand)$"
+        },
+        {
+          "column": "margin_vs_comparator",
+          "fmt": "{:.1%}",
+          "header": "$\\Dhand$"
+        },
+        {
+          "column": "margin_vs_comparator_lo",
+          "fmt": "{:.1%}",
+          "header": "$\\LB(\\Dhand)$"
+        },
+        {
+          "column": "nontrivial",
+          "header": "non-trivial"
+        }
+      ],
+      "file": "results/final_p4/per_model.csv",
+      "rows": 12,
+      "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+      "where": {
+        "split": "test",
+        "window": "10"
+      }
+    },
+    "street-nord": {
+      "columns": [
+        {
+          "column": "model",
+          "header": "member"
+        },
+        {
+          "column": "street_r_at_1",
+          "fmt": "{:.1%}",
+          "header": "street"
+        },
+        {
+          "column": "delta_m",
+          "fmt": "{:+.1%}",
+          "header": "$\\Dm$"
+        }
+      ],
+      "file": "results/final_p4/street_delta.csv",
+      "rows": 11,
+      "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe",
+      "where": {
+        "comparable": "True",
+        "split": "test",
+        "street_dataset": "nordland"
+      }
+    },
+    "street-sfxl": {
+      "columns": [
+        {
+          "column": "model",
+          "header": "member"
+        },
+        {
+          "column": "street_r_at_1",
+          "fmt": "{:.1%}",
+          "header": "street"
+        },
+        {
+          "column": "delta_m",
+          "fmt": "{:+.1%}",
+          "header": "$\\Dm$"
+        }
+      ],
+      "file": "results/final_p4/street_delta.csv",
+      "rows": 11,
+      "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe",
+      "where": {
+        "comparable": "True",
+        "split": "test",
+        "street_dataset": "sf_xl_small"
+      }
+    },
+    "sweep-ceiling": {
+      "columns": [
+        {
+          "column": "window",
+          "header": "$W$"
+        },
+        {
+          "column": "ceiling",
+          "fmt": "{:.1%}",
+          "header": "$C$"
+        },
+        {
+          "column": "irreducible",
+          "fmt": "{:.1%}",
+          "header": "$I$"
+        },
+        {
+          "column": "recoverable_best",
+          "fmt": "{:.1%}",
+          "header": "$\\rbest$"
+        },
+        {
+          "column": "best_model",
+          "header": "$m^\\star$"
+        },
+        {
+          "column": "chance_ceiling",
+          "fmt": "{:.1%}",
+          "header": "$\\Crand$"
+        }
+      ],
+      "file": "results/final_p4/oracle.csv",
+      "rows": 3,
+      "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+      "where": {
+        "split": "test",
+        "window": [
+          "5",
+          "10",
+          "15"
+        ]
+      }
+    },
+    "sweep-counts": {
+      "columns": [
+        {
+          "column": "window",
+          "header": "$W$"
+        },
+        {
+          "column": "reporting_role",
+          "header": "role"
+        },
+        {
+          "column": "n_answerable",
+          "header": "answ."
+        },
+        {
+          "column": "n_unanswerable_dropped",
+          "header": "drop."
+        },
+        {
+          "column": "n_beating_chance",
+          "header": "$>$chance"
+        },
+        {
+          "column": "n_nontrivial",
+          "header": "non-triv."
+        },
+        {
+          "column": "comparator_r_at_1",
+          "fmt": "{:.1%}",
+          "header": "$\\Rhand$"
+        }
+      ],
+      "file": "results/final_p4/counts.csv",
+      "rows": 3,
+      "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+      "where": {
+        "split": "test",
+        "window": [
+          "5",
+          "10",
+          "15"
+        ]
+      }
+    }
+  },
+  "values": {
+    "bl-hist-r1": {
+      "provenance": {
+        "column": "r_at_1",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.1%}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "color_histogram",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.3551912568306011,
+      "value": "35.5\\%"
+    },
+    "bl-rand-exp": {
+      "provenance": {
+        "column": "expected_hits",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.1f}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "random_ranking",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 6.798735607690741,
+      "value": "6.8"
+    },
+    "bl-rand-hits": {
+      "provenance": {
+        "column": "hits",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.0f}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "random_ranking",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 7.0,
+      "value": "7"
+    },
+    "bl-raw-hi": {
+      "provenance": {
+        "column": "r_at_1_hi",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.1%}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "raw_thumbnail",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.6271186440677966,
+      "value": "62.7\\%"
+    },
+    "bl-raw-lo": {
+      "provenance": {
+        "column": "r_at_1_lo",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.1%}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "raw_thumbnail",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.5210526315789473,
+      "value": "52.1\\%"
+    },
+    "bl-raw-r1": {
+      "provenance": {
+        "column": "r_at_1",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.1%}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "raw_thumbnail",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.5737704918032787,
+      "value": "57.4\\%"
+    },
+    "cnt-test10-total": {
+      "provenance": {
+        "column": "n_queries_total",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 223,
+      "value": "223"
+    },
+    "cnt-test15-ans": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "test",
+          "window": "15"
+        }
+      },
+      "raw": 163,
+      "value": "163"
+    },
+    "cnt-test15-nontriv": {
+      "provenance": {
+        "column": "n_nontrivial",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "test",
+          "window": "15"
+        }
+      },
+      "raw": 5,
+      "value": "5"
+    },
+    "cnt-test5-ans": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "test",
+          "window": "5"
+        }
+      },
+      "raw": 206,
+      "value": "206"
+    },
+    "cnt-test5-nontriv": {
+      "provenance": {
+        "column": "n_nontrivial",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "test",
+          "window": "5"
+        }
+      },
+      "raw": 11,
+      "value": "11"
+    },
+    "gate-best": {
+      "provenance": {
+        "column": "best_model",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": "boq_resnet50",
+      "value": "boq\\_resnet50"
+    },
+    "gate-chance": {
+      "provenance": {
+        "column": "chance_r_at_1",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:.1%}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 0.03715156069776361,
+      "value": "3.7\\%"
+    },
+    "gate-cilevel": {
+      "provenance": {
+        "column": "ci_level",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:.0%}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 0.95,
+      "value": "95\\%"
+    },
+    "gate-k": {
+      "provenance": {
+        "column": "k",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 1,
+      "value": "1"
+    },
+    "gate-minmargin-chance": {
+      "provenance": {
+        "column": "min_margin_vs_chance",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:.2f}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 0.05,
+      "value": "0.05"
+    },
+    "gate-minmargin-comp": {
+      "provenance": {
+        "column": "min_margin_vs_comparator",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:g}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "gate-minpass": {
+      "provenance": {
+        "column": "min_models_passing",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 2,
+      "value": "2"
+    },
+    "gate-nbeat": {
+      "provenance": {
+        "column": "n_beating_chance",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 12,
+      "value": "12"
+    },
+    "gate-nboot": {
+      "provenance": {
+        "column": "n_bootstrap",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:,d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 10000,
+      "value": "10,000"
+    },
+    "gate-ncases": {
+      "provenance": {
+        "column": "n_cases",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 14,
+      "value": "14"
+    },
+    "gate-ndrop": {
+      "provenance": {
+        "column": "n_unanswerable_dropped",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 40,
+      "value": "40"
+    },
+    "gate-nnontriv": {
+      "provenance": {
+        "column": "n_nontrivial",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 8,
+      "value": "8"
+    },
+    "gate-nq": {
+      "provenance": {
+        "column": "n_queries",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 183,
+      "value": "183"
+    },
+    "gate-nzoo": {
+      "provenance": {
+        "column": "n_zoo",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 12,
+      "value": "12"
+    },
+    "gate-outcome": {
+      "provenance": {
+        "column": "outcome",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": "GO",
+      "value": "GO"
+    },
+    "gate-protocol-source": {
+      "provenance": {
+        "column": "protocol_source",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": "gt",
+      "value": "gt"
+    },
+    "gate-window": {
+      "provenance": {
+        "column": "window",
+        "file": "results/final_p4/gate.csv",
+        "fmt": "{:d}",
+        "sha256": "5d559b75336f4429d531d6f3e464117cf926291c0465c8b446c5fa2fcffb6cb6",
+        "where": {
+          "split": "test"
+        }
+      },
+      "raw": 10,
+      "value": "10"
+    },
+    "or-ceil": {
+      "provenance": {
+        "column": "ceiling",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.8907103825136612,
+      "value": "89.1\\%"
+    },
+    "or-ceil-hi": {
+      "provenance": {
+        "column": "ceiling_hi",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.9371436050860135,
+      "value": "93.7\\%"
+    },
+    "or-ceil-lo": {
+      "provenance": {
+        "column": "ceiling_lo",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.8285672020287406,
+      "value": "82.9\\%"
+    },
+    "or-chance": {
+      "provenance": {
+        "column": "chance_ceiling",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.31220824193672203,
+      "value": "31.2\\%"
+    },
+    "or-irr": {
+      "provenance": {
+        "column": "irreducible",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.1092896174863388,
+      "value": "10.9\\%"
+    },
+    "or-irr-hi": {
+      "provenance": {
+        "column": "irreducible_hi",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.17143279797125946,
+      "value": "17.1\\%"
+    },
+    "or-irr-lo": {
+      "provenance": {
+        "column": "irreducible_lo",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.06285639491398655,
+      "value": "6.3\\%"
+    },
+    "or-irr-w15": {
+      "provenance": {
+        "column": "irreducible",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "15"
+        }
+      },
+      "raw": 0.18404907975460122,
+      "value": "18.4\\%"
+    },
+    "or-irr-w5": {
+      "provenance": {
+        "column": "irreducible",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "5"
+        }
+      },
+      "raw": 0.04854368932038835,
+      "value": "4.9\\%"
+    },
+    "or-rec": {
+      "provenance": {
+        "column": "recoverable_best",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.18579234972677597,
+      "value": "18.6\\%"
+    },
+    "or-rec-hi": {
+      "provenance": {
+        "column": "recoverable_best_hi",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.23404255319148937,
+      "value": "23.4\\%"
+    },
+    "or-rec-lo": {
+      "provenance": {
+        "column": "recoverable_best_lo",
+        "file": "results/final_p4/oracle.csv",
+        "fmt": "{:.1%}",
+        "sha256": "854970fb82c20c6e1e8c6b0e433926f67097e078bc1caf990f7bfb902bc1c2ec",
+        "where": {
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.133720152966049,
+      "value": "13.4\\%"
+    },
+    "or-rec-share": {
+      "provenance": {
+        "depends_on": [
+          "or-rec",
+          "pm-boqr50-r1"
+        ],
+        "derive": "or-rec / (1 - pm-boqr50-r1)",
+        "fmt": "{:.0%}"
+      },
+      "raw": 0.6296296296296297,
+      "value": "63\\%"
+    },
+    "pc-best-c08": {
+      "provenance": {
+        "column": "r_at_1",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:.1%}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "08",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.3333333333333333,
+      "value": "33.3\\%"
+    },
+    "pc-best-c13": {
+      "provenance": {
+        "column": "r_at_1",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:.1%}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "13",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 1.0,
+      "value": "100.0\\%"
+    },
+    "pc-drop-c06": {
+      "provenance": {
+        "column": "n_unanswerable_dropped",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "06",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 11,
+      "value": "11"
+    },
+    "pc-n-c06": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "06",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 12,
+      "value": "12"
+    },
+    "pc-n-c08": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "08",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 3,
+      "value": "3"
+    },
+    "pc-n-c13": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "13",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 3,
+      "value": "3"
+    },
+    "pc-n-c19": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/per_case.csv",
+        "fmt": "{:d}",
+        "sha256": "3bf0aaf90fa8f193ace2cf4bbbe3bdbc83a015a7849c05eff3551c6bc25b8ece",
+        "where": {
+          "case": "19",
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 24,
+      "value": "24"
+    },
+    "pm-boqr50-hi": {
+      "provenance": {
+        "column": "r_at_1_hi",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.7643979057591623,
+      "value": "76.4\\%"
+    },
+    "pm-boqr50-lo": {
+      "provenance": {
+        "column": "r_at_1_lo",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.6418918918918919,
+      "value": "64.2\\%"
+    },
+    "pm-boqr50-mlo": {
+      "provenance": {
+        "column": "margin_vs_comparator_lo",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.06918238993710692,
+      "value": "6.9\\%"
+    },
+    "pm-boqr50-r1": {
+      "provenance": {
+        "column": "r_at_1",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.7049180327868853,
+      "value": "70.5\\%"
+    },
+    "pm-cosr101-clo": {
+      "provenance": {
+        "column": "margin_vs_chance_lo",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "cosplace_r101",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.4581198434733217,
+      "value": "45.8\\%"
+    },
+    "pm-netvlad-mlo": {
+      "provenance": {
+        "column": "margin_vs_comparator_lo",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.1%}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "netvlad",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.005555555555555556,
+      "value": "0.6\\%"
+    },
+    "st-netvlad-colon": {
+      "provenance": {
+        "column": "colon_r_at_1",
+        "file": "results/final_p4/street_delta.csv",
+        "fmt": "{:.1%}",
+        "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe",
+        "where": {
+          "model": "netvlad",
+          "split": "test",
+          "street_dataset": "nordland"
+        }
+      },
+      "raw": 0.6284153005464481,
+      "value": "62.8\\%"
+    },
+    "st-nord-netvlad-street": {
+      "provenance": {
+        "column": "street_r_at_1",
+        "file": "results/final_p4/street_delta.csv",
+        "fmt": "{:.1%}",
+        "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe",
+        "where": {
+          "model": "netvlad",
+          "split": "test",
+          "street_dataset": "nordland"
+        }
+      },
+      "raw": 0.10416062626848362,
+      "value": "10.4\\%"
+    },
+    "st-sfxl-netvlad-street": {
+      "provenance": {
+        "column": "street_r_at_1",
+        "file": "results/final_p4/street_delta.csv",
+        "fmt": "{:.1%}",
+        "sha256": "88b1d955a36d444f91c5bee9d5946b5249e6d1c047e7ee1d34559d168c3874fe",
+        "where": {
+          "model": "netvlad",
+          "split": "test",
+          "street_dataset": "sf_xl_small"
+        }
+      },
+      "raw": 0.518,
+      "value": "51.8\\%"
+    },
+    "tie-anyloc-gem": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "anyloc_gem",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-boq-dinov2": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_dinov2",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-boq-resnet50": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "boq_resnet50",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-color-histogram": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.0f}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "color_histogram",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-cosplace": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "cosplace",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-cosplace-r101": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "cosplace_r101",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-cosplace-r18": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "cosplace_r18",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-cricavpr": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "cricavpr",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-eigenplaces": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "eigenplaces",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-megaloc": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "megaloc",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-mixvpr": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "mixvpr",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-netvlad": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "netvlad",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-raw-thumbnail": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/baselines.csv",
+        "fmt": "{:.0f}",
+        "sha256": "0f543cc7b6d0aefd9c02b2a56e12e9c39a01947aab699c8673b4d0963f0308cc",
+        "where": {
+          "baseline": "raw_thumbnail",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "tie-salad": {
+      "provenance": {
+        "column": "tie_sensitive",
+        "file": "results/final_p4/per_model.csv",
+        "fmt": "{:.0f}",
+        "sha256": "35a43a65a47d07bf51db1f975e9110f37493ce8abbc98aaf8bc3954b8883bca1",
+        "where": {
+          "model": "salad",
+          "split": "test",
+          "window": "10"
+        }
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "ties-sum": {
+      "provenance": {
+        "depends_on": [
+          "tie-anyloc-gem",
+          "tie-boq-dinov2",
+          "tie-boq-resnet50",
+          "tie-color-histogram",
+          "tie-cosplace",
+          "tie-cosplace-r101",
+          "tie-cosplace-r18",
+          "tie-cricavpr",
+          "tie-eigenplaces",
+          "tie-megaloc",
+          "tie-mixvpr",
+          "tie-netvlad",
+          "tie-raw-thumbnail",
+          "tie-salad"
+        ],
+        "derive": "tie-cosplace-r18 + tie-cosplace + tie-cosplace-r101 + tie-eigenplaces + tie-boq-resnet50 + tie-netvlad + tie-mixvpr + tie-megaloc + tie-salad + tie-boq-dinov2 + tie-cricavpr + tie-anyloc-gem + tie-raw-thumbnail + tie-color-histogram",
+        "fmt": "{:.0f}"
+      },
+      "raw": 0.0,
+      "value": "0"
+    },
+    "val-nans": {
+      "provenance": {
+        "column": "n_answerable",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "validation",
+          "window": "10"
+        }
+      },
+      "raw": 50,
+      "value": "50"
+    },
+    "val-nbeat": {
+      "provenance": {
+        "column": "n_beating_chance",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "validation",
+          "window": "10"
+        }
+      },
+      "raw": 12,
+      "value": "12"
+    },
+    "val-ncases": {
+      "provenance": {
+        "column": "n_cases",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "validation",
+          "window": "10"
+        }
+      },
+      "raw": 5,
+      "value": "5"
+    },
+    "val-nnontriv": {
+      "provenance": {
+        "column": "n_nontrivial",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "validation",
+          "window": "10"
+        }
+      },
+      "raw": 0,
+      "value": "0"
+    },
+    "val-nzoo": {
+      "provenance": {
+        "column": "n_zoo",
+        "file": "results/final_p4/counts.csv",
+        "fmt": "{:d}",
+        "sha256": "2cb5deb35adbf205614e9de6a480df16f09de02e56b7509857f79feaca49690f",
+        "where": {
+          "split": "validation",
+          "window": "10"
+        }
+      },
+      "raw": 12,
+      "value": "12"
+    }
+  }
+}

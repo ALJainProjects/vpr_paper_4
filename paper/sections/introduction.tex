@@ -1,63 +1,64 @@
-% Introduction.  Binding reframes (notes/positioning.md): C0 conceded; C1 never
-% "first"; C2 is the core, with the oracle credited to waheed2021improving;
-% C3 is a feature-reliance diagnosis (texture-bias premise contested);
-% C4 is a descriptive side-by-side report (no street "ceiling structure" is
-% assumed: Paper 3 has not established one, see notes/EVIDENCE.md section 4).
-% The companion street study is not referenced (anonymized; not in the bib).
+% Introduction.  Robot framing = motivation only (positioning.md, C-R and
+% attacks 9-13).  Never: "we localize capsule robots", "enables autonomous
+% navigation", "on-board", "first place recognition on a medical robot",
+% "outperforms/replaces magnetic localization", "for nanorobots", any unit
+% conversion of the frame window.  "First" appears once, for C2, with "as far
+% as we found" (EVIDENCE.md section 2).  The robot-side related work lives
+% here (MICCAI budget; positioning.md "Must-cite additions": core six + aziz).
 \section{Introduction}
 \label{sec:intro}
 
-Linking colonoscopy submaps or detecting a revisit is place recognition, and
-retrieval networks fine-tuned on colonoscopy now drive topological mapping
-and relocalization in real
-procedures~\cite{morlana2024colonmapper,morlana2024topological}. Endoscopic
-localization as image retrieval is thus established, with an
-endoscopist-verified benchmark~\cite{ma2021colon10k} and full-procedure
-data~\cite{azagra2023endomapper}. We claim no part of that formulation.
+Miniature in-body robots that carry a camera, such as robotic and
+magnetically actuated capsule endoscopes and robotic flexible endoscopes,
+need their position, for instance to retarget a lesion at
+follow-up~\cite{bianchi2019localization}. For capsules it comes mainly from
+external magnetic or radio-frequency
+sensing~\cite{bianchi2019localization,cao2024robotic}; in a magnetic flexible
+endoscope, magnetic sensing localizes and vision only centres the
+lumen~\cite{martin2020enabling}. Capsule cameras serve visual odometry and
+segment classification~\cite{herp2021feature}; a recent review
+of capsule video localization lists only topographical segmentation and
+motion estimation~\cite{cao2024robotic}, and capsule-robot SLAM has omitted
+global loop closure because ``the inner organ volumes are quite
+small''~\cite{turan2017nonrigid}. Revisiting a chosen point has been shown on
+a capsule robot with magnetic localization~\cite{xu2022autonomous}, which is
+millimetre-accurate in controlled settings~\cite{cao2024robotic}; the authors
+of a magnetic endoscope call its assumption of an undistorted field ``a
+challenging restriction in clinical environments''~\cite{martin2020enabling}. Recognizing a previously seen place
+from the robot's own images would therefore be a complement to external
+sensing, not a replacement. The one robot platform we found running place
+recognition used handcrafted bag-of-words inside ORB-SLAM2 and was assessed
+only visually~\cite{prendergast2018autonomous}. We do not address
+nanorobots, which carry no camera and are localized by external medical
+imaging~\cite{aziz2020medical}.
 
-We ask a narrower question: when retrieval fails in the colon, \emph{whose}
-failure is it? VPR-trained models degrade off-street, while DINOv2-based
-ones, including training-free AnyLoc, hold up
-best~\cite{keetha2024anyloc,larsen2026longterm}; the colon adds low texture,
-specularities and deformation~\cite{schmidt2024tracking} and repetitive
-tubular anatomy~\cite{jiang2025c3vdreg}. An error may be a failure of the
-\emph{representation}, which another model could recover, or genuine
-\emph{view ambiguity}: translation ambiguity along the tube already limits
-registration on phantoms~\cite{jiang2025c3vdreg}, and mapping pipelines
-discard frames humans judge unrecognizable~\cite{morlana2024colonmapper}.
-The remedies differ, and no study we found separates the two for retrieval.
+In colonoscopy, relocalization by image retrieval is
+established~\cite{ma2021colon10k,morlana2024colonmapper}, and an
+off-the-shelf, landmark-trained retrieval network has already been evaluated
+on real colonoscopy~\cite{morlana2021selfsupervised}. Street-trained visual
+place recognition (VPR) has advanced quickly since, and frozen VPR models
+transfer to some texture-poor domains~\cite{keetha2024anyloc,larsen2026longterm}.
+To our knowledge (search to September 2026), no prior work evaluates
+general-purpose, street-trained VPR models for localizing camera-carrying
+in-body robots. We ask two questions of a zoo of such models, frozen and
+without medical fine-tuning: do they retrieve the same place in the colon
+better than raw pixels, and how much of their error could per-query model
+selection recover? Our data are conventional colonoscope video with
+endoscopist-verified same-place ground truth~\cite{ma2021colon10k}, not robot
+video: we measure a perception component, not a robot.
 
-Zero-shot evidence exists. Morlana
-et al.~\cite{morlana2021selfsupervised} ran a landmark- and city-trained
-retrieval CNN off-the-shelf on a held-out real colonoscopy: it trailed its
-colonoscopy-fine-tuned counterpart by only single-digit Recall@1 margins, and
-its recall fell steeply as near-duplicate frames were excluded. Colon10k
-itself evaluated existing place-recognition techniques~\cite{ma2021colon10k}
-(which ones, and under what protocol, we could not determine). To our
-knowledge (search to September 2026), no prior work systematically
-benchmarks the 2022--2025 outdoor-trained VPR zoo, frozen and without medical
-fine-tuning, against endoscopic place-recognition ground truth, although
-off-the-shelf models already serve inside endoscopic pipelines
-(Sec.~\ref{sec:related}).
-
-\paragraph{Contributions.} Design and decision rules are specified here; no
-threshold is set yet (Table~\ref{tab:prereg}), and every result is pending.
+\paragraph{Contributions.}
 \begin{itemize}
-\item[\textbf{C1}] A systematic zero-shot benchmark of the frozen
-  2022--2025 VPR zoo (with NetVLAD as anchor), AnyLoc and raw DINOv2, under
-  endoscopist and overlap-derived phantom ground truth, with a street-protocol
-  transfer gap and a frozen endoscopy-pretrained arm.
-\item[\textbf{C2}] The core contribution: a zoo ceiling, the any-correct
-  oracle over a model zoo (after~\cite{waheed2021improving}), measured for the first
-  time on endoscopic place-recognition ground truth, as far as we found, with
-  a chance ceiling and an audit of the unsolved queries. It bounds per-query
-  model selection only (Sec.~\ref{sec:ceiling}); ``zoo-unsolved'' always
-  means \emph{for this zoo, this ground truth and this exclusion window}.
-\item[\textbf{C3}] A feature-reliance diagnosis of place retrieval: cue
-  suppression after~\cite{burgert2025imagenettrained} on the
-  geometry-by-texture design of C3VDv2~\cite{golhar2026c3vdv2}, two-sided,
-  with causal wording confined to phantoms.
-\item[\textbf{C4}] The same ceiling statistics on the street data of the
-  transfer gap, reported beside the colon values: a descriptive comparison,
-  since domain and set-up are confounded~\cite{schubert2021makes}.
+\item[\textbf{C1}] A zero-shot test of \res{gate-nzoo} frozen models under an
+  internal pre-registration, with a go/no-go gate scored once on held-out
+  cases, reported with the protocol's full history, including the decisions
+  taken after an informational validation readout
+  (Sec.~\ref{sec:protocol}).
+\item[\textbf{C2}] A zoo ceiling, the any-correct oracle over a model zoo
+  (after~\cite{waheed2021improving}), measured for the first time on
+  endoscopic place-recognition ground truth as far as we found. It splits
+  the error into a selection-recoverable and a zoo-unsolved part, beside a
+  chance ceiling.
+\item[\textbf{C3}] A descriptive, explicitly cross-protocol comparison with
+  the same models' street recall.
 \end{itemize}

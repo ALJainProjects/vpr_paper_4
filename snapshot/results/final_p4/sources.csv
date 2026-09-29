@@ -1,0 +1,27 @@
+output_file,root,path,role,sha256,reason
+(gate verification),results,p4_colon10k/test/gate_decision.json,verified,3989157eb1611b704cbe902e80e7bd630b7621c3abf7d1e4cc7b090d927aab3f,sha256 equals the gate record's gate_decision_sha256
+(gate verification),results,p4_colon10k/test/provenance.json,verified,e5a8eea3ab3d17683721ee9b39f784c84eaef4bc7e61913d69f5c4c8f35f3d11,sha256 equals the gate record's provenance_sha256
+(gate verification),results,p4_colon10k/test/readout.txt,verified,1fc1185fd8c87db52c5254fe37c5bf04a6d6faa80529c1e4cedf9e0ef7c5c00b,sha256 equals the gate record's readout_sha256
+(gate verification),results,p4_colon10k/TEST_GATE.lock,verified,7ec12480d020b7c4a1991918f864f6461edc36af58c5e885b88e076b2d918f5a,the one-shot lock; payload equals the gate record's and the decision's lock
+(gate verification),repo,docs/papers/p4_test_gate_record.json,verified,522ef45d3341a1294b7c02cb5ef834132d329ea93be184d34eec111bfd626946,the committed gate record
+(not exported),results,p4_colon10k/validation/20260928T031637.588890Z-85dc21c-b7cde89c,incomplete,,no outputs; not read
+(not exported),results,p4_colon10k/validation/20260928T032552.041932Z-3fe282a-ca5d15c8,superseded,,validation run not exported (the exported run is 20260928T051331.168544Z-7942b24-6818cd59); identical values on every shared column (checked)
+per_model.csv,results,p4_colon10k/test/per_model.csv,read,cc9f35e1e72425d56888957bd63d21fb7dc5c88ef2dcc99d2e1eeaf1fc8e992a,
+per_model.csv,results,p4_colon10k/test/summary.csv,read,56726dcb3de397c7c5959b5e7840474bd928e2064aca4b46f1547f24eb1f8115,
+baselines.csv,results,p4_colon10k/test/per_model.csv,read,cc9f35e1e72425d56888957bd63d21fb7dc5c88ef2dcc99d2e1eeaf1fc8e992a,
+oracle.csv,results,p4_colon10k/test/oracle.csv,read,67d35f22ae9acf2dd9f85d82323836cf982b5ab2205fb12e4c180b13e036e3ba,
+counts.csv,results,p4_colon10k/test/summary.csv,read,56726dcb3de397c7c5959b5e7840474bd928e2064aca4b46f1547f24eb1f8115,
+per_case.csv,results,p4_colon10k/test/per_case.csv,read,72a0b577a1c8a86bc2ad551f0a400caa60b6184705400dea53b80fb519e578d1,
+per_case.csv,results,p4_colon10k/test/per_model.csv,read,cc9f35e1e72425d56888957bd63d21fb7dc5c88ef2dcc99d2e1eeaf1fc8e992a,
+per_model.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/per_model.csv,read,aa602069e891f8c68af2bbea4431cfb61e32fc886c94a7d9fb71556030ef3a6b,
+per_model.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/summary.csv,read,bb29c9958497c864a90bc41c7a5134c0fcac66d760fb1cfea09c5586d8a1de02,
+baselines.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/per_model.csv,read,aa602069e891f8c68af2bbea4431cfb61e32fc886c94a7d9fb71556030ef3a6b,
+oracle.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/oracle.csv,read,ba16184d074fcc259a9facb851556270bfbd8bc7a9fee711f7a9d2cb6d14362d,
+counts.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/summary.csv,read,bb29c9958497c864a90bc41c7a5134c0fcac66d760fb1cfea09c5586d8a1de02,
+per_case.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/per_case.csv,read,8652138fc4eb9e8b2743ec1b071fcd22d55a0b7dbf4e388f2d2bc9bcd8309f6b,
+per_case.csv,results,p4_colon10k/validation/20260928T051331.168544Z-7942b24-6818cd59/per_model.csv,read,aa602069e891f8c68af2bbea4431cfb61e32fc886c94a7d9fb71556030ef3a6b,
+gate.csv,results,p4_colon10k/test/gate_decision.json,read,3989157eb1611b704cbe902e80e7bd630b7621c3abf7d1e4cc7b090d927aab3f,
+gate.csv,results,p4_colon10k/TEST_GATE.lock,read,7ec12480d020b7c4a1991918f864f6461edc36af58c5e885b88e076b2d918f5a,
+gate.csv,repo,docs/papers/p4_test_gate_record.json,read,522ef45d3341a1294b7c02cb5ef834132d329ea93be184d34eec111bfd626946,
+street_delta.csv,results,final_p3/member_recall.csv,read,da3d70ee453dbfe297f5983fdc52fd036d2d033c0b09ffeb5804cc503b6640d0,Paper 3 per-model street R@1 (report interval)
+street_delta.csv,results,p4_colon10k/test/per_model.csv,read,cc9f35e1e72425d56888957bd63d21fb7dc5c88ef2dcc99d2e1eeaf1fc8e992a,

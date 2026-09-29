@@ -1,0 +1,514 @@
+# numbers.yaml -- P4: every number the paper prints.
+#
+# Lookups (file/where/column/fmt) into snapshot/results/final_p4/*.csv, exported
+# by `make snapshot` from vpr-testtime results/final_p4/ (written by
+# scripts/consolidate_p4.py at commit 8ffb0c5, branch paper/p4-final-consolidation,
+# not merged; the snapshot's source_commit f17b5cc is the harness checkout the
+# files were exported from).  Read results/final_p4/MANIFEST_README.md first.
+#
+# Rules this spec follows (P4_PREREGISTRATION.md, MANIFEST_README.md):
+#  * Every lookup names `split`, so no row of the informational validation
+#    readout can be picked up by accident.  Headline = split test, window 10
+#    (reporting_role headline).  Windows 5 and 15 are the secondary sweep and
+#    are only used in the sweep table / sweep sentences, never as a headline.
+#  * Validation keys (val-*) exist only for the protocol-history paragraph:
+#    INFORMATIONAL, NOT THE GATE (no outcome was computed on validation).
+#  * chance R@1 is cited from gate.csv (it equals gate_decision.json); the
+#    baselines.csv copy differs in the last digits (consolidation report).
+#  * Delta_m intervals (street_delta.csv delta_m_ci_*) are NOT used: their
+#    interval method (MOVER) was chosen at consolidation, not pre-registered,
+#    and awaits the owner's approval.  Only point values are printed, and every
+#    street number is labelled cross-protocol in the paper.
+#  * anyloc_gem has no Delta_m (street_delta comparable False): the street
+#    tables filter comparable: 'True'.
+#  * Thresholds are the pre-registered §8 values as recorded in gate.csv (so the
+#    paper never types them).  min_*_frac are -inf (not finite): the paper states
+#    "disabled" in words instead of printing them.
+# Recall is printed as a percentage with one decimal ('{:.1%}').
+values:
+  # ------------------------------------------------------------ gate (test)
+  gate-outcome:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: outcome
+    fmt: '{}'
+  gate-k:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: k
+    fmt: '{:d}'
+  gate-window:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: window
+    fmt: '{:d}'
+  gate-nzoo:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_zoo
+    fmt: '{:d}'
+  gate-nbeat:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_beating_chance
+    fmt: '{:d}'
+  gate-nnontriv:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_nontrivial
+    fmt: '{:d}'
+  gate-minpass:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: min_models_passing
+    fmt: '{:d}'
+  gate-minmargin-chance:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: min_margin_vs_chance
+    fmt: '{:.2f}'
+  gate-minmargin-comp:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: min_margin_vs_comparator
+    fmt: '{:g}'
+  gate-cilevel:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: ci_level
+    fmt: '{:.0%}'
+  gate-nboot:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_bootstrap
+    fmt: '{:,d}'
+  gate-nq:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_queries
+    fmt: '{:d}'
+  gate-ncases:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_cases
+    fmt: '{:d}'
+  gate-ndrop:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: n_unanswerable_dropped
+    fmt: '{:d}'
+  gate-best:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: best_model
+    fmt: '{}'
+  gate-chance:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: chance_r_at_1
+    fmt: '{:.1%}'
+  gate-protocol-source:
+    file: results/final_p4/gate.csv
+    where: {split: test}
+    column: protocol_source
+    fmt: '{}'
+  # ---------------------------------------------------- counts (test, sweep)
+  cnt-test10-total:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: '10'}
+    column: n_queries_total
+    fmt: '{:d}'
+  cnt-test5-ans:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: '5'}
+    column: n_answerable
+    fmt: '{:d}'
+  cnt-test15-ans:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: '15'}
+    column: n_answerable
+    fmt: '{:d}'
+  cnt-test5-nontriv:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: '5'}
+    column: n_nontrivial
+    fmt: '{:d}'
+  cnt-test15-nontriv:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: '15'}
+    column: n_nontrivial
+    fmt: '{:d}'
+  # ------------------------------------ validation (INFORMATIONAL, not the gate)
+  val-ncases:
+    file: results/final_p4/counts.csv
+    where: {split: validation, window: '10'}
+    column: n_cases
+    fmt: '{:d}'
+  val-nans:
+    file: results/final_p4/counts.csv
+    where: {split: validation, window: '10'}
+    column: n_answerable
+    fmt: '{:d}'
+  val-nzoo:
+    file: results/final_p4/counts.csv
+    where: {split: validation, window: '10'}
+    column: n_zoo
+    fmt: '{:d}'
+  val-nbeat:
+    file: results/final_p4/counts.csv
+    where: {split: validation, window: '10'}
+    column: n_beating_chance
+    fmt: '{:d}'
+  val-nnontriv:
+    file: results/final_p4/counts.csv
+    where: {split: validation, window: '10'}
+    column: n_nontrivial
+    fmt: '{:d}'
+  # ----------------------------------------------- baselines (test, window 10)
+  bl-raw-r1:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: raw_thumbnail}
+    column: r_at_1
+    fmt: '{:.1%}'
+  bl-raw-lo:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: raw_thumbnail}
+    column: r_at_1_lo
+    fmt: '{:.1%}'
+  bl-raw-hi:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: raw_thumbnail}
+    column: r_at_1_hi
+    fmt: '{:.1%}'
+  bl-hist-r1:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: color_histogram}
+    column: r_at_1
+    fmt: '{:.1%}'
+  bl-rand-hits:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: random_ranking}
+    column: hits
+    fmt: '{:.0f}'
+  bl-rand-exp:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: random_ranking}
+    column: expected_hits
+    fmt: '{:.1f}'
+  # ----------------------------------------- zoo members (test, window 10)
+  pm-boqr50-r1:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    column: r_at_1
+    fmt: '{:.1%}'
+  pm-boqr50-lo:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    column: r_at_1_lo
+    fmt: '{:.1%}'
+  pm-boqr50-hi:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    column: r_at_1_hi
+    fmt: '{:.1%}'
+  pm-boqr50-mlo:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    column: margin_vs_comparator_lo
+    fmt: '{:.1%}'
+  pm-netvlad-mlo:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: netvlad}
+    column: margin_vs_comparator_lo
+    fmt: '{:.1%}'
+  pm-cosr101-clo:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: cosplace_r101}
+    column: margin_vs_chance_lo
+    fmt: '{:.1%}'
+  # Tie-sensitive query counts (pessimistic != optimistic tie handling), one per
+  # zoo member and handcrafted baseline; summed below.
+  tie-cosplace-r18:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: cosplace_r18}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-cosplace:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: cosplace}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-cosplace-r101:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: cosplace_r101}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-eigenplaces:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: eigenplaces}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-boq-resnet50:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-netvlad:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: netvlad}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-mixvpr:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: mixvpr}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-megaloc:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: megaloc}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-salad:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: salad}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-boq-dinov2:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: boq_dinov2}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-cricavpr:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: cricavpr}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-anyloc-gem:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10', model: anyloc_gem}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-raw-thumbnail:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: raw_thumbnail}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  tie-color-histogram:
+    file: results/final_p4/baselines.csv
+    where: {split: test, window: '10', baseline: color_histogram}
+    column: tie_sensitive
+    fmt: '{:.0f}'
+  ties-sum:
+    derive: >-
+      tie-cosplace-r18 + tie-cosplace + tie-cosplace-r101 + tie-eigenplaces
+      + tie-boq-resnet50 + tie-netvlad + tie-mixvpr + tie-megaloc + tie-salad
+      + tie-boq-dinov2 + tie-cricavpr + tie-anyloc-gem + tie-raw-thumbnail
+      + tie-color-histogram
+    fmt: '{:.0f}'
+  # ------------------------------------------- zoo ceiling (test, window 10)
+  or-ceil:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: ceiling
+    fmt: '{:.1%}'
+  or-ceil-lo:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: ceiling_lo
+    fmt: '{:.1%}'
+  or-ceil-hi:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: ceiling_hi
+    fmt: '{:.1%}'
+  or-irr:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: irreducible
+    fmt: '{:.1%}'
+  or-irr-lo:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: irreducible_lo
+    fmt: '{:.1%}'
+  or-irr-hi:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: irreducible_hi
+    fmt: '{:.1%}'
+  or-rec:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: recoverable_best
+    fmt: '{:.1%}'
+  or-rec-lo:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: recoverable_best_lo
+    fmt: '{:.1%}'
+  or-rec-hi:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: recoverable_best_hi
+    fmt: '{:.1%}'
+  or-chance:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    column: chance_ceiling
+    fmt: '{:.1%}'
+  # Share of the best member's errors that some other member solves:
+  # rho_{m*} / (1 - R_{m*}).
+  or-rec-share: {derive: or-rec / (1 - pm-boqr50-r1), fmt: '{:.0%}'}
+  # zoo-unsolved fraction across the SECONDARY sweep windows (sweep sentence only)
+  or-irr-w5:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '5'}
+    column: irreducible
+    fmt: '{:.1%}'
+  or-irr-w15:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '15'}
+    column: irreducible
+    fmt: '{:.1%}'
+  # ------------------------------------------- per case (test, window 10)
+  pc-n-c08:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '08', model: boq_resnet50}
+    column: n_answerable
+    fmt: '{:d}'
+  pc-n-c19:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '19', model: boq_resnet50}
+    column: n_answerable
+    fmt: '{:d}'
+  pc-best-c08:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '08', model: boq_resnet50}
+    column: r_at_1
+    fmt: '{:.1%}'
+  pc-best-c13:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '13', model: boq_resnet50}
+    column: r_at_1
+    fmt: '{:.1%}'
+  pc-n-c13:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '13', model: boq_resnet50}
+    column: n_answerable
+    fmt: '{:d}'
+  pc-drop-c06:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '06', model: boq_resnet50}
+    column: n_unanswerable_dropped
+    fmt: '{:d}'
+  pc-n-c06:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', case: '06', model: boq_resnet50}
+    column: n_answerable
+    fmt: '{:d}'
+  # ------------------------- street comparison (CROSS-PROTOCOL; points only)
+  st-nord-netvlad-street:
+    file: results/final_p4/street_delta.csv
+    where: {split: test, street_dataset: nordland, model: netvlad}
+    column: street_r_at_1
+    fmt: '{:.1%}'
+  st-netvlad-colon:
+    file: results/final_p4/street_delta.csv
+    where: {split: test, street_dataset: nordland, model: netvlad}
+    column: colon_r_at_1
+    fmt: '{:.1%}'
+  st-sfxl-netvlad-street:
+    file: results/final_p4/street_delta.csv
+    where: {split: test, street_dataset: sf_xl_small, model: netvlad}
+    column: street_r_at_1
+    fmt: '{:.1%}'
+tables:
+  # Table: every zoo member at the pre-registered gate (test, window 10).
+  models-gate:
+    file: results/final_p4/per_model.csv
+    where: {split: test, window: '10'}
+    sort_by: [-r_at_1]
+    columns:
+    - {column: model, header: member}
+    - {column: r_at_1, header: R@1, fmt: '{:.1%}'}
+    - {column: r_at_1_lo, header: $\LB$, fmt: '{:.1%}'}
+    - {column: r_at_1_hi, header: $\UB$, fmt: '{:.1%}'}
+    - {column: margin_vs_chance_lo, header: '$\LB(\Drand)$', fmt: '{:.1%}'}
+    - {column: margin_vs_comparator, header: '$\Dhand$', fmt: '{:.1%}'}
+    - {column: margin_vs_comparator_lo, header: '$\LB(\Dhand)$', fmt: '{:.1%}'}
+    - {column: nontrivial, header: non-trivial}
+  # Table: the zoo ceiling at the gate (test, window 10): one row.
+  ceiling-gate:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: '10'}
+    columns:
+    - {column: ceiling, header: $C$, fmt: '{:.1%}'}
+    - {column: ceiling_lo, header: $\LB$, fmt: '{:.1%}'}
+    - {column: ceiling_hi, header: $\UB$, fmt: '{:.1%}'}
+    - {column: irreducible, header: $I$, fmt: '{:.1%}'}
+    - {column: irreducible_lo, header: $\LB$, fmt: '{:.1%}'}
+    - {column: irreducible_hi, header: $\UB$, fmt: '{:.1%}'}
+    - {column: recoverable_best, header: '$\rbest$', fmt: '{:.1%}'}
+    - {column: recoverable_best_lo, header: $\LB$, fmt: '{:.1%}'}
+    - {column: recoverable_best_hi, header: $\UB$, fmt: '{:.1%}'}
+    - {column: best_model, header: '$m^\star$'}
+    - {column: chance_ceiling, header: '$\Crand$', fmt: '{:.1%}'}
+  # SECONDARY exclusion-window sweep (test).  reporting_role marks the headline row.
+  sweep-counts:
+    file: results/final_p4/counts.csv
+    where: {split: test, window: ['5', '10', '15']}
+    sort_by: [window]
+    columns:
+    - {column: window, header: $W$}
+    - {column: reporting_role, header: role}
+    - {column: n_answerable, header: answ.}
+    - {column: n_unanswerable_dropped, header: drop.}
+    - {column: n_beating_chance, header: '$>$chance'}
+    - {column: n_nontrivial, header: non-triv.}
+    - {column: comparator_r_at_1, header: '$\Rhand$', fmt: '{:.1%}'}
+  sweep-ceiling:
+    file: results/final_p4/oracle.csv
+    where: {split: test, window: ['5', '10', '15']}
+    sort_by: [window]
+    columns:
+    - {column: window, header: $W$}
+    - {column: ceiling, header: $C$, fmt: '{:.1%}'}
+    - {column: irreducible, header: $I$, fmt: '{:.1%}'}
+    - {column: recoverable_best, header: '$\rbest$', fmt: '{:.1%}'}
+    - {column: best_model, header: '$m^\star$'}
+    - {column: chance_ceiling, header: '$\Crand$', fmt: '{:.1%}'}
+  # Per-case R@1 (test, window 10): the best member (with its answerable query
+  # count) and the comparator.
+  cases-best:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', model: boq_resnet50}
+    sort_by: [case]
+    columns:
+    - {column: case, header: case}
+    - {column: n_answerable, header: answ.}
+    - {column: r_at_1, header: '$m^\star$', fmt: '{:.0%}'}
+  cases-raw:
+    file: results/final_p4/per_case.csv
+    where: {split: test, window: '10', model: raw_thumbnail}
+    sort_by: [case]
+    columns:
+    - {column: case, header: case}
+    - {column: r_at_1, header: '$\Rhand$', fmt: '{:.0%}'}
+  # CROSS-PROTOCOL street comparison (Delta_m points only; intervals pending the
+  # owner's approval of the interval method).  comparable 'True' drops anyloc_gem.
+  street-sfxl:
+    file: results/final_p4/street_delta.csv
+    where: {split: test, street_dataset: sf_xl_small, comparable: 'True'}
+    sort_by: [model]
+    columns:
+    - {column: model, header: member}
+    - {column: street_r_at_1, header: street, fmt: '{:.1%}'}
+    - {column: delta_m, header: '$\Dm$', fmt: '{:+.1%}'}
+  street-nord:
+    file: results/final_p4/street_delta.csv
+    where: {split: test, street_dataset: nordland, comparable: 'True'}
+    sort_by: [model]
+    columns:
+    - {column: model, header: member}
+    - {column: street_r_at_1, header: street, fmt: '{:.1%}'}
+    - {column: delta_m, header: '$\Dm$', fmt: '{:+.1%}'}

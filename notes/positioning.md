@@ -479,7 +479,7 @@ Inline notes marked **(adversarial pass)** were added at each of these places in
 - **Test gate.** The one-shot test gate ran from clean commit `91ea512` and returned **GO**. The record is `vpr-testtime/docs/papers/p4_test_gate_record.json` (committed in `f17b5cc`), and the outputs are under `vpr-testtime/results/p4_colon10k/test/`.
 - **Validation readout.** It is informational only. It had pointed to **OWNER_REVIEW**, and the fixed rule was **not** changed after seeing it.
 - **Numbers.** Headline numbers enter the paper only as `\res` macros from a verified snapshot; none are restated here.
-- **EVIDENCE.md is stale.** `notes/EVIDENCE.md` still reads "STAGED — zero results" and predates the gate. This pass did not edit it (see "Recommended changes" below).
+- **EVIDENCE.md is stale.** `notes/EVIDENCE.md` still reads "STAGED — zero results" and predates the gate. This pass did not edit it (see "Recommended changes" below). *(Resolved 2026-09-28 by the results-wiring pass: EVIDENCE.md §0 now records the gate, the claim table with C-R, and the open owner decisions.)*
 
 **Verification.** Every key cited below is in `bib/references.bib`. `bibcheck --online` re-verified all 144 entries with 0 errors. The evidence and reading depth for the 26 new keys are in `notes/literature.md` §18.
 

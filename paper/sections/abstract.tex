@@ -1,34 +1,33 @@
-% Abstract.  States the study design; the results sentence is pending.
-% Wording rules (notes/EVIDENCE.md sections 2 and 5): "pre-specified", not
-% "pre-registered", until a registry record exists; the zoo is finite, so no
-% "any representation"; "zoo-unsolved" and "selection-recoverable" (Paper 3's
-% terms), never a bare "irreducible"/"recoverable"; phantoms are not "in silico".
+% Abstract.  Every number is a \res macro (numbers.yaml).  Wording rules
+% (notes/EVIDENCE.md, notes/positioning.md "In-body robot framing pass"): the
+% robots are the motivation only; the data are conventional colonoscope video;
+% "internal pre-registration" (no public registry); "zoo-unsolved" is always
+% qualified; no clinical, robot, on-board or closed-loop claim.
 \begin{abstract}
-Place recognition by image retrieval is an established route to
-relocalization in colonoscopy, and an off-the-shelf retrieval model has
-already been evaluated on colonoscopy ground truth. How much of the
-remaining error a diverse zoo of frozen representations could recover has,
-as far as we found, not been measured. We specify a study that transfers the
-modern visual place recognition (VPR) zoo, frozen and without medical
-fine-tuning, to colonoscopy and splits its error with a zoo-relative oracle
-ceiling into a selection-recoverable part (some zoo member retrieves the
-right place) and a zoo-unsolved part (no member does, for this zoo, ground
-truth and exclusion window). The zoo spans CNN- and DINOv2-based VPR models,
-AnyLoc and raw DINOv2, beside a frozen endoscopy-pretrained arm. Ground truth
-is endoscopist-verified same-place intervals on real sequences (Colon10k) and
-view overlap from depth and pose on silicone phantoms (C3VD, C3VDv2), whose
-results make no claim about patients. Quantities are reported per ground
-truth, exclusion window and model arm, beside a random-ranking chance
-ceiling, and unsolved real queries are audited for ground-truth misses before
-any reading as view ambiguity. Controlled phantom
-contrasts support a feature-reliance diagnosis. Two-sided hypotheses and a
-go/no-go gate are specified here; their thresholds are to be fixed and
-publicly registered before any data are acquired, and none is set yet.
-\pending{abstract results sentence: gate outcome; best frozen Recall@k,
-zoo ceiling, chance ceiling and zoo-unsolved fraction on Colon10k, with
-sequence-level confidence intervals}
-No clinical claim is made.
+Camera-carrying miniature in-body robots, such as robotic and magnetically
+actuated capsule endoscopes and robotic flexible endoscopes, are localized
+mainly by external sensing or kinematics; their cameras serve
+odometry, organ classification and steering. We test whether frozen,
+street-trained visual place recognition (VPR) models could supply a missing
+component, relocalization from the robot's own images, on conventional
+colonoscopy video rather than robot data. The thresholds, model zoo,
+comparator and case split were fixed in a signed internal pre-registration
+before any model was run, and the go/no-go gate was scored once on held-out
+cases. On \res{gate-ncases} test cases of Colon10k (\res{gate-nq} answerable
+queries, endoscopist-verified same-place intervals, a
+\res{gate-window}-frame exclusion window), all \res{gate-nbeat} frozen models
+beat chance and \res{gate-nnontriv} beat a raw-pixel thumbnail at the lower
+bound of a case-level bootstrap interval, so the gate returned
+\texttt{\res{gate-outcome}}. The best model reached Recall@1
+\res{pm-boqr50-r1} (\res{gate-cilevel} interval \res{pm-boqr50-lo} to
+\res{pm-boqr50-hi}), against \res{bl-raw-r1} for the thumbnail. At least
+one zoo member retrieves the right place for \res{or-ceil} of queries, and
+\res{or-irr} are solved by none, for this zoo, ground truth and window. An
+informational validation readout had matched the rule's owner-review
+pattern; the unchanged rule gave \texttt{\res{gate-outcome}} on test, with
+wide intervals. This is a perception-component measurement: no robot,
+capsule or closed loop was involved, and no clinical claim is made.
 
-\keywords{Place recognition \and Colonoscopy \and Zero-shot transfer \and
-Oracle ceiling \and Pre-specified protocol}
+\keywords{Visual place recognition \and In-body robots \and Capsule
+endoscopy \and Colonoscopy \and Zero-shot transfer \and Oracle ceiling}
 \end{abstract}

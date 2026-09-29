@@ -1,138 +1,107 @@
-% Methods, written as the harness WILL implement them.  The gate, the Colon10k and
-% pose+angle ground truths, the baselines and the preprocessing exist only on the
-% unmerged branch paper/p4-endoscopy-loaders (vpr-testtime@eeba592); the view-overlap
-% ground truth, raw DINOv2, the medical arm and AnyLoc-GeM / target-vocabulary
-% AnyLoc-VLAD do not exist on any branch.  Nothing here has run.
-% Never attribute to the code a check it does not do (review M4): the C3VD
-% loader does NOT verify a shared world frame across recordings or textures.
+% Methods = the pre-specified protocol as run (vpr-testtime
+% docs/papers/P4_PREREGISTRATION.md, signed; gate machinery
+% vprbench/analysis/preregistration.py; runner scripts/eval_p4_colon10k.py at
+% the gate commit 91ea512).  Every threshold is printed from gate.csv via \res.
+% Never attribute to the code a check it does not do.  The E2 verdict rules,
+% the GT audit, the phantom design and the Bonferroni/Holm rules of the staged
+% draft were NOT merged into the signed document: they are not stated as
+% pre-registered, and the gate used one ci_level for every bound.
 \section{Methods}
 \label{sec:methods}
 
-\subsection{Frozen models}
-\label{sec:zoo}
-The \emph{outdoor arm} $\Zout$ holds CNN-based models
-(NetVLAD~\cite{arandjelovic2016netvlad}, CosPlace~\cite{berton2022rethinking},
-EigenPlaces~\cite{berton2023eigenplaces}, MixVPR~\cite{alibey2023mixvpr},
-BoQ~\cite{alibey2024boq} on ResNet-50) and DINOv2-based ones
-(SALAD~\cite{izquierdo2024optimal}, MegaLoc~\cite{berton2025megaloc}, BoQ
-on DINOv2). The \emph{generic arm} $\Zgen$ holds raw
-DINOv2~\cite{oquab2023dinov2} (CLS token; GeM-pooled patch tokens) at the
-backbone size and input resolution of each model it is contrasted with, and
-AnyLoc-VLAD~\cite{keetha2024anyloc} with a vocabulary released for another
-domain, which is strictly zero-shot. AnyLoc-VLAD with a vocabulary built from
-the target database is a separate \emph{target-adapted} condition, outside
-every zero-shot claim; AnyLoc-GeM joins if a wrapper is written. The frozen
-\emph{medical arm} $\Zmed$ holds EndoViT~\cite{batic2024endovit} (surgical
-pretraining), Endo-FM~\cite{wang2023foundation} (video) and the colonoscopy
-encoders of~\cite{hirsch2023selfsupervised}; the landmark-trained anchor
-of~\cite{morlana2021selfsupervised} joins $\Zout$ if its weights prove
-obtainable; $\Zall$ is their union. A \emph{backbone family} is
-the set of CNN-based, of DINOv2-based (with $\Zgen$) or of medical members:
-the CNN and DINOv2 families share no backbone, whereas $\Zout$ and $\Zgen$
-do. \pending{per model: checkpoint, input size, dimension; Endo-FM frame
-recipe} No parameter is updated:
-reference-set fine-tuning, adapters and re-ranking are excluded, and some
-zoo-unsolved error may be solved by them. Descriptors are
-L2-normalized and ranked by exhaustive cosine similarity, with ties counted
-against the model (a tied negative ranks first).
-
-\subsection{Datasets and ground truth}
+\subsection{Data and ground truth}
 \label{sec:data}
-\paragraph{Colon10k (real).} Twenty short sequences (cases) from one centre,
-undistorted to low-resolution pinhole frames~\cite{ma2021colon10k}. Per case,
-a matchings file lists for each annotated query the intervals of frames an
-endoscopist verified as the same place; its interval syntax, frame-id
-convention and end inclusivity are undocumented and are read off the first
-file before any model is run. Positives are the database frames inside the
-query's intervals; frames within $W$ frames of the query (in the sorted image
-list) leave database and positives, as near-duplicates inflate
-recall~\cite{morlana2021selfsupervised}; queries left without a positive are
-dropped and counted. The database is the query's case or all cases
-(Table~\ref{tab:prereg}). Every frame outside the intervals is a negative,
-although whether the annotation is exhaustive is unknown (audit,
-Sec.~\ref{sec:protocol}); totals are counted at acquisition. We could not
-read Colon10k's own protocol: this is our reading of its release, and we
-compare with none of its numbers.
+Colon10k~\cite{ma2021colon10k} holds twenty short colonoscopy sequences
+(cases) from one centre, undistorted to low-resolution pinhole frames. For
+each case, a matchings file lists, for each annotated query, the frame
+intervals that an endoscopist verified as the same place. The file format is
+undocumented; its interval syntax, frame-id convention and inclusive ends were
+read from the files and recorded before any model was run
+(Sec.~\ref{sec:protocol}). The positives of a query are the frames of its own
+case inside its intervals. Frames within $W$ frames of the query in the
+case's frame list, the query included, are removed from both the database and
+the positives, since near-duplicate neighbours inflate
+recall~\cite{morlana2021selfsupervised}; a query left without a positive is
+unanswerable and is dropped and counted. The database is the query's own case.
+Correctness at $k$ is computed over the full ranking after the removed frames
+are taken out, and ties count against the model: a negative tied with the
+best positive ranks first.
 
-\paragraph{C3VD and C3VDv2 (phantom).} Colonoscopy video of silicone
-phantoms with per-frame pose and depth~\cite{bobrow2023colonoscopy}; C3VDv2
-has two sculpted geometries with four textures each and, for every
-debris-laden video, a clean twin on the identical
-trajectory~\cite{golhar2026c3vdv2}. E2 pairs recordings of one phantom and
-texture made on different trajectories (queries from one, database from the
-other); twins enter only E4. Video pairs and resampling clusters (phantom
-segments, not recordings, which share databases) are fixed from the
-release's structure before any model is run. That different recordings'
-poses share one phantom frame, via the 2D--3D registration, is an
-\emph{unverified precondition} of every cross-recording comparison. The
-primary ground truth, \emph{view overlap}, is not yet implemented: the
-fraction of a query's valid pixels (in the field of view, with depth in the
-released valid range) whose back-projected points, mapped by both poses and
-projected through the released fisheye calibration, land in the database
-view with depth agreeing within $\varepsilon_d$; it is directional (query to
-database) and positive at $o^\star$ or above. The secondary one, \emph{pose
-and angle} (implemented), needs camera centres within $\tau$ and optical
-axes within $\theta$. Pose radius alone is never used: nearby cameras in a
-tube may share no view~\cite{larsen2026longterm}.
+Before any data were seen, a seeded permutation of the case identifiers set
+aside validation cases for method development; the other
+\res{gate-ncases} cases form the test split, on which the gate was scored
+once. One validation case proved unusable (its intervals reference frames
+beyond the released images) and was dropped before any model was run. At the
+gate window the test split has \res{cnt-test10-total} annotated queries, of
+which \res{gate-ndrop} are unanswerable, leaving \res{gate-nq}.
 
-\paragraph{Preprocessing.} If enabled (Table~\ref{tab:prereg}), pixels
-outside the field of view (convex hull of the large lit components after a
-max-channel threshold and opening) or specular (bright and near-achromatic:
-HSV thresholds, dilated) are set to a constant fill colour before a
-mask-aware crop and resize to each model's input; nothing is inpainted or
-dropped. Defaults are untuned; the unmodified street pipeline is an ablation.
+\subsection{Frozen models and baselines}
+\label{sec:zoo}
+The gate zoo $\Zgate$ holds \res{gate-nzoo} frozen models with their released
+weights. The street-trained VPR models are CNN-based NetVLAD on
+VGG16~\cite{arandjelovic2016netvlad}, CosPlace on ResNet-18, ResNet-50 and
+ResNet-101~\cite{berton2022rethinking}, EigenPlaces~\cite{berton2023eigenplaces},
+MixVPR~\cite{alibey2023mixvpr} and BoQ~\cite{alibey2024boq} on ResNet-50, and
+DINOv2-based~\cite{oquab2023dinov2} SALAD~\cite{izquierdo2024optimal},
+MegaLoc~\cite{berton2025megaloc}, BoQ on DINOv2 and
+CricaVPR~\cite{lu2024cricavpr}. AnyLoc~\cite{keetha2024anyloc} enters in its
+training-free GeM form on DINOv2 ViT-G/14 patch features, following the
+authors' code. No parameter is updated and no endoscopy-specific
+preprocessing (masking) is applied; descriptors are L2-normalized and ranked
+by exhaustive inner product.
+Raw DINOv2 and medical-domain encoders are not in the zoo
+(Sec.~\ref{sec:limitations}).
 
-\subsection{Zoo ceiling and error decomposition}
+Chance is the exact probability that a random ranking puts a positive
+first, $p_q=P_q/N_q$ for $P_q$ positives among $N_q$ candidates, with mean
+$\Rrand$; random rankings never enter the zoo. The one handcrafted comparator
+fixed in advance is a raw-pixel thumbnail: a colour tiny image, area-averaged,
+zero-mean and L2-normalized, so that the inner product is a normalized
+cross-correlation, with its default settings (Recall@1 $\Rhand$). A colour
+histogram and one draw of an empirical random ranking are reported for
+information only.
+
+\subsection{The gate and its statistics}
+\label{sec:gate}
+The gate is evaluated at $k=\res{gate-k}$ and $W=\res{gate-window}$ frames on
+the test split. A member $m$ \emph{beats chance} if
+$\LB(R_m-\Rrand)>\res{gate-minmargin-chance}$ and is \emph{non-trivial} if,
+in addition, $\LB(R_m-\Rhand)>\res{gate-minmargin-comp}$; both margins
+($\Drand$, $\Dhand$) are paired per query. The outcome is \texttt{GO} if at
+least \res{gate-minpass} members are non-trivial and the error split is
+meaningful, \texttt{NO\_GO} if no member beats chance, and
+\texttt{OWNER\_REVIEW} otherwise, a case for which the protocol at first
+defined no action (Sec.~\ref{sec:protocol}). A meaningful split needs lower
+bounds on the zoo-unsolved fraction and on the best member's
+selection-recoverable fraction (Sec.~\ref{sec:ceiling}) above two thresholds.
+Both thresholds were set to $-\infty$ before any data were acquired, because
+the split is this study's measurement whichever way it comes out; the split
+condition is therefore always met, and \texttt{GO} rests on the count of
+non-trivial members alone. $\LB$ and $\UB$ are the ends of a central
+\res{gate-cilevel} percentile bootstrap interval over whole cases
+(\res{gate-nboot} replicates, each the pooled mean over the queries of the
+resampled cases). The same level is used for every bound, with no correction
+for multiplicity. The best member $m^\star$ is the one of highest Recall@1 on
+the full test split, chosen once. The window and the database scope are
+derived from the ground truth and checked against the protocol, not declared
+by the caller.
+
+\subsection{Zoo ceiling and error split}
 \label{sec:ceiling}
-Let $c_m(q)\in\{0,1\}$ mark that model $m$'s top-$k$ list for query $q$
-contains a positive under a given ground truth and window, and $R_m$ its
-mean (Recall@$k$). For a zoo $Z$, let $o_Z(q)=\max_{m\in Z}c_m(q)$; the
+Let $c_m(q)\in\{0,1\}$ mark that member $m$ ranks a positive first for query
+$q$, and $R_m$ its mean (Recall@1). With $o(q)=\max_{m\in\Zgate}c_m(q)$, the
 \emph{zoo ceiling} (after~\cite{waheed2021improving}) is
-$C(Z)=\frac{1}{|Q|}\sum_q o_Z(q)$ and the \emph{zoo-unsolved} fraction is
-$I(Z)=1-C(Z)$. Each member's error splits exactly as
-$1-R_m=\rho_m(Z)+I(Z)$, with
-$\rho_m(Z)=\frac{1}{|Q|}\sum_q \bigl(1-c_m(q)\bigr)\,o_Z(q)$: queries $m$
-misses but another member solves. $I(Z)$ is an oracle miss rate, not a
-Bayes error, and nothing in this paper estimates one.
-
-\emph{What $C(Z)$ bounds.} On this query set, ground truth, window and $k$,
-$C(Z)$ (i)~upper-bounds the Recall@$k$ of any per-query selector that
-returns one member's top-$k$ list (routing, cascades, plurality voting over
-top-1 answers); (ii)~lower-bounds the fraction of recognizable queries only
-up to chance hits, which inflate it, and ground-truth artefacts, which can
-move it either way; (iii)~bounds no model outside $Z$; and (iv)~does not
-bound score fusion, ranked-list voting, re-ranking or adaptation, which can
-return an item no member ranks first. So $\rho_m$ is the
-\emph{selection-recoverable} part of $m$'s error, the only sense of
-``recoverable'' used here, and $C(Z)-\max_m R_m$ is the headroom for
-selection.
-
-\emph{Chance.} A random ranking puts a positive among the top $k$ with
-probability $p_q=1-\binom{N_q-P_q}{k}\big/\binom{N_q}{k}$, for $P_q$
-positives among $N_q$ candidates. The chance ceiling of $n$ independent
-random rankings is $\Crand(n)=\frac{1}{|Q|}\sum_q\bigl[1-(1-p_q)^{n}\bigr]$,
-and adding $n'$ of them to $Z$ is expected to lower $I$ by
-$\Delta I_{\mathrm{rand}}(Z,n')=\frac{1}{|Q|}\sum_q\bigl(1-o_Z(q)\bigr)
-\bigl[1-(1-p_q)^{n'}\bigr]$: a union over many models collects chance hits,
-and Colon10k's positive intervals can be wide. The zoo-size curve $\bar
-C(n)$ is the mean of $C(S)$ over subsets $S\subseteq Z$ of size $n$; $m$'s
-leave-one-out contribution is $C(Z)-C(Z\setminus\{m\})$.
-
-\subsection{Baselines and statistics}
-\label{sec:stats}
-Two training-free baselines anchor ``non-trivial'': the exact random-ranking
-rate $p_q$ (mean $\Rrand$; random rankings never enter a zoo) and \emph{one}
-handcrafted descriptor fixed before data, a raw-pixel thumbnail compared by
-normalized cross-correlation or a Hellinger-normalized joint RGB histogram.
-Intervals are cluster percentile bootstraps over whole clusters (Colon10k
-cases; phantom segments), each replicate the pooled mean over their queries.
-$\LB$ and $\UB$ are the ends of a central interval of level
-$1-\alpha_{\mathrm{CI}}$, i.e.\ one-sided bounds at level
-$1-\alpha_{\mathrm{CI}}/2$, with $\alpha_{\mathrm{CI}}=2\alpha/|\Zgate|$ for
-the gate (Bonferroni over the gate zoo) and $2\alpha$ otherwise. Paired
-contrasts get two-sided $p$-values (twice the smaller share of replicates
-beyond zero, as $(b+1)/(B+1)$), Holm-corrected within H1a (one test per
-member), H1b (per DINOv2-based VPR model and raw variant) and H4b (per
-manipulation). With twenty or fewer clusters, percentile intervals may
-under-cover. There is no validation split, and nothing is tuned on
-evaluation data.
+$C=\frac{1}{|Q|}\sum_q o(q)$ and the \emph{zoo-unsolved} fraction is $I=1-C$.
+Each member's error splits exactly as $1-R_m=\rho_m+I$, where
+$\rho_m=\frac{1}{|Q|}\sum_q\bigl(1-c_m(q)\bigr)\,o(q)$ counts the queries $m$
+misses and another member solves: its \emph{selection-recoverable} error.
+Hence $\rbest=C-R_{m^\star}$ is also the headroom of per-query selection over
+the best member. On this query set, ground truth and window, $C$ upper-bounds
+the Recall@1 of any selector that returns one member's answer per query. It
+bounds no model outside the zoo, nor score fusion, re-ranking or adaptation,
+which can return an item no member ranks first; chance hits inflate it, and
+ground-truth errors can move it either way. $I$ is an oracle miss rate, not a
+Bayes error, and ``zoo-unsolved'' always means \emph{for this zoo, this ground
+truth and this exclusion window}. The chance ceiling
+$\Crand=\frac{1}{|Q|}\sum_q\bigl[1-(1-p_q)^{|\Zgate|}\bigr]$ is the expected
+ceiling of as many independent random rankings as the zoo has members.

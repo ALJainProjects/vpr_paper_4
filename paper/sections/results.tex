@@ -1,12 +1,155 @@
-% Results.  NONE EXIST.  Each slot is replaced by \res{...} keys (from a
-% numbers.yaml over a hash-verified snapshot) once the pre-specified runs are
-% done.  Do not type a number here.  Delete the "nothing has run" sentence then.
+% Results.  Every number is \res / \restable (numbers.yaml).  Headline = split
+% test, window 10.  The 5/15-frame sweep is SECONDARY and never replaces the
+% headline (P4_PREREGISTRATION section 8d).  Street numbers are CROSS-PROTOCOL;
+% Delta_m intervals await the owner's approval of an interval method (MOVER was
+% chosen at consolidation, not pre-registered), so H-E1a stays \pending.
+% Never read "zoo-unsolved" as view ambiguity: the GT audit was not run.
 \section{Results}
 \label{sec:results}
 
-Nothing has been run.
-\textbf{E1:} \pending{Colon10k counts; Recall@k per model and window;
-baselines; H1a--H1c; gate margins, bounds, outcome; ColonMapper mAP}
-\textbf{E2, C4:} \pending{$C$, $I$, $\rho_m$, headroom, $\Crand$ per ground
-truth, window, arm, family, and on streets; curves; verdicts; audit; strata}
-\textbf{E4:} \pending{H4a; H4b per manipulation}
+\begin{table}[t]
+\centering
+\caption{Every zoo member at the gate (test split, $k=\res{gate-k}$,
+$W=\res{gate-window}$, \res{gate-nq} queries in \res{gate-ncases} cases),
+sorted by Recall@1. $\LB$, $\UB$: \res{gate-cilevel} case-bootstrap
+interval. $\Drand$, $\Dhand$: paired margins over exact chance and over the
+raw thumbnail; non-trivial means $\LB(\Drand)>\res{gate-minmargin-chance}$
+and $\LB(\Dhand)>\res{gate-minmargin-comp}$. The thumbnail reaches
+$\Rhand=\res{bl-raw-r1}$ and chance $\Rrand=\res{gate-chance}$.}
+\label{tab:gate}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lrrrrrrl@{}}
+\restable{models-gate}
+\end{tabular}
+
+\medskip
+\normalsize
+\caption{Zoo ceiling at the gate (test, $W=\res{gate-window}$). $C$:
+fraction of queries some member solves; $I=1-C$: zoo-unsolved, for this zoo,
+ground truth and window; $\rbest$: the best member's selection-recoverable
+error; $\Crand$: expected ceiling of as many random rankings.}
+\label{tab:ceiling}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}rrrrrrrrrlr@{}}
+\restable{ceiling-gate}
+\end{tabular}
+\end{table}
+
+\paragraph{The gate.} The gate returned \texttt{\res{gate-outcome}}
+(Table~\ref{tab:gate}). All \res{gate-nbeat} members beat chance by a wide
+margin (smallest $\LB(\Drand)$: \res{pm-cosr101-clo}, CosPlace on
+ResNet-101), and \res{gate-nnontriv} were non-trivial against the raw
+thumbnail, which alone reached \res{bl-raw-r1} (\res{bl-raw-lo} to
+\res{bl-raw-hi}; colour histogram \res{bl-hist-r1}). The best member,
+\texttt{\res{gate-best}}, reached \res{pm-boqr50-r1} (\res{pm-boqr50-lo} to
+\res{pm-boqr50-hi}) with $\LB(\Dhand)=\res{pm-boqr50-mlo}$; the smallest
+passing bound is NetVLAD's, \res{pm-netvlad-mlo}. As the split condition was
+disabled, \texttt{\res{gate-outcome}} rests on this count alone. The margins
+over raw pixels are detectable but far smaller than those over chance.
+Non-trivial
+and trivial members occur in both the CNN and the DINOv2 families; the
+planned contrast between families was not computed \pending{H-E1c: paired
+case-bootstrap contrast of the CNN and DINOv2 means}. No query was
+tie-sensitive for any member or handcrafted baseline (summed count
+\res{ties-sum}), and the one empirical random ranking hit \res{bl-rand-hits}
+queries, against \res{bl-rand-exp} expected by chance.
+
+\paragraph{The zoo ceiling.} Some member retrieves a correct place for
+$C=\res{or-ceil}$ of the queries (\res{or-ceil-lo} to \res{or-ceil-hi};
+Table~\ref{tab:ceiling}), far above the chance ceiling of as many random
+rankings, \res{or-chance}. For this zoo, this ground truth and this
+exclusion window, $I=\res{or-irr}$ (\res{or-irr-lo} to \res{or-irr-hi}) of
+the queries are zoo-unsolved. The best member misses $\rbest=\res{or-rec}$
+(\res{or-rec-lo} to \res{or-rec-hi}) of the queries that another member
+solves: \res{or-rec-share} of its errors are selection-recoverable, and
+$\rbest$ is the headroom of per-query selection over it. We do not read $I$
+as view ambiguity: the annotation is not known to be exhaustive, so a
+zoo-unsolved query may be a correct retrieval of an unlabelled revisit, and
+the planned blind audit of zoo-unsolved queries was not run
+\pending{audit of zoo-unsolved queries for ground-truth misses}.
+
+\begin{table}[t]
+\begin{minipage}[t]{0.34\textwidth}
+\centering
+\caption{Per case (test, $W=\res{gate-window}$): answerable queries;
+Recall@1 of $m^\star$ and of the thumbnail.}
+\label{tab:cases}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}[t]{@{}lrr@{}}
+\restable{cases-best}
+\end{tabular}\hspace{4pt}%
+\begin{tabular}[t]{@{}lr@{}}
+\restable{cases-raw}
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.64\textwidth}
+\centering
+\caption{\emph{Secondary} exclusion-window sweep (test). The \emph{headline}
+row is the pre-registered gate window; the others never replace it. Query
+sets differ between rows. Top: counts and the thumbnail's Recall@1; bottom:
+the zoo ceiling.}
+\label{tab:sweep}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}rlrrrrr@{}}
+\restable{sweep-counts}
+\end{tabular}\\[4pt]
+\begin{tabular}{@{}rrrrlr@{}}
+\restable{sweep-ceiling}
+\end{tabular}
+\end{minipage}
+\end{table}
+
+\paragraph{Per-case variation.} The test cases are few and unequal
+(Table~\ref{tab:cases}): answerable queries per case range from
+\res{pc-n-c08} (cases 08 and 13) to \res{pc-n-c19} (case 19), and the
+window removed \res{pc-drop-c06} queries of case 06, leaving \res{pc-n-c06}.
+The best member's per-case Recall@1 ranges from \res{pc-best-c08} (case 08)
+to \res{pc-best-c13} (case 13), the two cases with \res{pc-n-c13} answerable
+queries each. The case-level intervals rest on these clusters: the low power
+stated in the protocol before the run.
+
+\paragraph{Exclusion window (secondary).} As the window grows
+(Table~\ref{tab:sweep}), answerable queries fall from \res{cnt-test5-ans} to
+\res{cnt-test15-ans}, the thumbnail's recall falls, non-trivial members fall
+from \res{cnt-test5-nontriv} to \res{cnt-test15-nontriv}, and the
+zoo-unsolved fraction rises from \res{or-irr-w5} to \res{or-irr-w15},
+consistent with near-duplicate frames inflating recall and the ceiling
+alike~\cite{morlana2021selfsupervised}; whether a member is non-trivial
+depends on the window. The headline stays at the pre-registered window.
+
+\begin{table}[t]
+\centering
+\caption{Cross-protocol street comparison: street Recall@1 of the same
+weights under a separate street protocol, and
+$\Dm=R_m^{\mathrm{street}}-R_m$ (point values; the interval method is not
+yet approved). Not a domain effect.}
+\label{tab:street}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}[t]{@{}lrr@{}}
+\multicolumn{3}{@{}c@{}}{SF-XL (small)}\\
+\restable{street-sfxl}
+\end{tabular}\hspace{16pt}%
+\begin{tabular}[t]{@{}lrr@{}}
+\multicolumn{3}{@{}c@{}}{Nordland}\\
+\restable{street-nord}
+\end{tabular}
+\end{table}
+
+\paragraph{Street comparison (cross-protocol).} Table~\ref{tab:street} sets
+each member's colonoscopy Recall@1 against its street Recall@1 with the same
+weights (checked by checksum), measured with the same harness on SF-XL
+(small) and Nordland under a 25\,m threshold (Nordland: its frame
+equivalent)~\cite{berton2022deep}. The two sides differ in ground-truth
+kind, database, exclusion and frame rate, so $\Dm$ confounds domain with
+set-up~\cite{schubert2021makes}. NetVLAD illustrates this: its colonoscopy
+Recall@1 (\res{st-netvlad-colon}) exceeds its street Recall@1 on both SF-XL
+(\res{st-sfxl-netvlad-street}) and Nordland (\res{st-nord-netvlad-street}).
+The pre-registered two-sided test of $\Dm$ needs an interval, whose method
+was chosen after the gate ran and is not reported \pending{H-E1a: Delta\_m
+intervals, once the owner approves an interval method}. AnyLoc has no $\Dm$:
+the street study measured AnyLoc-VLAD, the gate AnyLoc-GeM.

@@ -1,8 +1,16 @@
-% Conclusion.  No result is stated; the study is staged.
+% Conclusion.  Numbers via \res only.  Robots: motivation and next step, never
+% a demonstrated result.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have specified, before any data are acquired, a study of how much
-colonoscopic place-recognition error per-query selection over frozen
-representations could recover; its thresholds remain to be fixed and
-registered. \pending{conclusion results sentence: gate outcome and E2 verdicts}
+Under an internal pre-registration fixed before any model was run, a zoo of
+frozen VPR models, most of them street-trained, found the same place in real
+colonoscopy far above chance, and \res{gate-nnontriv} of \res{gate-nzoo} did so detectably
+better than raw pixels: the one-shot gate returned
+\texttt{\res{gate-outcome}}. Some member solves \res{or-ceil} of the queries,
+and \res{or-rec-share} of the best member's errors are solved by another
+member, so per-query selection has headroom, while \res{or-irr} remain
+zoo-unsolved for this zoo, ground truth and window. For camera-carrying
+in-body robots, this makes frozen appearance-based relocalization a
+candidate complement to external sensing that is worth testing on robot
+video; it does not show that it works on a robot. No clinical claim is made.

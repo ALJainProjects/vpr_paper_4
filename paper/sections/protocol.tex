@@ -1,137 +1,42 @@
-% Pre-specified protocol.  CANONICAL SOURCE for the gate, the ground truths and
-% the baselines: vpr-testtime docs/papers/P4_PREREGISTRATION.md and
-% vprbench/analysis/preregistration.py (branch paper/p4-endoscopy-loaders,
-% matched at eeba592; the review cited eac266d).  This section must restate
-% them exactly (review M1): GO / NO_GO /
-% OWNER_REVIEW; min_models_passing; the "meaningful split"; ONE handcrafted
-% baseline; H-E1a as a two-sided test.  The E2/E4/C4 rules below are additions
-% that must be merged into that document before it is signed (list in
-% notes/review_response.md).  Every threshold is the owner's decision and is
-% \pending until fixed.  E3 (section probe) and E5 (sequence priors) of the
-% outline are not in this paper (review M13, S11, S16).
-\section{Pre-Specified Protocol}
+% Pre-registration and its history.  Source: vpr-testtime
+% docs/papers/P4_PREREGISTRATION.md (Stages A and B, section 8d owner decisions,
+% section 11 row C) and docs/papers/p4_test_gate_record.json (commit f17b5cc).
+% Say "internal pre-registration": the document is committed and signed but is
+% NOT in a public registry (EVIDENCE.md section 5).  Report the validation
+% readout as INFORMATIONAL (val-* keys), never as a result of the study.
+\subsection{Pre-registration and its history}
 \label{sec:protocol}
+The protocol is an internal, version-controlled document, signed in dated
+stages and committed with the code; it is not deposited in a public
+registry, so its timestamps are those of the repository history. Stage~A fixed
+the thresholds of Sec.~\ref{sec:gate}, the window and its two secondary sweep
+values, the database scope, the comparator, the zoo and the case split before
+the data were acquired. Stage~B recorded, after acquisition and before any
+descriptor was computed, the facts only the files could give: the annotation
+format, the frame-id convention, the image counts, the unusable validation
+case and the unanswerable queries. It was drafted from the files by an AI
+coding assistant, and the protocol owner countersigned it before the test
+gate, which the gate runner enforced. The AnyLoc-GeM wrapper was written
+after Stage~B and before any Colon10k descriptor was computed; its parameters,
+which the protocol had not fixed, were recorded unchanged before the test
+gate.
 
-A protocol document released with the harness (an unsigned draft) is
-canonical for the gate, ground truths and baselines; this section restates
-it and adds the E2 and E4 rules, to be merged into it. It is to be signed and
-publicly registered with timestamps in two stages: Table~\ref{tab:prereg}
-before any data are acquired, facts only the files give
-(Sec.~\ref{sec:data}) before any descriptor is computed.
-
-\begin{table}[t]
-\centering
-\caption{Quantities to be fixed before any data are acquired. Left: fields
-of the canonical protocol document (its names in \texttt{typewriter}). Right: this paper's additions. None is set:
-\pending{every value in Table 1 (owner decisions)}}
-\label{tab:prereg}
-\scriptsize
-\setlength{\tabcolsep}{2pt}
-\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{\hspace{8pt}}l>{\raggedright\arraybackslash}X@{}}
-\toprule
-\multicolumn{2}{@{}l}{Canonical document} & \multicolumn{2}{l@{}}{Additions (this paper)} \\
-\cmidrule(r{8pt}){1-2}\cmidrule{3-4}
-$k$ & gate Recall@$k$ (\texttt{k})
-  & $o^\star$, $\varepsilon_d$ & overlap threshold; depth tolerance \\
-$W^\star$, $\mathcal{W}$ & window in frames (\texttt{exclusion\_window}); sweep
-  & $\tau$, $\theta$ & pose radius; optical-axis angle \\
-$\Rhand$ & handcrafted baseline, settings (\texttt{handcrafted\_baseline})
-  & phantom & query/database videos; clusters; world frames \\
-$\delta_{\mathrm{rand}}$ & margin over chance (\texttt{min\_margin\_vs\_random})
-  & raw & raw-DINOv2 size, resolution per contrasted model \\
-$\delta_{\mathrm{hand}}$ & margin over $\Rhand$ (\texttt{min\_margin\_vs\_handcrafted})
-  & $\delta_{\Delta}$, $\varepsilon$, $\eta$ & E2 margins: excess $\Delta I$; spread; last increment \\
-$n_{\mathrm{pass}}$ & non-trivial members for \textsc{Go} (\texttt{min\_models\_passing})
-  & $n_a$, $\gamma$ & audit sample; miss-share bound; annotators \\
-$\rho^\star$, $I^\star$ & split bounds (\texttt{min\_recoverable\_frac}, \texttt{min\_irreducible\_frac})
-  & $\mathcal{B}_q$ & image-quality strata \\
-$\alpha$, $B$ & error rate (sets \texttt{ci\_level}); \texttt{n\_bootstrap}; \texttt{bootstrap\_seed}
-  & E4 & cue operators; mesh centreline; distance bins \\
-$\Zgate$, scope & gate zoo, AnyLoc vocabulary; own case or all (\texttt{db\_scope})
-  & & \\
-street, prep & street data (H1a); preprocessing, undistortion
-  & & \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\paragraph{E1: zero-shot retrieval and the gate (Colon10k).} Every member
-of $\Zall$ is run; we report Recall@$k$, $k\in\{1,5,10\}$, at $W^\star$ and
-over $\mathcal{W}$, beside both baselines. Two-sided hypotheses:
-\emph{H1a}, per member: the transfer gap $\Delta_m=R_m^{\mathrm{street}}-R_m$
-(street side under the standard 25\,m protocol~\cite{berton2022deep})
-differs from zero; the ground truths differ in kind~\cite{schubert2021makes},
-so $\Delta_m$ does not isolate the domain. \emph{H1b}: each DINOv2-based VPR
-model (SALAD, BoQ-DINOv2, MegaLoc, AnyLoc) differs from backbone-matched raw
-DINOv2, CLS and GeM (VPR training or aggregation versus backbone). \emph{H1c}: the mean of
-NetVLAD, CosPlace, EigenPlaces and MixVPR differs from that of the
-DINOv2-based VPR models. $\Zout$ versus $\Zmed$ is descriptive. An interval
-containing zero means ``no difference detected'', never equivalence.
-
-\emph{Gate} (gate's $k$, $W^\star$, $\Zgate$). A member \emph{beats random}
-if $\LB(R_m-\Rrand)>\delta_{\mathrm{rand}}$, and is \emph{non-trivial} if
-also $\LB(R_m-\Rhand)>\delta_{\mathrm{hand}}$. The split is
-\emph{meaningful} if $\LB(I)>I^\star$ and $\LB(\rho_{m^\star})>\rho^\star$,
-with $m^\star$ the member of highest Recall@$k$, chosen once on the full
-data; a bound of $-\infty$ disables its half (else no zoo that solves every
-query reaches \textsc{Go}). \textsc{Go}: at least $n_{\mathrm{pass}}$ non-trivial members and a
-meaningful split; E2 and E4 run. \textsc{No-go}: no member beats random; E1
-is reported as a negative benchmark (no signal detected above the chance
-margin),
-and the study narrows to an anatomical-section probe or is shelved. Otherwise
-\textsc{Owner review}: the protocol defines no action, and whatever follows
-is reported as post hoc. $C$ and $\Crand(|\Zgate|)$ are reported
-beside the split, not as gate terms. If ColonMapper's EndoMapper protocol
-labels are obtainable, the zoo also runs beside its fine-tuned
-descriptors~\cite{morlana2024colonmapper}.
-
-\paragraph{E2: the ceiling in the body (Colon10k, C3VD, C3VDv2).} At the
-gate's $k$, per ground truth, window in $\mathcal{W}$ and zoo (each arm, each backbone family,
-$\Zall$): $C$, $I$, every $\rho_m$, headroom, $\Crand$, the zoo-size curve and
-leave-one-out contributions. $I$ is \emph{large} if $\LB(I)>I^\star$ in two
-or more backbone families, under the endoscopist and a geometric ground truth
-(a conjunction: the two kinds also differ as real versus phantom data).
-Adding members never increases $I$, so when $Z'=\Zgen$ or $\Zmed$ joins
-$\Zout$, part of $\Zout$'s unsolved error is read as representation failure
-only if $\LB(\Delta I-\Delta I_{\mathrm{rand}})>\delta_{\Delta}$, with
-$\Delta I=I(\Zout)-I(\Zout\cup Z')$ and $\Delta
-I_{\mathrm{rand}}=\Delta I_{\mathrm{rand}}(\Zout,|Z'|)$. $I(\Zall)$ is
-\emph{stable} if $\UB$ of its spread (maximum minus minimum over the windows
-in $\mathcal{W}$ and, on phantoms, the two geometric ground truths) is at most
-$\varepsilon$; zoo size is not a stability axis. The ceiling is
-\emph{saturated} if $\UB\bigl(\bar C(|Z|)-\bar C(|Z|-1)-g\bigr)<\eta$, with
-$g$ the mean of $\Delta I_{\mathrm{rand}}(S,1)$ over subsets $S$ of size
-$|Z|-1$ (the gain of one random ranking).
-
-\emph{Audit.} Before any Colon10k query is read as view ambiguity, $n_a$
-random zoo-unsolved queries are shown with every member's top-1 to annotators
-blind to model identity, and labelled ground-truth miss (a retrieved frame
-shows the query's place outside its intervals), ambiguous view (several
-places fit), low quality, or representation failure (the place is
-identifiable, yet no member retrieves it). Ambiguity is read only from the ``ambiguous''
-share, and not at all if $\UB$ of the miss share exceeds $\gamma$. Unsolved
-queries are also stratified by $\mathcal{B}_q$ (blur, specular area,
-exposure). A large, stable $I$ that survives the audit would be evidence
-that, for this zoo, colonoscopic place recognition is limited by view
-ambiguity, in line with~\cite{jiang2025c3vdreg}; a small $I$ is a reportable
-null (errors are mostly selection-recoverable); a ceiling near its chance
-ceiling mostly collects lucky hits. For C4, the same statistics are reported
-for the street data of H1a, with no recurrence verdict: domain and set-up
-(ground truth, frame rate, window) are confounded~\cite{schubert2021makes}.
-
-\paragraph{E4: aliasing geometry and feature reliance (phantoms).} (a)~For
-each zoo-unsolved query, the displacement to the camera of the wrong top-1
-of the dataset's best member is split into a component along the phantom
-centreline, taken from the released mesh (else (a) is not run), and a
-remainder. \emph{H4a}: the mean axial share differs from that of a
-distance-matched null (one non-positive frame per query from the retrieved
-frame's distance bin); registration results predict an axial
-excess~\cite{jiang2025c3vdreg}, and no excess would not by itself identify a
-cause. (b)~On C3VDv2, \emph{H4b}: the recall change under each manipulation
-differs between the CNN- and DINOv2-based families (means). Manipulations:
-cross- versus within-texture retrieval at fixed geometry, only if the
-textures' shared frame is confirmed; debris-laden queries against their
-clean twins (same places) plus debris-laden frames of other segments (same
-condition, other places), after~\cite{kim2026visual}; cue suppression with
-the operators of~\cite{burgert2025imagenettrained}, and grayscale. Causal
-wording is confined to these contrasts, as ``in phantoms''.
+The validation cases were reserved for method development, though nothing
+was tuned on them; their readout was informational, and the runner computes
+no outcome on them. At the gate window,
+on \res{val-nans} answerable queries from \res{val-ncases} cases, all
+\res{val-nbeat} of \res{val-nzoo} members beat chance and \res{val-nnontriv}
+were non-trivial, the pattern the rule maps to \texttt{OWNER\_REVIEW}. After
+seeing this readout, and before any test case was scored, the owner added two
+rules that the protocol had left open, chosen from options the assistant
+proposed. (i)~If the test gate returned
+\texttt{OWNER\_REVIEW}, the paper would report that outcome as its headline
+and continue as a diagnostic study. (ii)~If the run crashed after writing its
+one-shot lock, one re-run would be allowed only if no gate quantity had been
+written. No threshold, window, comparator, zoo member or split was changed,
+and the secondary windows stayed non-gating. The gate then ran once on the
+test cases, from a clean commit: the runner refuses any path override, writes
+the one-shot lock before scoring, and verifies the vendored code it imports;
+the gate record it wrote, holding the lock's content and the hash of the
+decision file, was committed. Its protocol source is \texttt{\res{gate-protocol-source}}, i.e.\
+the window and scope were derived from the ground truth.

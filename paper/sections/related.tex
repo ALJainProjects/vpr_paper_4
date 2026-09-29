@@ -1,46 +1,26 @@
-% Related work.  Written from notes/literature.md and notes/positioning.md;
-% every cited key exists in bib/references.bib.  Nothing positioning.md marks
-% "pre-empted" is claimed.  Space-limited: the cited set is the positioning
-% must-cite core minus the cuts listed in notes/EVIDENCE.md section 7.
-% Negative statements are restricted to what was verified (notes/review_response.md
-% M9--M12): wei2023stereo is NOT zero-shot (distilled on surgical video);
-% ColonSLAM reports an off-the-shelf LightGlue baseline; only the abstract of
-% soberanismukul2026global was readable.
+% Related work.  From notes/literature.md (sections 1-2, 11, 14, 18) and
+% notes/positioning.md.  Every key is in bib/references.bib and verified.  The
+% robot-side prior work is in the introduction (MICCAI budget); keys cut for
+% space are listed in notes/EVIDENCE.md.  Negative statements are restricted
+% to what was verified: wei2023stereo is NOT zero-shot.
 \section{Related Work}
 \label{sec:related}
 
 \paragraph{Place recognition in the body.}
-Off-the-shelf models are already used in the body: beside the
-landmark-trained baseline of~\cite{morlana2021selfsupervised}, NetVLAD retrieves candidate views in
-ureteroscopy~\cite{li2026automated}, off-the-shelf local matchers (LoFTR
-with outdoor weights, LightGlue) run inside ColonMapper and
-ColonSLAM~\cite{morlana2024colonmapper,morlana2024topological}, and a
-training-free foundation-model method re-identifies regions after scope
-reinsertion~\cite{soberanismukul2026global}. Apart from that baseline,
-ColonSLAM's off-the-shelf LightGlue baseline and Colon10k's unread
-evaluation, we found no measurement of an off-the-shelf model's
-place-recognition accuracy in the body, and no oracle ceiling
-(for~\cite{soberanismukul2026global}, as far as its abstract shows).
+Colon10k provides endoscopist-verified same-place
+intervals~\cite{ma2021colon10k}, and a topological mapping system
+relocalizes with retrieval fine-tuned on
+colonoscopy~\cite{morlana2024colonmapper}. The closest
+measurement to ours is Morlana et al.'s off-the-shelf landmark-trained
+baseline on real colonoscopy, whose recall fell as near-duplicate frames
+were excluded~\cite{morlana2021selfsupervised}. On robotic capsules and
+endoscopes we found no retrieval of same-place frames with a learned global
+descriptor (Sec.~\ref{sec:intro}).
 
-\paragraph{Zero-shot VPR and frozen foundation features.}
+\paragraph{Zero-shot VPR and oracle ceilings.}
 Moving a frozen VPR zoo to a texture-poor domain is an established
-genre~\cite{keetha2024anyloc,larsen2026longterm}, none of it medical; we
-borrow its protocol and add the domain and the ceiling. Frozen general and
-endoscopy foundation models have been compared for object- and class-level
-retrieval in GI endoscopy~\cite{parolari2026contrastive,kim2025improving},
-frozen DINOv2 being a strong baseline~\cite{parolari2026contrastive}, but as
-far as we found never for same-place retrieval; endoscopy foundation
-models~\cite{wang2023foundation,batic2024endovit,hirsch2023selfsupervised}
-are usually evaluated after fine-tuning.
-
-\paragraph{Ceilings, ambiguity and feature reliance.}
-The oracle ceiling---the fraction of queries that at least one method
-localizes---was introduced for VPR, for pairs of techniques, as an estimate
-of the maximum achievable performance~\cite{waheed2021improving}; we apply it
-to a zoo. TOPO-Bench already measures dataset ambiguity across indoor and
-outdoor environments and argues that it is largely
-method-independent~\cite{wang2025topobench}; we propose no such measure.
-The texture-bias account of CNNs is contested: under controlled cue
-suppression they rely mostly on local shape, and medical-imaging models
-emphasize colour~\cite{burgert2025imagenettrained}; VPR descriptors can
-also retrieve by condition rather than place~\cite{kim2026visual}.
+genre~\cite{keetha2024anyloc,larsen2026longterm}, none of it medical. The
+oracle ceiling, the fraction of queries that at least one method localizes,
+was introduced for pairs of VPR techniques~\cite{waheed2021improving}; we
+apply it to a zoo. Comparisons across VPR datasets confound domain with
+ground-truth kind and set-up~\cite{schubert2021makes}.

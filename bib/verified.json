@@ -455,6 +455,12 @@
     "ratio": 1.0,
     "source": "crossref"
   },
+  "lu2024cricavpr": {
+    "fetched_title": "CricaVPR: Cross-Image Correlation-Aware Representation Learning for Visual Place Recognition",
+    "fingerprint": "26400a13c3571b96a8e797ae3606c50d4ce90081ba2dbf81268f827669b7c485",
+    "ratio": 1.0,
+    "source": "crossref"
+  },
   "lu2024seamless": {
     "fetched_title": "Towards Seamless Adaptation of Pre-trained Models for Visual Place Recognition",
     "fingerprint": "d11113e037eee7777bfa72fcd14f51dc286fc3fcc3717e9f9fed1f86a0ee0373",
